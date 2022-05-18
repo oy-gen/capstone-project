@@ -1,0 +1,34 @@
+{
+  "name": "next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prettier": "npx prettier --write",
+    "eslint": "eslint \"**/*.js\"",
+    "stylelint": "stylelint \"**/*.css\"",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "mongoose": "^6.3.3",
+    "next": "12.1.6",
+    "next-auth": "^4.3.4",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "styled-components": "^5.3.5",
+    "zustand": "^4.0.0-rc.1"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^2.0.7",
+    "eslint": "8.14.0",
+    "eslint-config-next": "12.1.6",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.7",
+    "stylelint": "^14.6.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^25.0.0"
+  }
+}
