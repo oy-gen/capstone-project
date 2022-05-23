@@ -117,10 +117,10 @@ const useStore = create(set => {
         b2bnett: 17.4,
       },
       {
-        name: 'Meister Candle Jade',
-        id: '633710796569',
+        name: 'Meister Candle Black Gold',
+        id: '633710796576',
         image:
-          'https://cdn.shopify.com/s/files/1/0002/7502/1865/products/Burning-Buddha-Skulptur-Kerze-Jade_f70c6cb5-717b-4e88-bc5a-5a072279db5f.png?v=1648370885',
+          'https://cdn.shopify.com/s/files/1/0002/7502/1865/products/Burning-Buddha-Kerze-Skulptur-gesprenkelt-Meister2.png?v=1648373512',
         description: `Der Meister ist mehr als nur eine Kerze. Er steckt voller Symbolik und spielt mit der Vergänglichkeit der Schönheit. Zündest Du die Kerze an oder ist sie zu schade dazu? Einfach ist die Entscheidung nicht, doch der Meister lockt mit einer Besonderheit und belohnt diejenigen die sich trauen: Nach dem Wegschmelzen offenbart er eine Glücksmünze, auf der alte Weisheiten verewigt sind.Die Herstellung unserer mehrfarbigen Modelle ist sehr aufwendig, wobei das Endresultat nie ganz vorhersehbar ist. Jeder Meister ist ein Unikat mit individuellem Charme und variiert leicht im Aussehen.
         Material: Rapswachs Komposition mit Paraffinanteil, Baumwolldocht, Metallmünze
         Farbe: Schwarz, Jadegrün, durchgefärbt, glanzbeschichtet, RAL Kerzengüte Qualität
