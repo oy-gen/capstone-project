@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 
-export default function QuantitySelector({ product }) {
+export default function QuantitySelector() {
   const quantity = useStore(state => state.quantity);
   const addQuantity = useStore(state => state.addQuantity);
   const subtractQuantity = useStore(state => state.subtractQuantity);

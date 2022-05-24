@@ -165,15 +165,37 @@ const useStore = create(set => {
       },
     ],
 
-    quantity: 0,
-    addQuantity: () => {
+    addQuantity: id => {
       set(state => {
-        return { quantity: state.quantity + 1 };
+        return {
+          products: state.products.map(product =>
+            product.id === id
+              ? { ...product, quantity: product.quantity + 1 }
+              : product
+          ),
+        };
       });
     },
-    subtractQuantity: () => {
+    subtractQuantity: id => {
       set(state => {
-        return { quantity: state.quantity - 1 };
+        return {
+          products: state.products.map(product =>
+            product.id === id
+              ? { ...product, quantity: product.quantity - 1 }
+              : product
+          ),
+        };
+      });
+    },
+    removeQuantity: id => {
+      set(state => {
+        return {
+          products: state.products.map(product =>
+            product.id === id
+              ? { ...product, quantity: 0 }
+              : product
+          ),
+        };
       });
     },
   };
