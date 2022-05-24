@@ -14,8 +14,8 @@ const useStore = create(set => {
             Brenndauer: 30h
             Größe:19cm
             Geruch: neutral`,
-        b2cgross: 29.9,
-        b2bnett: 17.4,
+        RRPprice: 29.9,
+        WSprice: 17.4,
       },
       {
         name: 'Meister Candle Mint',
@@ -28,8 +28,8 @@ const useStore = create(set => {
           Brenndauer: 30h
           Größe:19cm
           Geruch: neutral`,
-        b2cgross: 29.9,
-        b2bnett: 17.4,
+        RRPprice: 29.9,
+        WSprice: 17.4,
       },
       {
         name: 'Meister Candle Black',
@@ -42,8 +42,8 @@ const useStore = create(set => {
               Brenndauer: 30h
               Größe:19cm
               Geruch: neutral`,
-        b2cgross: 34.9,
-        b2bnett: 19.4,
+        RRPprice: 34.9,
+        WSprice: 19.4,
       },
       {
         name: 'Meister Candle Purpur',
@@ -56,8 +56,8 @@ const useStore = create(set => {
                 Brenndauer: 30h
                 Größe:19cm
                 Geruch: neutral`,
-        b2cgross: 34.9,
-        b2bnett: 19.4,
+        RRPprice: 34.9,
+        WSprice: 19.4,
       },
 
       {
@@ -71,8 +71,8 @@ const useStore = create(set => {
             Brenndauer: 30h
             Größe:19cm
             Geruch: neutral`,
-        b2cgross: 34.9,
-        b2bnett: 19.6,
+        RRPprice: 34.9,
+        WSprice: 19.6,
       },
       {
         name: 'Meister Candle Jade',
@@ -85,8 +85,8 @@ const useStore = create(set => {
         Brenndauer: 30h
         Größe:19cm
         Geruch: neutral`,
-        b2cgross: 34.9,
-        b2bnett: 19.6,
+        RRPprice: 34.9,
+        WSprice: 19.6,
       },
       {
         name: 'Sun Candle',
@@ -99,8 +99,8 @@ const useStore = create(set => {
         Größe: 10cm
         Brenndauer: 50h+
         Geruch: neutral`,
-        b2cgross: 34.9,
-        b2bnett: 17.4,
+        RRPprice: 34.9,
+        WSprice: 17.4,
       },
       {
         name: 'Prisma Candle Lavendel',
@@ -113,8 +113,8 @@ const useStore = create(set => {
         Größe: 10cm
         Brenndauer: 40h
         Geruchsneutral`,
-        b2cgross: 34.9,
-        b2bnett: 17.4,
+        RRPprice: 34.9,
+        WSprice: 17.4,
       },
       {
         name: 'Meister Candle Black Gold',
@@ -127,8 +127,8 @@ const useStore = create(set => {
         Brenndauer: 30h
         Größe:19cm
         Geruch: neutral`,
-        b2cgross: 34.9,
-        b2bnett: 19.6,
+        RRPprice: 34.9,
+        WSprice: 19.6,
       },
       {
         name: 'Meister Stein Sculpture',
@@ -140,8 +140,8 @@ const useStore = create(set => {
         Gewicht: ca. 1kg
         Farbe: Schneeweiß
         Größe: 18cm`,
-        b2cgross: 34.9,
-        b2bnett: 17.4,
+        RRPprice: 34.9,
+        WSprice: 17.4,
       },
     ],
   };

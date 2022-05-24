@@ -1,3 +1,0 @@
-export default function RoundNumberToTwo(x) {
-  return x.toPrecision(4);
-}

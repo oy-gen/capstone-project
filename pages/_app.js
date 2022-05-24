@@ -24,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
 }
   
  * {
-   _outline: 1px solid #7E7E7E;
     margin: 0;
     padding: 0;
     box-sizing: border-box;

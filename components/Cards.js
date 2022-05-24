@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import useStore from '../hooks/useStore';
-import RoundNumberToTwo from '../components/RoundNumberToTwo';
 
 export default function Cards() {
   const products = useStore(state => state.products);
@@ -11,11 +10,9 @@ export default function Cards() {
           <StyledImage src={product.image} alt={product.name} />
           <TextWrapperVertical>
             <StyledProductName>{product.name}</StyledProductName>
-            <StyledWSPrice>
-              WS {RoundNumberToTwo(product.b2bnett)} €
-            </StyledWSPrice>
+            <StyledWSPrice>WS {product.WSprice.toPrecision(4)} €</StyledWSPrice>
             <StyledRRPPrice>
-              RRP {RoundNumberToTwo(product.b2cgross)} €
+              RRP {product.RRPprice.toPrecision(4)} €
             </StyledRRPPrice>
           </TextWrapperVertical>
         </StyledCard>
