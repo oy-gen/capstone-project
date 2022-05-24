@@ -164,13 +164,12 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
-
     addQuantity: id => {
       set(state => {
         return {
           products: state.products.map(product =>
             product.id === id
-              ? { ...product, quantity: product.quantity + 1 }
+              ? { ...product, quantity: Math.min(product.quantity + 1, 99) }
               : product
           ),
         };
@@ -181,7 +180,7 @@ const useStore = create(set => {
         return {
           products: state.products.map(product =>
             product.id === id
-              ? { ...product, quantity: product.quantity - 1 }
+              ? { ...product, quantity: Math.max(product.quantity - 1, 0) }
               : product
           ),
         };
@@ -191,9 +190,7 @@ const useStore = create(set => {
       set(state => {
         return {
           products: state.products.map(product =>
-            product.id === id
-              ? { ...product, quantity: 0 }
-              : product
+            product.id === id ? { ...product, quantity: 0 } : product
           ),
         };
       });
