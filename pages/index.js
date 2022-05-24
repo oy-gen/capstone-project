@@ -1,14 +1,13 @@
-import styled from "styled-components";
+import Cards from '../components/Cards';
+import useStore from '../hooks/useStore';
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`;
 
 export default function Home() {
+  const products = useStore(state => state.products);
+
   return (
     <>
-      <h1>Hello</h1>
+      <Cards/>
     </>
   );
-}
+  }
