@@ -16,6 +16,8 @@ const useStore = create(set => {
             Geruch: neutral`,
         RRPprice: 29.9,
         WSprice: 17.4,
+        quantity: 0,
+        sum: 0,
       },
       {
         name: 'Meister Candle Mint',
@@ -30,6 +32,8 @@ const useStore = create(set => {
           Geruch: neutral`,
         RRPprice: 29.9,
         WSprice: 17.4,
+        quantity: 0,
+        sum: 0,
       },
       {
         name: 'Meister Candle Black',
@@ -44,6 +48,8 @@ const useStore = create(set => {
               Geruch: neutral`,
         RRPprice: 34.9,
         WSprice: 19.4,
+        quantity: 0,
+        sum: 0,
       },
       {
         name: 'Meister Candle Purpur',
@@ -58,6 +64,8 @@ const useStore = create(set => {
                 Geruch: neutral`,
         RRPprice: 34.9,
         WSprice: 19.4,
+        quantity: 0,
+        sum: 0,
       },
 
       {
@@ -73,6 +81,8 @@ const useStore = create(set => {
             Geruch: neutral`,
         RRPprice: 34.9,
         WSprice: 19.6,
+        quantity: 0,
+        sum: 0,
       },
       {
         name: 'Meister Candle Jade',
@@ -87,6 +97,8 @@ const useStore = create(set => {
         Geruch: neutral`,
         RRPprice: 34.9,
         WSprice: 19.6,
+        quantity: 0,
+        sum: 0,
       },
       {
         name: 'Sun Candle',
@@ -101,6 +113,8 @@ const useStore = create(set => {
         Geruch: neutral`,
         RRPprice: 34.9,
         WSprice: 17.4,
+        quantity: 0,
+        sum: 0,
       },
       {
         name: 'Prisma Candle Lavendel',
@@ -115,6 +129,8 @@ const useStore = create(set => {
         Geruchsneutral`,
         RRPprice: 34.9,
         WSprice: 17.4,
+        quantity: 0,
+        sum: 0,
       },
       {
         name: 'Meister Candle Black Gold',
@@ -129,6 +145,8 @@ const useStore = create(set => {
         Geruch: neutral`,
         RRPprice: 34.9,
         WSprice: 19.6,
+        quantity: 0,
+        sum: 0,
       },
       {
         name: 'Meister Stein Sculpture',
@@ -142,8 +160,22 @@ const useStore = create(set => {
         Größe: 18cm`,
         RRPprice: 34.9,
         WSprice: 17.4,
+        quantity: 0,
+        sum: 0,
       },
     ],
+
+    quantity: 0,
+    addQuantity: () => {
+      set(state => {
+        return { quantity: state.quantity + 1 };
+      });
+    },
+    subtractQuantity: () => {
+      set(state => {
+        return { quantity: state.quantity - 1 };
+      });
+    },
   };
 });
 

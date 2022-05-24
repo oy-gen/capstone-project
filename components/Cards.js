@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
 import useStore from '../hooks/useStore';
+import QuantitySelector from './QuantitySelector';
 
 export default function Cards() {
   const products = useStore(state => state.products);
+
   return (
     <>
       {products.map(product => (
@@ -15,12 +17,12 @@ export default function Cards() {
               RRP {product.RRPprice.toPrecision(4)} €
             </StyledRRPPrice>
           </TextWrapperVertical>
+          <QuantitySelector key={product.id} quantity={product.quantity} />
         </StyledCard>
       ))}
     </>
   );
 }
-
 const StyledCard = styled.div`
   display: flex;
   align-items: center;
