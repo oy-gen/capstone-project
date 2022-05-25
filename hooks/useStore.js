@@ -169,7 +169,7 @@ const useStore = create(set => {
         return {
           products: state.products.map(product =>
             product.id === id
-              ? { ...product, quantity: Math.min(product.quantity + 1, 99) }
+              ? { ...product, quantity: Math.min(product.quantity + 1, 20) }
               : product
           ),
         };
