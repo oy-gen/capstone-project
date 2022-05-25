@@ -1,29 +1,36 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import useStore from '../hooks/useStore';
+import QuantitySelector from './QuantitySelector';
 
 export default function Cards() {
   const products = useStore(state => state.products);
+
   return (
     <>
       {products.map(product => (
         <StyledCard key={product.id}>
-          <StyledImage src={product.image} alt={product.name} />
-          <TextWrapperVertical>
-            <StyledProductName>{product.name}</StyledProductName>
-            <StyledWSPrice>WS {product.WSprice.toPrecision(4)} €</StyledWSPrice>
-            <StyledRRPPrice>
-              RRP {product.RRPprice.toPrecision(4)} €
-            </StyledRRPPrice>
-          </TextWrapperVertical>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <StyledImage src={product.image} alt={product.name} />
+            <TextWrapper>
+              <StyledProductName>{product.name}</StyledProductName>
+              <StyledWSPrice>
+                WS {product.WSprice.toPrecision(4)} €
+              </StyledWSPrice>
+              <StyledRRPPrice>
+                RRP {product.RRPprice.toPrecision(4)} €
+              </StyledRRPPrice>
+            </TextWrapper>
+          </div>
+          <QuantitySelector product={product} />
         </StyledCard>
       ))}
     </>
   );
 }
-
 const StyledCard = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid lightgray;
   background-color: var(--background-color);
   padding: 1rem 1rem;
@@ -62,7 +69,7 @@ const StyledRRPPrice = styled.p`
   text-decoration: line-through;
 `;
 
-const TextWrapperVertical = styled.div`
+const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
