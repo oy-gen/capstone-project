@@ -164,33 +164,11 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
-    addQuantity: id => {
+    setQuantity: (id, quantity) => {
       set(state => {
         return {
           products: state.products.map(product =>
-            product.id === id
-              ? { ...product, quantity: Math.min(product.quantity + 1, 20) }
-              : product
-          ),
-        };
-      });
-    },
-    subtractQuantity: id => {
-      set(state => {
-        return {
-          products: state.products.map(product =>
-            product.id === id
-              ? { ...product, quantity: Math.max(product.quantity - 1, 0) }
-              : product
-          ),
-        };
-      });
-    },
-    removeQuantity: id => {
-      set(state => {
-        return {
-          products: state.products.map(product =>
-            product.id === id ? { ...product, quantity: 0 } : product
+            product.id === id ? { ...product, quantity } : product
           ),
         };
       });

@@ -2,17 +2,38 @@ import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 
 export default function QuantitySelector({ product }) {
-  const addQuantity = useStore(state => state.addQuantity);
-  const subtractQuantity = useStore(state => state.subtractQuantity);
-  const removeQuantity = useStore(state => state.removeQuantity);
+  const setQuantity = useStore(state => state.setQuantity);
 
   return (
     <QuantityWrapper>
+      <StyledRemoveButton
+        type="button"
+        onClick={() => {
+          setQuantity(product.id, (product.quantity = 0));
+        }}
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 12H14V24H12V12ZM18 12H20V24H18V12Z"
+            fill="var(--text-lightcolor)"
+          />
+          <path
+            d="M4 6V8H6V28C6 28.5304 6.21071 29.0391 6.58579 29.4142C6.96086 29.7893 7.46957 30 8 30H24C24.5304 30 25.0391 29.7893 25.4142 29.4142C25.7893 29.0391 26 28.5304 26 28V8H28V6H4ZM8 28V8H24V28H8ZM12 2H20V4H12V2Z"
+            fill="var(--text-lightcolor)"
+          />
+        </svg>
+      </StyledRemoveButton>
       <StyledSelector>
         <StyledQuantityButton
           type="button"
           onClick={() => {
-            subtractQuantity(product.id);
+            setQuantity(product.id, Math.max(product.quantity - 1, 0));
           }}
         >
           {'-'}
@@ -21,27 +42,22 @@ export default function QuantitySelector({ product }) {
         <StyledQuantityButton
           type="button"
           onClick={() => {
-            addQuantity(product.id);
+            setQuantity(product.id, Math.min(product.quantity + 1, 20));
           }}
         >
           {'+'}
         </StyledQuantityButton>
       </StyledSelector>
-      <StyledRemoveButton
-        type="button"
-        onClick={() => {
-          removeQuantity(product.id);
-        }}
-      >
-        remove
-      </StyledRemoveButton>
     </QuantityWrapper>
   );
 }
 
 const QuantityWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 1rem;
+  align-self: flex-end;
+  margin-bottom: 1rem;
 `;
 
 const StyledSelector = styled.div`
@@ -73,15 +89,17 @@ const StyledQuantityCounter = styled.span`
 `;
 
 const StyledRemoveButton = styled.button`
+  border: 1px solid lightgrey;
+  height: 45px;
+  padding: 0 1rem;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-weight: 200;
   text-transform: uppercase;
   color: var(--text-lightcolor);
-  border-style: none;
+
   letter-spacing: 0.5rem;
   text-transform: uppercase;
   text-decoration: underline;
-  margin-top: 1rem;
   cursor: pointer;
 `;
