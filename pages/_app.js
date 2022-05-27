@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
 }
   
  * {
+   _outline: 1px solid blue;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -32,11 +33,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 1200px;
     margin:auto;
   }
 `;
+
