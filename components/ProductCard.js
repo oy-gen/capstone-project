@@ -67,6 +67,7 @@ const StyledCard = styled.div`
 const TitleWrapper = styled.div`
   grid-row: 1/2;
   grid-column: 2 / 3;
+  align-self: center;
 `;
 
 const FlexWrepper = styled.div`
@@ -74,7 +75,7 @@ const FlexWrepper = styled.div`
   grid-column: 2 / 3;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-self: center;
 `;
 
 const ExtraInfoWrapper = styled.div`

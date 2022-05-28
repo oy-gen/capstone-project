@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
 
 h2 {
   color: var(--text-lightcolor);
-  padding-bottom: 0.2rem;
+  padding-bottom: 0.4rem;
   font-size: 1.2rem;
   font-weight: 200;
   letter-spacing: 0.4rem;
