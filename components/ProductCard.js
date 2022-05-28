@@ -9,7 +9,7 @@ export default function ProductCard({ product }) {
   return (
     <>
       <StyledCard key={id}>
-        <StyledImage src={image} alt={name} />
+        <StyledImage src={image} alt="" />
         <TitleWrapper>
           <h2>{name}</h2>
           <h3>
@@ -19,10 +19,8 @@ export default function ProductCard({ product }) {
             })}
           </h3>
         </TitleWrapper>
-        <FlexWrepper>
+        <FlexWrapper>
           <StyledMoreInfoButton
-            type="button"
-            key={id}
             onClick={() => {
               setShowDetails(!showDetails);
             }}
@@ -30,7 +28,7 @@ export default function ProductCard({ product }) {
             {showDetails ? 'Less Info' : 'More Info'}
           </StyledMoreInfoButton>
           <QuantitySelector id={id} quantity={quantity} />
-        </FlexWrepper>
+        </FlexWrapper>
       </StyledCard>
       {showDetails && (
         <ExtraInfoWrapper>
@@ -70,7 +68,7 @@ const TitleWrapper = styled.div`
   align-self: center;
 `;
 
-const FlexWrepper = styled.div`
+const FlexWrapper = styled.div`
   grid-row: 2 / 3;
   grid-column: 2 / 3;
   display: flex;
