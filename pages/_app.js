@@ -21,8 +21,6 @@ const GlobalStyle = createGlobalStyle`
   --text-maincolor: #1C1B1B;
   --text-lightcolor: #7E7E7E;
   --signal-color: #F94C43;
-
-
 }
   
  * {

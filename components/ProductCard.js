@@ -55,6 +55,7 @@ const StyledCard = styled.div`
   gap: 1rem;
   background-color: var(--background-color);
   padding: 1rem;
+  align-items: center;
   @media (max-width: 600px) {
     grid-template-columns: 120px 1fr;
     column-count: 1;
@@ -63,9 +64,8 @@ const StyledCard = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  grid-row: 1/2;
+  grid-row: 1 / 2;
   grid-column: 2 / 3;
-  align-self: center;
 `;
 
 const FlexWrapper = styled.div`
@@ -73,7 +73,6 @@ const FlexWrapper = styled.div`
   grid-column: 2 / 3;
   display: flex;
   justify-content: space-between;
-  align-self: center;
 `;
 
 const ExtraInfoWrapper = styled.div`
@@ -89,16 +88,14 @@ const ExtraInfoWrapper = styled.div`
 const StyledMoreInfoButton = styled.button`
   color: var(--text-lightcolor);
   border-style: none;
-  text-align: left;
   font-weight: 200;
   padding-right: 10px;
   text-transform: uppercase;
   text-decoration: underline;
-  cursor: pointer;
 `;
 
 const StyledImage = styled.img`
-  grid-row: 1/3;
+  grid-row: 1 / 3;
   grid-column: 1 / 2;
   max-width: 300px;
   width: 100%;
