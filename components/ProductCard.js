@@ -9,33 +9,31 @@ export default function ProductCard({ product }) {
     <>
       <StyledCard key={product.id}>
         <StyledImage src={product.image} alt={product.name} />
-        <InfoWrapperColumn>
+        <MainInfoWrapper>
           <StyledProductName>{product.name}</StyledProductName>
+          <StyledWSPrice>WS {product.WSprice.toPrecision(4)} €</StyledWSPrice>
           <InfoWrapperRow>
-            <div>
-              <StyledWSPrice>
-                WS {product.WSprice.toPrecision(4)} €
-              </StyledWSPrice>
-              <StyledRRPPrice>
-                RRP {product.RRPprice.toPrecision(4)} €
-              </StyledRRPPrice>
-              <StyledMoreInfo
-                type="button"
-                key={product.id}
-                onClick={() => setShowDetails(!showDetails)}
-              >
-                More Info
-              </StyledMoreInfo>
-            </div>
+            <StyledMoreInfoButton
+              type="button"
+              key={product.id}
+              onClick={() => {
+                setShowDetails(!showDetails);
+              }}
+            >
+              {showDetails ? 'Less Info' : 'More Info'}
+            </StyledMoreInfoButton>
             <QuantitySelector product={product} />
           </InfoWrapperRow>
-        </InfoWrapperColumn>
+        </MainInfoWrapper>
       </StyledCard>
       {showDetails ? (
-        <InfoWrapperColumn>
-          <div>{product.description}</div>
-          <div>Barcode: {product.id}</div>
-        </InfoWrapperColumn>
+        <ExtraInfoWrapper>
+          <StyledExtraInfo>
+            <strong>RRP</strong> {product.RRPprice.toPrecision(4)} €
+            <br /> <strong>Barcode:</strong> {product.id}
+          </StyledExtraInfo>
+          <StyledExtraInfo>{product.description}</StyledExtraInfo>
+        </ExtraInfoWrapper>
       ) : null}
     </>
   );
@@ -46,18 +44,26 @@ const StyledCard = styled.div`
   align-items: center;
   border-top: 1px solid lightgray;
   background-color: var(--background-color);
-  padding: 1rem 1rem;
-  gap: 1rem;
+  padding: 0.8rem;
 `;
-const InfoWrapperColumn = styled.div`
+const MainInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 0.6rem;
+  padding-left: 0.6rem;
 `;
 
 const InfoWrapperRow = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+`;
+
+const ExtraInfoWrapper = styled.div`
+  flex-direction: column;
+  padding: 0.8rem;
 `;
 
 const StyledProductName = styled.h2`
@@ -67,33 +73,30 @@ const StyledProductName = styled.h2`
   font-weight: 200;
   letter-spacing: 0.4rem;
   text-transform: uppercase;
-  padding-bottom: 1.2rem;
   @media (max-width: 600px) {
-    letter-spacing: 0.4rem;
     font-size: 14px;
   }
 `;
 
-const StyledWSPrice = styled.p`
+const StyledWSPrice = styled.h3`
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
-  padding-bottom: 5px;
   color: var(--text-maincolor);
   font-size: 1rem;
   font-weight: 600;
 `;
 
-const StyledRRPPrice = styled.p`
+const StyledExtraInfo = styled.p`
   font-family: 'Poppins', sans-serif;
+  padding-bottom: 0.4rem;
   color: var(--text-lightcolor);
   font-size: 14px;
   font-weight: 200;
-  text-transform: uppercase;
+  text-align: justify;
 `;
 
-const StyledMoreInfo = styled.p`
+const StyledMoreInfoButton = styled.span`
   font-family: 'Poppins', sans-serif;
-  margin-top: 0.2rem;
   color: var(--text-lightcolor);
   font-size: 14px;
   font-weight: 200;
@@ -107,16 +110,4 @@ const StyledImage = styled.img`
   @media (max-width: 600px) {
     width: 120px;
   }
-`;
-
-const InfoWrapper = styled.p`
-  display: flex;
-  flex-direction: colu;
-  font-family: 'Poppins', sans-serif;
-  padding: 1rem 1rem;
-  gap: 1rem;
-  margin-top: 0.2rem;
-  color: var(--text-lightcolor);
-  font-size: 14px;
-  font-weight: 200;
 `;

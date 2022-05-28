@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 
-
 export default function QuantitySelector({ product }) {
   const setQuantity = useStore(state => state.setQuantity);
 
@@ -56,9 +55,8 @@ export default function QuantitySelector({ product }) {
 const QuantityWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.6rem;
   align-self: flex-end;
-  margin-bottom: 1rem;
 `;
 
 const StyledSelector = styled.div`
@@ -80,10 +78,10 @@ const StyledQuantityButton = styled.button`
 `;
 
 const StyledQuantityCounter = styled.span`
-  width: 25px;
+  width: 24px;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 200;
   text-transform: uppercase;
   color: var(--text-lightcolor);
@@ -92,15 +90,8 @@ const StyledQuantityCounter = styled.span`
 const StyledRemoveButton = styled.button`
   border: 1px solid lightgrey;
   height: 45px;
-  padding: 0 1rem;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 200;
+  padding: 0 0.6rem;
   text-transform: uppercase;
   color: var(--text-lightcolor);
-
-  letter-spacing: 0.5rem;
-  text-transform: uppercase;
-  text-decoration: underline;
   cursor: pointer;
 `;

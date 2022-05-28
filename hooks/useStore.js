@@ -173,17 +173,6 @@ const useStore = create(set => {
         };
       });
     },
-    
-    showDetails: (id) => {
-      set(state => {
-        return {
-          products: state.products.map(product =>
-            product.id === id ? { ...product, quantity } : product
-          ),
-        };
-      });
-    },
   };
 });
 export default useStore;
-
