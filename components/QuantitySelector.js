@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 
-export default function QuantitySelector({ product }) {
+export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
 
   return (
@@ -9,7 +9,7 @@ export default function QuantitySelector({ product }) {
       <StyledRemoveButton
         type="button"
         onClick={() => {
-          setQuantity(product.id, (product.quantity = 0));
+          setQuantity(id, (quantity = 0));
         }}
       >
         <svg
@@ -33,16 +33,16 @@ export default function QuantitySelector({ product }) {
         <StyledQuantityButton
           type="button"
           onClick={() => {
-            setQuantity(product.id, Math.max(product.quantity - 1, 0));
+            setQuantity(id, Math.max(quantity - 1, 0));
           }}
         >
           {'-'}
         </StyledQuantityButton>
-        <StyledQuantityCounter>{product.quantity}</StyledQuantityCounter>
+        <StyledQuantityCounter>{quantity}</StyledQuantityCounter>
         <StyledQuantityButton
           type="button"
           onClick={() => {
-            setQuantity(product.id, Math.min(product.quantity + 1, 20));
+            setQuantity(id, Math.min(quantity + 1, 20));
           }}
         >
           {'+'}
@@ -55,9 +55,7 @@ export default function QuantitySelector({ product }) {
 const QuantityWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 1rem;
-  align-self: flex-end;
-  margin-bottom: 1rem;
+  gap: 0.6rem;
 `;
 
 const StyledSelector = styled.div`
@@ -74,15 +72,15 @@ const StyledQuantityButton = styled.button`
   text-transform: uppercase;
   color: var(--text-lightcolor);
   border-style: none;
-  padding: 0 1rem 0.2rem;
+  padding: 0 1rem;
   cursor: pointer;
 `;
 
 const StyledQuantityCounter = styled.span`
-  width: 25px;
+  width: 24px;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 200;
   text-transform: uppercase;
   color: var(--text-lightcolor);
@@ -91,15 +89,8 @@ const StyledQuantityCounter = styled.span`
 const StyledRemoveButton = styled.button`
   border: 1px solid lightgrey;
   height: 45px;
-  padding: 0 1rem;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 200;
+  padding: 0 0.6rem;
   text-transform: uppercase;
   color: var(--text-lightcolor);
-
-  letter-spacing: 0.5rem;
-  text-transform: uppercase;
-  text-decoration: underline;
   cursor: pointer;
 `;
