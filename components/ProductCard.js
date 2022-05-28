@@ -12,7 +12,7 @@ export default function ProductCard({ product }) {
         <MainInfoWrapper>
           <StyledProductName>{product.name}</StyledProductName>
           <StyledWSPrice>WS {product.WSprice.toPrecision(4)} €</StyledWSPrice>
-          <InfoWrapperRow>
+          <MainInfoWrapperRow>
             <StyledMoreInfoButton
               type="button"
               key={product.id}
@@ -23,7 +23,7 @@ export default function ProductCard({ product }) {
               {showDetails ? 'Less Info' : 'More Info'}
             </StyledMoreInfoButton>
             <QuantitySelector product={product} />
-          </InfoWrapperRow>
+          </MainInfoWrapperRow>
         </MainInfoWrapper>
       </StyledCard>
       {showDetails ? (
@@ -55,7 +55,7 @@ const MainInfoWrapper = styled.div`
   padding-left: 0.6rem;
 `;
 
-const InfoWrapperRow = styled.div`
+const MainInfoWrapperRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,7 +63,11 @@ const InfoWrapperRow = styled.div`
 
 const ExtraInfoWrapper = styled.div`
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 0.8rem;
+  max-width: 600px;
+  margin: auto;
 `;
 
 const StyledProductName = styled.h2`
