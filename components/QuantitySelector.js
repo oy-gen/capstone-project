@@ -73,7 +73,7 @@ const StyledQuantityButton = styled.button`
   text-transform: uppercase;
   color: var(--text-lightcolor);
   border-style: none;
-  padding: 0 1rem 0.2rem;
+  padding: 0 1rem;
   cursor: pointer;
 `;
 

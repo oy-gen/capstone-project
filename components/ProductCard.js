@@ -7,19 +7,19 @@ export default function ProductCard({ product }) {
 
   return (
     <>
-      <StyledCard
-        key={product.id}
-        type="button"
-        onClick={() => {
-          setShowDetails(!showDetails);
-        }}
-      >
+      <StyledCard key={product.id}>
         <StyledImage src={product.image} alt={product.name} />
         <MainInfoWrapper>
           <StyledProductName>{product.name}</StyledProductName>
           <StyledWSPrice>WS {product.WSprice.toPrecision(4)} €</StyledWSPrice>
           <MainInfoWrapperRow>
-            <StyledMoreInfoButton>
+            <StyledMoreInfoButton
+              type="button"
+              key={product.id}
+              onClick={() => {
+                setShowDetails(!showDetails);
+              }}
+            >
               {showDetails ? 'Less Info' : 'More Info'}
             </StyledMoreInfoButton>
             <QuantitySelector product={product} />
@@ -29,8 +29,8 @@ export default function ProductCard({ product }) {
       {showDetails ? (
         <ExtraInfoWrapper>
           <StyledExtraInfo>
-            <strong>RRP</strong> {product.RRPprice.toPrecision(4)} €
-            <br /> <strong>Barcode:</strong> {product.id}
+            <strong>RRP: </strong> {product.RRPprice.toPrecision(4)} €
+            <br /> <strong>BARCODE:</strong> {product.id}
           </StyledExtraInfo>
           <StyledExtraInfo>{product.description}</StyledExtraInfo>
         </ExtraInfoWrapper>
