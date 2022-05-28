@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 import ProductCard from '../components/ProductCard';
 
@@ -13,4 +12,3 @@ export default function Home() {
     </>
   );
 }
-

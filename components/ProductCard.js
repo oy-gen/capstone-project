@@ -4,37 +4,47 @@ import { useState } from 'react';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
+  const { id, image, name, description, WSprice, RRPprice, quantity } = product;
 
   return (
     <>
-      <StyledCard key={product.id}>
-        <StyledImage src={product.image} alt={product.name} />
+      <StyledCard key={id}>
+        <StyledImage src={image} alt={name} />
         <MainInfoWrapper>
-          <StyledProductName>{product.name}</StyledProductName>
-          <StyledWSPrice>WS {product.WSprice.toPrecision(4)} €</StyledWSPrice>
-          <MainInfoWrapperRow>
+          <h2>{name}</h2>
+          <h3>
+            {WSprice.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </h3>
+          <FlexWrepper>
             <StyledMoreInfoButton
               type="button"
-              key={product.id}
+              key={id}
               onClick={() => {
                 setShowDetails(!showDetails);
               }}
             >
               {showDetails ? 'Less Info' : 'More Info'}
             </StyledMoreInfoButton>
-            <QuantitySelector product={product} />
-          </MainInfoWrapperRow>
+            <QuantitySelector id={id} quantity={quantity} />
+          </FlexWrepper>
         </MainInfoWrapper>
       </StyledCard>
-      {showDetails ? (
+      {showDetails && (
         <ExtraInfoWrapper>
-          <StyledExtraInfo>
-            <strong>RRP: </strong> {product.RRPprice.toPrecision(4)} €
-            <br /> <strong>BARCODE:</strong> {product.id}
-          </StyledExtraInfo>
-          <StyledExtraInfo>{product.description}</StyledExtraInfo>
+          <p>
+            <p>{description}</p>
+            <strong>RRP: </strong>
+            {RRPprice.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+            <br /> <strong>BARCODE: </strong> {id}
+          </p>
         </ExtraInfoWrapper>
-      ) : null}
+      )}
     </>
   );
 }
@@ -52,58 +62,31 @@ const MainInfoWrapper = styled.div`
   justify-content: space-between;
   flex-grow: 1;
   gap: 0.6rem;
-  padding-left: 0.6rem;
 `;
 
-const MainInfoWrapperRow = styled.div`
+const FlexWrepper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
 const ExtraInfoWrapper = styled.div`
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.8rem;
-  max-width: 600px;
+  padding: 1rem;
+  column-count: 2;
+  max-width: 1000px;
   margin: auto;
-`;
-
-const StyledProductName = styled.h2`
-  font-family: 'Poppins', sans-serif;
-  color: var(--text-maincolor);
-  font-size: 1rem;
-  font-weight: 200;
-  letter-spacing: 0.4rem;
-  text-transform: uppercase;
   @media (max-width: 600px) {
-    font-size: 14px;
+    column-count: 1;
   }
 `;
 
-const StyledWSPrice = styled.h3`
-  font-family: 'Poppins', sans-serif;
-  text-transform: uppercase;
-  color: var(--text-maincolor);
-  font-size: 1rem;
-  font-weight: 600;
-`;
-
-const StyledExtraInfo = styled.p`
-  font-family: 'Poppins', sans-serif;
-  padding-bottom: 0.4rem;
+const StyledMoreInfoButton = styled.button`
   color: var(--text-lightcolor);
-  font-size: 14px;
+  border-style: none;
+  text-align: left;
+  font-size: 0.8rem;
   font-weight: 200;
-  text-align: justify;
-`;
-
-const StyledMoreInfoButton = styled.span`
-  font-family: 'Poppins', sans-serif;
-  color: var(--text-lightcolor);
-  font-size: 14px;
-  font-weight: 200;
+  padding-right: 10px;
   text-transform: uppercase;
   text-decoration: underline;
   cursor: pointer;

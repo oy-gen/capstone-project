@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 
-export default function QuantitySelector({ product }) {
+export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
 
   return (
@@ -9,7 +9,7 @@ export default function QuantitySelector({ product }) {
       <StyledRemoveButton
         type="button"
         onClick={() => {
-          setQuantity(product.id, (product.quantity = 0));
+          setQuantity(id, (quantity = 0));
         }}
       >
         <svg
@@ -33,16 +33,16 @@ export default function QuantitySelector({ product }) {
         <StyledQuantityButton
           type="button"
           onClick={() => {
-            setQuantity(product.id, Math.max(product.quantity - 1, 0));
+            setQuantity(id, Math.max(quantity - 1, 0));
           }}
         >
           {'-'}
         </StyledQuantityButton>
-        <StyledQuantityCounter>{product.quantity}</StyledQuantityCounter>
+        <StyledQuantityCounter>{quantity}</StyledQuantityCounter>
         <StyledQuantityButton
           type="button"
           onClick={() => {
-            setQuantity(product.id, Math.min(product.quantity + 1, 20));
+            setQuantity(id, Math.min(quantity + 1, 20));
           }}
         >
           {'+'}
