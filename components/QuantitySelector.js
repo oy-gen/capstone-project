@@ -56,7 +56,6 @@ const QuantityWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.6rem;
-  align-self: flex-end;
 `;
 
 const StyledSelector = styled.div`

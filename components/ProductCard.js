@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
     <>
       <StyledCard key={id}>
         <StyledImage src={image} alt={name} />
-        <MainInfoWrapper>
+        <TitleWrapper>
           <h2>{name}</h2>
           <h3>
             {WSprice.toLocaleString('de-DE', {
@@ -18,19 +18,19 @@ export default function ProductCard({ product }) {
               currency: 'EUR',
             })}
           </h3>
-          <FlexWrepper>
-            <StyledMoreInfoButton
-              type="button"
-              key={id}
-              onClick={() => {
-                setShowDetails(!showDetails);
-              }}
-            >
-              {showDetails ? 'Less Info' : 'More Info'}
-            </StyledMoreInfoButton>
-            <QuantitySelector id={id} quantity={quantity} />
-          </FlexWrepper>
-        </MainInfoWrapper>
+        </TitleWrapper>
+        <FlexWrepper>
+          <StyledMoreInfoButton
+            type="button"
+            key={id}
+            onClick={() => {
+              setShowDetails(!showDetails);
+            }}
+          >
+            {showDetails ? 'Less Info' : 'More Info'}
+          </StyledMoreInfoButton>
+          <QuantitySelector id={id} quantity={quantity} />
+        </FlexWrepper>
       </StyledCard>
       {showDetails && (
         <ExtraInfoWrapper>
@@ -50,21 +50,28 @@ export default function ProductCard({ product }) {
 }
 
 const StyledCard = styled.div`
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  grid-template-rows: 1fr 1fr;
   border-top: 1px solid lightgray;
+  gap: 1rem;
   background-color: var(--background-color);
-  padding: 0.8rem;
+  padding: 1rem;
+  @media (max-width: 600px) {
+    grid-template-columns: 120px 1fr;
+    column-count: 1;
+    gap: 0rem;
+  }
 `;
-const MainInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
-  gap: 0.6rem;
+
+const TitleWrapper = styled.div`
+  grid-row: 1/2;
+  grid-column: 2 / 3;
 `;
 
 const FlexWrepper = styled.div`
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,7 +91,6 @@ const StyledMoreInfoButton = styled.button`
   color: var(--text-lightcolor);
   border-style: none;
   text-align: left;
-  font-size: 0.8rem;
   font-weight: 200;
   padding-right: 10px;
   text-transform: uppercase;
@@ -93,8 +99,8 @@ const StyledMoreInfoButton = styled.button`
 `;
 
 const StyledImage = styled.img`
-  width: 150px;
-  @media (max-width: 600px) {
-    width: 120px;
-  }
+  grid-row: 1/3;
+  grid-column: 1 / 2;
+  max-width: 300px;
+  width: 100%;
 `;

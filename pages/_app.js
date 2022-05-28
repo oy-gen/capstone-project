@@ -21,6 +21,8 @@ const GlobalStyle = createGlobalStyle`
   --text-maincolor: #1C1B1B;
   --text-lightcolor: #7E7E7E;
   --signal-color: #F94C43;
+
+
 }
   
  * {
@@ -34,12 +36,13 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    max-width: 1000px;
+    max-width: 800px;
     margin: auto;
   }
 
 h2 {
-  color: var(--text-maincolor);
+  color: var(--text-lightcolor);
+  padding-bottom: 0.2rem;
   font-size: 1.2rem;
   font-weight: 200;
   letter-spacing: 0.4rem;
@@ -57,7 +60,7 @@ h3 {
 
 p {
   font-family: 'Poppins', sans-serif;
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.6rem;
   color: var(--text-lightcolor);
   font-weight: 200;
   text-align: justify;
