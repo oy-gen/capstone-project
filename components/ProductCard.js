@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
-  const { id, image, name, description, WSprice, RRPprice, quantity } = product;
+  const { id, image, name, description, WSprice, RRPprice, quantity, sum } =
+    product;
 
   return (
     <>
