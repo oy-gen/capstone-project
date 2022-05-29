@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
 }
   
  * {    
-margin: 0;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;  
@@ -36,27 +36,42 @@ margin: 0;
     background-color: var(--background-color);
     font-size: 1rem;
     max-width: 800px;
-    margin: auto;
-    
+    margin: 0 auto 4rem auto;
   }
 
 h2 {
-  color: var(--text-lightcolor);
+  color: var(--text-maincolor);
   padding-bottom: 0.4rem;
   font-size: 1.2rem;
-  font-weight: 200;
-  letter-spacing: 0.4rem;
+  font-weight: 600;
   text-transform: uppercase;
   @media (max-width: 600px) {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 };
 
 h3 {
   text-transform: uppercase;
   color: var(--text-maincolor);
+  font-size: 1.2rem;
   font-weight: 600;
-};
+  @media (max-width: 600px) {
+    font-size: 1.1rem;
+  }
+}
+
+h4 {
+  text-transform: uppercase;
+  color: var(--text-lightcolor);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+h5 {
+  color: var(--text-lightcolor);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
 
 p {
   font-family: 'Poppins', sans-serif;
@@ -65,7 +80,7 @@ p {
   font-weight: 200;
   text-align: justify;
   @media (max-width: 600px) {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }
 `;

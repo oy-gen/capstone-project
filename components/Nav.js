@@ -2,33 +2,24 @@ import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 
 export default function Nav() {
-  const products = useStore(state => state.products);
   const TotalPrice = useStore(state => state.TotalPrice);
   const TotalQuantity = useStore(state => state.TotalQuantity);
 
-  const _TotalPriceNett = products //this is the total price without useStore, it works!
-    .map(product => product.sum)
-    .reduce((prev, curr) => prev + curr)
-    .toLocaleString('de-DE', {
-      style: 'currency',
-      currency: 'EUR',
-    });
-
   return (
     <NavBottom>
-      <NavBottomWrapper>
-        <Button>Proceed to Checkout</Button>
-        <NavPriceInfoWrapper>
+      <NavElementWrapper>
+        <Button>Checkout</Button>
+        <div>
           <h3>
-            TOTAL:{' '}
+            TOTAL PRICE:{' '}
             {TotalPrice.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
             })}
           </h3>
           <h5>total products: {TotalQuantity}</h5>
-        </NavPriceInfoWrapper>
-      </NavBottomWrapper>
+        </div>
+      </NavElementWrapper>
     </NavBottom>
   );
 }
@@ -36,41 +27,37 @@ export default function Nav() {
 const NavBottom = styled.div`
   display: flex;
   justify-content: center;
-  background-color: white 95%;
+  background-color: white 90%;
   box-shadow: 0px 0px 2rem 1rem rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(10px);
-  padding: 1rem;
   position: fixed;
-  bottom: 0px;
+  bottom: -3px;
   right: 0px;
   width: 100vw;
 `;
 
-const NavBottomWrapper = styled.div`
+const NavElementWrapper = styled.div`
   display: grid;
   align-items: center;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-  max-width: 800px;
+  gap: 1.6rem;
+  grid-template-columns: 40% 1fr;
+  width: 800px;
+  @media (max-width: 600px) {
+    grid-template-columns: 136px 1fr;
+    gap: 1rem;
+  }
 `;
 
 const Button = styled.button`
-  padding: 1rem 0;
-  grid-column: 1 / 2;
   background-color: black;
   border-style: none;
-  text-align: left;
+  font-size: 1rem;
   text-decoration: none;
   color: white;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 1rem;
+  padding: 1.6rem;
+  @media (max-width: 600px) {
+    padding: 1.4rem;
+  }
 `;
-
-const NavPriceInfoWrapper = styled.div`
-  grid-column: 2 / 3;
-`;
-
-//   const TotalQuantity = products
-//     .map(product => product.quantity)
-//     .reduce((prev, curr) => prev + curr);

@@ -8,7 +8,6 @@ export default function QuantitySelector({ id, quantity }) {
   return (
     <QuantityWrapper>
       <StyledRemoveButton
-        type="button"
         onClick={() => {
           setQuantity(id, (quantity = 0));
           updateTotal();
@@ -33,7 +32,6 @@ export default function QuantitySelector({ id, quantity }) {
       </StyledRemoveButton>
       <StyledSelector>
         <StyledQuantityButton
-          type="button"
           onClick={() => {
             setQuantity(id, Math.max(quantity - 1, 0));
             updateTotal();
@@ -43,7 +41,6 @@ export default function QuantitySelector({ id, quantity }) {
         </StyledQuantityButton>
         <StyledQuantityCounter>{quantity}</StyledQuantityCounter>
         <StyledQuantityButton
-          type="button"
           onClick={() => {
             setQuantity(id, Math.min(quantity + 1, 20));
             updateTotal();
