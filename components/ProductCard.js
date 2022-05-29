@@ -4,8 +4,7 @@ import { useState } from 'react';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
-  const { id, image, name, description, WSprice, RRPprice, quantity, sum } =
-    product;
+  const { id, image, name, description, WSprice, RRPprice, quantity } = product;
 
   return (
     <>
@@ -36,7 +35,7 @@ export default function ProductCard({ product }) {
           >
             {showDetails ? 'Less Info' : 'More Info'}
           </StyledMoreInfoButton>
-          <QuantitySelector id={id} quantity={quantity} sum={sum} />
+          <QuantitySelector id={id} quantity={quantity} />
         </FlexWrapper>
       </StyledCard>
       {showDetails && (
