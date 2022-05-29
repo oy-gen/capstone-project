@@ -164,25 +164,22 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
-    TotalPriceUseStore: 0,
-    updateTotalPrice: () => {
+    TotalPrice: 0,
+    TotalQuantity: 0,
+    updateTotal: () => {
       set(state => {
         const calcTotalPriceNett = state.products
           .map(product => product.sum)
           .reduce((prev, curr) => prev + curr);
-        return { TotalPriceUseStore: calcTotalPriceNett };
+        const calcTotalProducts = state.products
+          .map(product => product.quantity)
+          .reduce((prev, curr) => prev + curr);
+        return {
+          TotalPrice: calcTotalPriceNett,
+          TotalQuantity: calcTotalProducts,
+        };
       });
     },
-
-    totalPurchase: [
-      {
-        totalPriceNett: 0,
-        totalProducts: 0,
-        totalShipping: 0,
-        totalTaxes: 0,
-      },
-    ],
-
     setQuantity: (id, quantity) => {
       set(state => {
         return {
@@ -201,18 +198,3 @@ const useStore = create(set => {
   };
 });
 export default useStore;
-
-// setTotalPriceNett: () => {
-//   set(state => {
-//     const calcTotalPriceNett = state.products
-//       .map(product => product.sum)
-//       .reduce((prev, curr) => prev + curr);
-//        console.log("this is the price");
-//      console.log(calcTotalPriceNett);
-//     return {
-//       totalPurchase: state.totalPurchase.map(
-//         item => (item.totalPriceNett = calcTotalPriceNett)
-//       ),
-//     };
-//   });
-// },

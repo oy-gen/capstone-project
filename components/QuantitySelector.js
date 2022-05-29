@@ -3,7 +3,7 @@ import useStore from '../hooks/useStore';
 
 export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
-  const updateTotalPrice = useStore(state => state.updateTotalPrice);
+  const updateTotal = useStore(state => state.updateTotal);
 
   return (
     <QuantityWrapper>
@@ -11,7 +11,7 @@ export default function QuantitySelector({ id, quantity }) {
         type="button"
         onClick={() => {
           setQuantity(id, (quantity = 0));
-          updateTotalPrice();
+          updateTotal();
         }}
       >
         <svg
@@ -36,7 +36,7 @@ export default function QuantitySelector({ id, quantity }) {
           type="button"
           onClick={() => {
             setQuantity(id, Math.max(quantity - 1, 0));
-            updateTotalPrice();
+            updateTotal();
           }}
         >
           {'-'}
@@ -46,7 +46,7 @@ export default function QuantitySelector({ id, quantity }) {
           type="button"
           onClick={() => {
             setQuantity(id, Math.min(quantity + 1, 20));
-            updateTotalPrice();
+            updateTotal();
           }}
         >
           {'+'}
