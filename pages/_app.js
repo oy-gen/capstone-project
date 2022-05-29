@@ -23,19 +23,21 @@ const GlobalStyle = createGlobalStyle`
   --signal-color: #F94C43;
 }
   
- * {
-    margin: 0;
+ * {    
+margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--background-color);
     -webkit-font-smoothing: antialiased;  
+    _outline: 1px solid red;
   }
 
   body {
     font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
     font-size: 1rem;
     max-width: 800px;
     margin: auto;
+    
   }
 
 h2 {

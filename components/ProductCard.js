@@ -4,20 +4,29 @@ import { useState } from 'react';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
-  const { id, image, name, description, WSprice, RRPprice, quantity } = product;
+  const { id, image, name, description, WSprice, RRPprice, quantity, sum } =
+    product;
 
   return (
-    <>
+  <>
       <StyledCard key={id}>
         <StyledImage src={image} alt="" />
         <TitleWrapper>
           <h2>{name}</h2>
           <h3>
+            UNIT PRICE:{' '}
             {WSprice.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
             })}
           </h3>
+          <p>
+            TOTAL UNIT PRICE:{' '}
+            {sum.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </p>
         </TitleWrapper>
         <FlexWrapper>
           <StyledMoreInfoButton
@@ -27,7 +36,7 @@ export default function ProductCard({ product }) {
           >
             {showDetails ? 'Less Info' : 'More Info'}
           </StyledMoreInfoButton>
-          <QuantitySelector id={id} quantity={quantity} />
+          <QuantitySelector id={id} quantity={quantity} sum={sum} />
         </FlexWrapper>
       </StyledCard>
       {showDetails && (
@@ -88,8 +97,9 @@ const ExtraInfoWrapper = styled.div`
 const StyledMoreInfoButton = styled.button`
   color: var(--text-lightcolor);
   border-style: none;
+  text-align: left;
   font-weight: 200;
-  padding-right: 10px;
+  padding-right: 0.8rem;
   text-transform: uppercase;
   text-decoration: underline;
 `;
