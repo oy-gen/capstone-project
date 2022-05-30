@@ -164,11 +164,33 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
+    TotalPrice: 0,
+    TotalQuantity: 0,
+    updateTotal: () => {
+      set(state => {
+        const calcTotalPriceNett = state.products
+          .map(product => product.sum)
+          .reduce((prev, curr) => prev + curr);
+        const calcTotalProducts = state.products
+          .map(product => product.quantity)
+          .reduce((prev, curr) => prev + curr);
+        return {
+          TotalPrice: calcTotalPriceNett,
+          TotalQuantity: calcTotalProducts,
+        };
+      });
+    },
     setQuantity: (id, quantity) => {
       set(state => {
         return {
           products: state.products.map(product =>
-            product.id === id ? { ...product, quantity } : product
+            product.id === id
+              ? {
+                  ...product,
+                  quantity: quantity,
+                  sum: product.WSprice * quantity,
+                }
+              : product
           ),
         };
       });

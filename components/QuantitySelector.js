@@ -3,13 +3,14 @@ import useStore from '../hooks/useStore';
 
 export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
-
+  const updateTotal = useStore(state => state.updateTotal);
+  
   return (
     <QuantityWrapper>
       <StyledRemoveButton
-        type="button"
         onClick={() => {
           setQuantity(id, (quantity = 0));
+          updateTotal();
         }}
       >
         <svg
@@ -31,18 +32,18 @@ export default function QuantitySelector({ id, quantity }) {
       </StyledRemoveButton>
       <StyledSelector>
         <StyledQuantityButton
-          type="button"
           onClick={() => {
             setQuantity(id, Math.max(quantity - 1, 0));
+            updateTotal();
           }}
         >
           {'-'}
         </StyledQuantityButton>
         <StyledQuantityCounter>{quantity}</StyledQuantityCounter>
         <StyledQuantityButton
-          type="button"
           onClick={() => {
             setQuantity(id, Math.min(quantity + 1, 20));
+            updateTotal();
           }}
         >
           {'+'}
@@ -61,7 +62,7 @@ const QuantityWrapper = styled.div`
 const StyledSelector = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--text-lightcolor);
   height: 45px;
 `;
 
@@ -87,7 +88,7 @@ const StyledQuantityCounter = styled.span`
 `;
 
 const StyledRemoveButton = styled.button`
-  border: 1px solid lightgrey;
+  border: 1px solid var(--text-lightcolor);
   height: 45px;
   padding: 0 0.6rem;
   text-transform: uppercase;

@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
-  const { id, image, name, description, WSprice, RRPprice, quantity } = product;
+  const { id, image, name, description, WSprice, RRPprice, quantity, sum } =
+    product;
 
   return (
     <>
@@ -12,12 +13,20 @@ export default function ProductCard({ product }) {
         <StyledImage src={image} alt="" />
         <TitleWrapper>
           <h2>{name}</h2>
-          <h3>
+          <h4>
+            UNIT PRICE:{' '}
             {WSprice.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
             })}
-          </h3>
+          </h4>
+          <p>
+            TOTAL:{' '}
+            {sum.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </p>
         </TitleWrapper>
         <FlexWrapper>
           <StyledMoreInfoButton
@@ -33,14 +42,16 @@ export default function ProductCard({ product }) {
       {showDetails && (
         <ExtraInfoWrapper>
           <p>
-            <p>{description}</p>
             <strong>RRP: </strong>
             {RRPprice.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
             })}
-            <br /> <strong>BARCODE: </strong> {id}
           </p>
+          <p>
+            <strong>BARCODE: </strong> {id}
+          </p>
+          <p>{description}</p>
         </ExtraInfoWrapper>
       )}
     </>
@@ -49,16 +60,14 @@ export default function ProductCard({ product }) {
 
 const StyledCard = styled.div`
   display: grid;
-  grid-template-columns: 170px 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 200px 1fr;
   border-top: 1px solid lightgray;
   gap: 1rem;
   background-color: var(--background-color);
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 0;
   align-items: center;
   @media (max-width: 600px) {
-    grid-template-columns: 120px 1fr;
-    column-count: 1;
+    grid-template-columns: 136px 1fr;
     gap: 0rem;
   }
 `;
@@ -88,8 +97,9 @@ const ExtraInfoWrapper = styled.div`
 const StyledMoreInfoButton = styled.button`
   color: var(--text-lightcolor);
   border-style: none;
+  text-align: left;
   font-weight: 200;
-  padding-right: 10px;
+  padding-right: 0.8rem;
   text-transform: uppercase;
   text-decoration: underline;
 `;
