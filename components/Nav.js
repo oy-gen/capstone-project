@@ -27,13 +27,16 @@ export default function Nav() {
 const NavBottom = styled.div`
   display: flex;
   justify-content: center;
-  background-color: white 90%;
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0px 2rem 1rem rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(10px);
   position: fixed;
   bottom: -3px;
   right: 0px;
   width: 100vw;
+  @supports (backdrop-filter: blur(7px)) {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(7px);
+  }
 `;
 
 const NavElementWrapper = styled.div`

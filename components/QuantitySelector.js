@@ -4,7 +4,7 @@ import useStore from '../hooks/useStore';
 export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
   const updateTotal = useStore(state => state.updateTotal);
-
+  
   return (
     <QuantityWrapper>
       <StyledRemoveButton
@@ -62,7 +62,7 @@ const QuantityWrapper = styled.div`
 const StyledSelector = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--text-lightcolor);
   height: 45px;
 `;
 
@@ -88,7 +88,7 @@ const StyledQuantityCounter = styled.span`
 `;
 
 const StyledRemoveButton = styled.button`
-  border: 1px solid lightgrey;
+  border: 1px solid var(--text-lightcolor);
   height: 45px;
   padding: 0 0.6rem;
   text-transform: uppercase;

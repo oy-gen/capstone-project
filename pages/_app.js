@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;  
-    _outline: 1px solid red;
+    
   }
 
   body {
@@ -37,6 +37,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
     max-width: 800px;
     margin: 0 auto 4rem auto;
+  }
+   
+  button {
+    background-color: var(--background-color);
   }
 
 h2 {
