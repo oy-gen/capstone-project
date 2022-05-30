@@ -21,6 +21,9 @@ const GlobalStyle = createGlobalStyle`
   --text-maincolor: #1C1B1B;
   --text-lightcolor: #7E7E7E;
   --signal-color: #F94C43;
+
+  --nav-height: 75px;
+  --nav-height-mobile:65px;
 }
   
  * {    
@@ -36,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--background-color);
     font-size: 1rem;
     max-width: 800px;
-    margin: 0 auto 4rem auto;
+    margin: var(--nav-height-mobile) auto;
   }
    
   button {
@@ -45,7 +48,8 @@ const GlobalStyle = createGlobalStyle`
 
 h2 {
   color: var(--text-maincolor);
-  padding-bottom: 0.4rem;
+  line-height: 1.2rem;
+  padding-bottom: 0.2rem;
   font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -73,8 +77,8 @@ h4 {
 
 h5 {
   color: var(--text-lightcolor);
-  font-size: 0.9rem;
-  font-weight: 400;
+  font-size: 0.8rem;
+  font-weight: 300;
 }
 
 p {

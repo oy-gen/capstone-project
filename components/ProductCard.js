@@ -20,13 +20,13 @@ export default function ProductCard({ product }) {
               currency: 'EUR',
             })}
           </h4>
-          <p>
+          <h5>
             TOTAL:{' '}
             {sum.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
             })}
-          </p>
+          </h5>
         </TitleWrapper>
         <FlexWrapper>
           <StyledMoreInfoButton
@@ -98,7 +98,7 @@ const StyledMoreInfoButton = styled.button`
   color: var(--text-lightcolor);
   border-style: none;
   text-align: left;
-  font-weight: 200;
+  font-weight: 300;
   padding-right: 0.8rem;
   text-transform: uppercase;
   text-decoration: underline;
