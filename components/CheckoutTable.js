@@ -6,9 +6,15 @@ export default function CheckoutTable() {
   const productsInCart = products.filter(product => product.quantity !== 0);
   const SubTotalPrice = useStore(state => state.SubTotalPrice);
   const TotalShipping = useStore(state => state.TotalShipping);
+  const TotalParcels = useStore(state => state.TotalParcels);
+  const ParcelPrice = useStore(state => state.ParcelPrice);
   const Taxes = useStore(state => state.Taxes);
-  const SubTotalPriceInclShipping = SubTotalPrice + TotalShipping;
-  const TotalTaxes = SubTotalPriceInclShipping * (Taxes / 100);
+  const TotalTaxes = useStore(state => state.TotalTaxes);
+  const SubTotalPriceInclShipping = useStore(
+    state => state.SubTotalPriceInclShipping
+  );
+  const TotalPrice = useStore(state => state.TotalPrice);
+  const LocalPickup = useStore(state => state.LocalPickup);
 
   return (
     <>
@@ -39,34 +45,54 @@ export default function CheckoutTable() {
             </td>
           </tr>
         ))}
+        {LocalPickup || (
+          <tr>
+            <td align="left">
+              <strong>Shipping</strong>
+            </td>
+            <td align="center">{TotalParcels}</td>
+            <td align="right">
+              {ParcelPrice.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </td>
+            <td align="right">
+              {TotalShipping.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </td>
+          </tr>
+        )}
         <tr>
-          <th />
-          <th />
+          <td empty />
+          <td empty />
           <th align="right">Subtotal</th>
           <th align="right">
-            {SubTotalPrice.toLocaleString('de-DE', {
+            {SubTotalPriceInclShipping.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
             })}
           </th>
         </tr>
         <tr>
-          <th />
-          <th />
-          <th align="right">Shipping</th>
-          <th align="right">
-            {TotalShipping.toLocaleString('de-DE', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
-          </th>
-        </tr>
-        <tr>
-          <th />
-          <th />
+          <td empty />
+          <td empty />
           <th align="right">VAT {Taxes}%</th>
           <th align="right">
             {TotalTaxes.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </th>
+        </tr>
+        <tr>
+          <td empty />
+          <td empty />
+          <th align="right">TOTAL</th>
+          <th align="right">
+            {TotalPrice.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
             })}
@@ -78,43 +104,40 @@ export default function CheckoutTable() {
 }
 
 const StyledTable = styled.table`
+font-size: 0.9rem;
   padding: 1rem 0;
-  border-collapse: collapse;
   color: var(--text-maincolor);
-  font-weight: 300;
   width: 100%;
   border-spacing: 0;
-  @media (max-width: 600) {
-  }
 
   tr {
     height: 3.6rem;
-    height: 1.2 rem;
   }
-
   tr:nth-child(even) {
     background-color: white;
   }
-
+  tr:last-of-type th {
+    font-size: 1rem;
+    font-weight: 600;
+    border-top: 2px solid var(--text-maincolor);
+    border-bottom: 0;
+  }
   th {
-    font-size: 0.9rem;
     text-transform: uppercase;
     padding: 0.4rem;
     color: (--text-maincolor);
-    border-bottom: 2px solid var(--text-maincolor);
     text-align: ${props => props.align};
+    border-bottom: 2px solid var(--text-maincolor);
+    background-color: var(--background-color);
   }
-
   td {
-    font-size: 0.9rem;
+    
     padding: 0.4rem;
     line-height: 1.2rem;
     border-bottom: 1px solid var(--text-lightcolor);
   }
   td:empty {
-    visibility: hidden;
-  }
-  tr:last-child {
-    border-bottom: 2px solid var(--text-maincolor);
+    border: 0;
+    background-color: var(--background-color);
   }
 `;

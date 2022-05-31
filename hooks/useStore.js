@@ -2,6 +2,9 @@ import create from 'zustand';
 
 const useStore = create(set => {
   return {
+    StoreLogo:
+      'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
+
     products: [
       {
         name: 'Meister Candle Beige',
@@ -164,14 +167,19 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
-    StoreLogo:
-      'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
+    TotalPrice: 0,
 
     SubTotalPrice: 0,
+
+    SubTotalPriceInclShipping: 0,
+
+    TotalTaxes: 0,
 
     TotalQuantity: 0,
 
     TotalShipping: 0,
+
+    TotalParcels: 0,
 
     Taxes: 19,
 
@@ -179,21 +187,33 @@ const useStore = create(set => {
 
     ProductsInParcel: 20,
 
+    LocalPickup: false,
+
     updateTotal: () => {
       set(state => {
-        const calcSubTotalPriceNett = state.products
+        const calcSubTotalPrice = state.products
           .map(product => product.sum)
           .reduce((prev, curr) => prev + curr);
         const calcTotalProducts = state.products
           .map(product => product.quantity)
           .reduce((prev, curr) => prev + curr);
-        const calcTotalShipping =
-          Math.ceil(calcTotalProducts / state.ProductsInParcel) *
-          state.ParcelPrice;
+        const calcTotalParcels = Math.ceil(
+          calcTotalProducts / state.ProductsInParcel
+        );
+        const calcTotalShipping = calcTotalParcels * state.ParcelPrice;
+        const calcSubTotalPriceInclShipping =
+          calcSubTotalPrice + calcTotalShipping;
+        const calcTotalTaxes =
+          calcSubTotalPriceInclShipping * (state.Taxes / 100);
+        const calcTotalPrice = calcSubTotalPriceInclShipping + calcTotalTaxes;
         return {
-          SubTotalPrice: calcSubTotalPriceNett,
+          SubTotalPrice: calcSubTotalPrice,
           TotalQuantity: calcTotalProducts,
           TotalShipping: calcTotalShipping,
+          TotalParcels: calcTotalParcels,
+          SubTotalPriceInclShipping: calcSubTotalPriceInclShipping,
+          TotalTaxes: calcTotalTaxes,
+          TotalPrice: calcTotalPrice,
         };
       });
     },
