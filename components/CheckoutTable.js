@@ -4,7 +4,6 @@ import useStore from '../hooks/useStore';
 export default function CheckoutTable() {
   const products = useStore(state => state.products);
   const productsInCart = products.filter(product => product.quantity !== 0);
-  const SubTotalPrice = useStore(state => state.SubTotalPrice);
   const TotalShipping = useStore(state => state.TotalShipping);
   const TotalParcels = useStore(state => state.TotalParcels);
   const ParcelPrice = useStore(state => state.ParcelPrice);
@@ -20,10 +19,10 @@ export default function CheckoutTable() {
     <>
       <StyledTable>
         <tr>
-          <th align="left">product name</th>
+          <th align="left">product</th>
           <th align="center">QTY</th>
-          <th align="right">unit price</th>
-          <th align="right">total price</th>
+          <th align="right">unit</th>
+          <th align="right">sum</th>
         </tr>
         {productsInCart.map(product => (
           <tr key={product.id}>
@@ -104,7 +103,7 @@ export default function CheckoutTable() {
 }
 
 const StyledTable = styled.table`
-font-size: 0.9rem;
+  font-size: 0.9rem;
   padding: 1rem 0;
   color: var(--text-maincolor);
   width: 100%;
@@ -131,7 +130,6 @@ font-size: 0.9rem;
     background-color: var(--background-color);
   }
   td {
-    
     padding: 0.4rem;
     line-height: 1.2rem;
     border-bottom: 1px solid var(--text-lightcolor);

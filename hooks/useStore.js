@@ -167,6 +167,7 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
+    
     TotalPrice: 0,
 
     SubTotalPrice: 0,
