@@ -164,19 +164,24 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
-    StoreLogo: "https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146",
-    TotalPrice: 0,
+    StoreLogo:
+      'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
+    SubTotalPrice: 0,
     TotalQuantity: 0,
+    Taxes: 19,
+    ParcelPrice: 9.9,
+    ProductsInParcel: 20,
+
     updateTotal: () => {
       set(state => {
-        const calcTotalPriceNett = state.products
+        const calcSubTotalPriceNett = state.products
           .map(product => product.sum)
           .reduce((prev, curr) => prev + curr);
         const calcTotalProducts = state.products
           .map(product => product.quantity)
           .reduce((prev, curr) => prev + curr);
         return {
-          TotalPrice: calcTotalPriceNett,
+          SubTotalPrice: calcSubTotalPriceNett,
           TotalQuantity: calcTotalProducts,
         };
       });

@@ -1,18 +1,21 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
+import Link from 'next/link';
 
 export default function Nav() {
-  const TotalPrice = useStore(state => state.TotalPrice);
+  const SubTotalPrice = useStore(state => state.SubTotalPrice);
   const TotalQuantity = useStore(state => state.TotalQuantity);
 
   return (
     <NavBottom>
       <NavElementWrapper>
-        <Button>Checkout</Button>
+        <Link passHref href="/checkout">
+          <Button>Checkout</Button>
+        </Link>
         <div>
           <h3>
             TOTAL PRICE:{' '}
-            {TotalPrice.toLocaleString('de-DE', {
+            {SubTotalPrice.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
             })}
