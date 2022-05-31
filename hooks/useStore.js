@@ -167,28 +167,25 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
-    
-    TotalPrice: 0,
 
-    SubTotalPrice: 0,
+    totals: {
+      TotalTaxes: 0,
+      TotalPrice: 0,
+      SubTotalPrice: 0,
+      SubTotalPriceInclShipping: 0,
+      TotalShipping: 0,
+      TotalQuantity: 0,
+      TotalParcels: 0,
+    },
 
-    SubTotalPriceInclShipping: 0,
-
-    TotalTaxes: 0,
-
-    TotalQuantity: 0,
-
-    TotalShipping: 0,
-
-    TotalParcels: 0,
-
-    Taxes: 19,
-
-    ParcelPrice: 9.9,
-
-    ProductsInParcel: 20,
-
-    LocalPickup: false,
+    seller: {
+      ProductsInParcel: 20,
+      ParcelPrice: 9.9,
+      Taxes: 19,
+    },
+    buyer: {
+      LocalPickup: false,
+    },
 
     updateTotal: () => {
       set(state => {
@@ -199,22 +196,24 @@ const useStore = create(set => {
           .map(product => product.quantity)
           .reduce((prev, curr) => prev + curr);
         const calcTotalParcels = Math.ceil(
-          calcTotalProducts / state.ProductsInParcel
+          calcTotalProducts / state.seller.ProductsInParcel
         );
-        const calcTotalShipping = calcTotalParcels * state.ParcelPrice;
+        const calcTotalShipping = calcTotalParcels * state.seller.ParcelPrice;
         const calcSubTotalPriceInclShipping =
           calcSubTotalPrice + calcTotalShipping;
         const calcTotalTaxes =
-          calcSubTotalPriceInclShipping * (state.Taxes / 100);
+          calcSubTotalPriceInclShipping * (state.seller.Taxes / 100);
         const calcTotalPrice = calcSubTotalPriceInclShipping + calcTotalTaxes;
         return {
-          SubTotalPrice: calcSubTotalPrice,
-          TotalQuantity: calcTotalProducts,
-          TotalShipping: calcTotalShipping,
-          TotalParcels: calcTotalParcels,
-          SubTotalPriceInclShipping: calcSubTotalPriceInclShipping,
-          TotalTaxes: calcTotalTaxes,
-          TotalPrice: calcTotalPrice,
+          totals: {
+            TotalTaxes: calcTotalTaxes,
+            TotalPrice: calcTotalPrice,
+            SubTotalPrice: calcSubTotalPrice,
+            SubTotalPriceInclShipping: calcSubTotalPriceInclShipping,
+            TotalShipping: calcTotalShipping,
+            TotalQuantity: calcTotalProducts,
+            TotalParcels: calcTotalParcels,
+          },
         };
       });
     },

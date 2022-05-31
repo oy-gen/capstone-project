@@ -4,16 +4,17 @@ import useStore from '../hooks/useStore';
 export default function CheckoutTable() {
   const products = useStore(state => state.products);
   const productsInCart = products.filter(product => product.quantity !== 0);
-  const TotalShipping = useStore(state => state.TotalShipping);
-  const TotalParcels = useStore(state => state.TotalParcels);
-  const ParcelPrice = useStore(state => state.ParcelPrice);
-  const Taxes = useStore(state => state.Taxes);
-  const TotalTaxes = useStore(state => state.TotalTaxes);
-  const SubTotalPriceInclShipping = useStore(
-    state => state.SubTotalPriceInclShipping
-  );
-  const TotalPrice = useStore(state => state.TotalPrice);
-  const LocalPickup = useStore(state => state.LocalPickup);
+  const totals = useStore(state => state.totals);
+  const ParcelPrice = useStore(state => state.seller.ParcelPrice);
+  const Taxes = useStore(state => state.seller.Taxes);
+  const LocalPickup = useStore(state => state.buyer.LocalPickup);
+  const {
+    TotalTaxes,
+    TotalPrice,
+    TotalShipping,
+    SubTotalPriceInclShipping,
+    TotalParcels,
+  } = totals;
 
   return (
     <>
@@ -112,28 +113,32 @@ const StyledTable = styled.table`
   tr {
     height: 3.6rem;
   }
+
   tr:nth-child(even) {
     background-color: white;
   }
+
   tr:last-of-type th {
     font-size: 1rem;
     font-weight: 600;
     border-top: 2px solid var(--text-maincolor);
     border-bottom: 0;
   }
+
   th {
     text-transform: uppercase;
     padding: 0.4rem;
     color: (--text-maincolor);
     text-align: ${props => props.align};
-    border-bottom: 2px solid var(--text-maincolor);
-    background-color: var(--background-color);
+    border-bottom: 1px solid var(--text-lightcolor);
   }
+
   td {
     padding: 0.4rem;
     line-height: 1.2rem;
     border-bottom: 1px solid var(--text-lightcolor);
   }
+
   td:empty {
     border: 0;
     background-color: var(--background-color);

@@ -3,8 +3,11 @@ import useStore from '../hooks/useStore';
 import Link from 'next/link';
 
 export default function Nav() {
-  const SubTotalPrice = useStore(state => state.SubTotalPrice);
-  const TotalQuantity = useStore(state => state.TotalQuantity);
+  const SubTotalPrice = useStore(state => state.totals.SubTotalPrice);
+  const TotalQuantity = useStore(state => state.totals.TotalQuantity);
+ 
+
+ 
 
   return (
     <NavBottom>
