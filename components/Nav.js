@@ -24,7 +24,7 @@ export default function Nav() {
   );
 }
 
-const NavBottom = styled.div`
+const NavBottom = styled.nav`
   display: flex;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.9);
@@ -33,9 +33,13 @@ const NavBottom = styled.div`
   bottom: -3px;
   right: 0px;
   width: 100vw;
+  height: var(--nav-height);
   @supports (backdrop-filter: blur(7px)) {
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(7px);
+  }
+  @media (max-width: 600px) {
+    height: var(--nav-height-mobile);
   }
 `;
 
@@ -43,7 +47,7 @@ const NavElementWrapper = styled.div`
   display: grid;
   align-items: center;
   gap: 1.6rem;
-  grid-template-columns: 40% 1fr;
+  grid-template-columns: 1fr 1fr;
   width: 800px;
   @media (max-width: 600px) {
     grid-template-columns: 136px 1fr;
@@ -59,8 +63,6 @@ const Button = styled.button`
   color: white;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 1.6rem;
-  @media (max-width: 600px) {
-    padding: 1.4rem;
-  }
+  height: 100%;
+  width: 100%;
 `;

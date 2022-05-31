@@ -164,6 +164,7 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
+    StoreLogo: "https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146",
     TotalPrice: 0,
     TotalQuantity: 0,
     updateTotal: () => {
