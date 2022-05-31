@@ -11,8 +11,8 @@ export default function Home() {
       {products.map(product => (
         <ProductCard key={product.id} product={product} />
         ))}
-        <Header></Header>
-      <Nav></Nav>
+        <Header/>
+      <Nav/>
     </>
   );
 }
