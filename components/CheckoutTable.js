@@ -4,6 +4,12 @@ import useStore from '../hooks/useStore';
 export default function CheckoutTable() {
   const products = useStore(state => state.products);
   const productsInCart = products.filter(product => product.quantity !== 0);
+  const SubTotalPrice = useStore(state => state.SubTotalPrice);
+  const TotalShipping = useStore(state => state.TotalShipping);
+  const Taxes = useStore(state => state.Taxes);
+  const SubTotalPriceInclShipping = SubTotalPrice + TotalShipping;
+  const TotalTaxes = SubTotalPriceInclShipping * (Taxes / 100);
+
   return (
     <>
       <StyledTable>
@@ -15,10 +21,12 @@ export default function CheckoutTable() {
         </tr>
         {productsInCart.map(product => (
           <tr key={product.id}>
-            <td align="left">{product.name}</td>
+            <td align="left">
+              <strong>{product.name}</strong>
+            </td>
             <td align="center">{product.quantity}</td>
             <td align="right">
-              {product.RRPprice.toLocaleString('de-DE', {
+              {product.WSprice.toLocaleString('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
               })}
@@ -31,60 +39,82 @@ export default function CheckoutTable() {
             </td>
           </tr>
         ))}
-        ,
+        <tr>
+          <th />
+          <th />
+          <th align="right">Subtotal</th>
+          <th align="right">
+            {SubTotalPrice.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </th>
+        </tr>
+        <tr>
+          <th />
+          <th />
+          <th align="right">Shipping</th>
+          <th align="right">
+            {TotalShipping.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </th>
+        </tr>
+        <tr>
+          <th />
+          <th />
+          <th align="right">VAT {Taxes}%</th>
+          <th align="right">
+            {TotalTaxes.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </th>
+        </tr>
       </StyledTable>
     </>
   );
 }
 
 const StyledTable = styled.table`
+  padding: 1rem 0;
+  border-collapse: collapse;
   color: var(--text-maincolor);
   font-weight: 300;
-  padding: 1rem;
   width: 100%;
-  @media (max-width: 600px) {
-    font-size: 0.8rem;
+  border-spacing: 0;
+  @media (max-width: 600) {
+  }
+
+  tr {
+    height: 3.6rem;
+    height: 1.2 rem;
+  }
+
+  tr:nth-child(even) {
+    background-color: white;
   }
 
   th {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    padding: 0.4rem;
+    color: (--text-maincolor);
+    border-bottom: 2px solid var(--text-maincolor);
     text-align: ${props => props.align};
   }
-`;
 
-const TableHeaderLeft = styled.th`
-  text-align: left;
-`;
-
-const FlexWrapper = styled.div`
-  grid-row: 2 / 3;
-  grid-column: 2 / 3;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ExtraInfoWrapper = styled.div`
-  padding: 1rem;
-  column-count: 2;
-  max-width: 1000px;
-  margin: auto;
-  @media (max-width: 600px) {
-    column-count: 1;
+  td {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+    line-height: 1.2rem;
+    border-bottom: 1px solid var(--text-lightcolor);
   }
-`;
-
-const StyledMoreInfoButton = styled.button`
-  color: var(--text-lightcolor);
-  border-style: none;
-  text-align: left;
-  font-weight: 300;
-  padding-right: 0.8rem;
-  text-transform: uppercase;
-  text-decoration: underline;
-`;
-
-const StyledImage = styled.img`
-  grid-row: 1 / 3;
-  grid-column: 1 / 2;
-  max-width: 300px;
-  width: 100%;
+  td:empty {
+    visibility: hidden;
+  }
+  tr:last-child {
+    border-bottom: 2px solid var(--text-maincolor);
+  }
 `;

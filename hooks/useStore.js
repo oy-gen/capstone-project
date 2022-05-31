@@ -166,10 +166,17 @@ const useStore = create(set => {
     ],
     StoreLogo:
       'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
+
     SubTotalPrice: 0,
+
     TotalQuantity: 0,
+
+    TotalShipping: 0,
+
     Taxes: 19,
+
     ParcelPrice: 9.9,
+
     ProductsInParcel: 20,
 
     updateTotal: () => {
@@ -180,12 +187,17 @@ const useStore = create(set => {
         const calcTotalProducts = state.products
           .map(product => product.quantity)
           .reduce((prev, curr) => prev + curr);
+        const calcTotalShipping =
+          Math.ceil(calcTotalProducts / state.ProductsInParcel) *
+          state.ParcelPrice;
         return {
           SubTotalPrice: calcSubTotalPriceNett,
           TotalQuantity: calcTotalProducts,
+          TotalShipping: calcTotalShipping,
         };
       });
     },
+
     setQuantity: (id, quantity) => {
       set(state => {
         return {
