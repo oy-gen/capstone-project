@@ -23,7 +23,7 @@ export default function Nav() {
               currency: 'EUR',
             })}
           </h3>
-          <h5>total products: {TotalQuantity}</h5>
+          <h5>TOTAL PRODUCTS: {TotalQuantity}</h5>
         </div>
       </NavElementWrapper>
     </NavBottom>

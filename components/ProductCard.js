@@ -7,8 +7,6 @@ export default function ProductCard({ product }) {
   const { id, image, name, description, WSprice, RRPprice, quantity, sum } =
     product;
 
-
-    
   return (
     <>
       <StyledCard key={id}>
@@ -23,7 +21,7 @@ export default function ProductCard({ product }) {
             })}
           </h4>
           <h5>
-            TOTAL:{' '}
+            SUM:{' '}
             {sum.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
