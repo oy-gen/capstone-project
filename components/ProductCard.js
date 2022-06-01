@@ -14,7 +14,7 @@ export default function ProductCard({ product }) {
         <TitleWrapper>
           <h2>{name}</h2>
           <h4>
-            UNIT PRICE:{' '}
+            WS PRICE:{' '}
             {WSprice.toLocaleString('de-DE', {
               style: 'currency',
               currency: 'EUR',
@@ -82,6 +82,7 @@ const FlexWrapper = styled.div`
   grid-column: 2 / 3;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const ExtraInfoWrapper = styled.div`
@@ -96,6 +97,7 @@ const ExtraInfoWrapper = styled.div`
 
 const StyledMoreInfoButton = styled.button`
   color: var(--text-lightcolor);
+  padding: 0 0.4rem 0 0;
   border-style: none;
   text-align: left;
   font-weight: 300;

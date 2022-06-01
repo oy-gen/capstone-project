@@ -68,7 +68,7 @@ export default function CheckoutTable() {
         <tr>
           <td empty />
           <td empty />
-          <th align="right">Subtotal</th>
+          <th align="right">TOTAL NET</th>
           <th align="right">
             {SubTotalPriceInclShipping.toLocaleString('de-DE', {
               style: 'currency',
@@ -90,7 +90,7 @@ export default function CheckoutTable() {
         <tr>
           <td empty />
           <td empty />
-          <th align="right">TOTAL</th>
+          <th align="right">TOTAL GROSS</th>
           <th align="right">
             {TotalPrice.toLocaleString('de-DE', {
               style: 'currency',
@@ -119,8 +119,6 @@ const StyledTable = styled.table`
   }
 
   tr:last-of-type th {
-    font-size: 1rem;
-    font-weight: 600;
     border-top: 2px solid var(--text-maincolor);
     border-bottom: 0;
   }
