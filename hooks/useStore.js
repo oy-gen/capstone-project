@@ -2,6 +2,9 @@ import create from 'zustand';
 
 const useStore = create(set => {
   return {
+    StoreLogo:
+      'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
+
     products: [
       {
         name: 'Meister Candle Beige',
@@ -164,23 +167,57 @@ const useStore = create(set => {
         sum: 0,
       },
     ],
-    StoreLogo: "https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146",
-    TotalPrice: 0,
-    TotalQuantity: 0,
+
+    totals: {
+      TotalTaxes: 0,
+      TotalPrice: 0,
+      SubTotalPrice: 0,
+      SubTotalPriceInclShipping: 0,
+      TotalShipping: 0,
+      TotalQuantity: 0,
+      TotalParcels: 0,
+    },
+
+    seller: {
+      ProductsInParcel: 20,
+      ParcelPrice: 9.9,
+      Taxes: 19,
+    },
+    buyer: {
+      LocalPickup: false,
+    },
+
     updateTotal: () => {
       set(state => {
-        const calcTotalPriceNett = state.products
+        const calcSubTotalPrice = state.products
           .map(product => product.sum)
           .reduce((prev, curr) => prev + curr);
         const calcTotalProducts = state.products
           .map(product => product.quantity)
           .reduce((prev, curr) => prev + curr);
+        const calcTotalParcels = Math.ceil(
+          calcTotalProducts / state.seller.ProductsInParcel
+        );
+        const calcTotalShipping = calcTotalParcels * state.seller.ParcelPrice;
+        const calcSubTotalPriceInclShipping =
+          calcSubTotalPrice + calcTotalShipping;
+        const calcTotalTaxes =
+          calcSubTotalPriceInclShipping * (state.seller.Taxes / 100);
+        const calcTotalPrice = calcSubTotalPriceInclShipping + calcTotalTaxes;
         return {
-          TotalPrice: calcTotalPriceNett,
-          TotalQuantity: calcTotalProducts,
+          totals: {
+            TotalTaxes: calcTotalTaxes,
+            TotalPrice: calcTotalPrice,
+            SubTotalPrice: calcSubTotalPrice,
+            SubTotalPriceInclShipping: calcSubTotalPriceInclShipping,
+            TotalShipping: calcTotalShipping,
+            TotalQuantity: calcTotalProducts,
+            TotalParcels: calcTotalParcels,
+          },
         };
       });
     },
+
     setQuantity: (id, quantity) => {
       set(state => {
         return {

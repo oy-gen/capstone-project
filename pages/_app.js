@@ -77,18 +77,17 @@ h4 {
 
 h5 {
   color: var(--text-lightcolor);
-  font-size: 0.8rem;
-  font-weight: 300;
+  font-size: 0.9rem;
+  font-weight: 400;
 }
 
 p {
   font-family: 'Poppins', sans-serif;
   padding-bottom: 0.6rem;
   color: var(--text-lightcolor);
-  font-weight: 200;
-  text-align: justify;
+  font-weight: 300;
   @media (max-width: 600px) {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 }
 `;
