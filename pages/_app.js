@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
   --text-maincolor: #1C1B1B;
   --text-lightcolor: #7E7E7E;
   --signal-color: #F94C43;
+  --accent-color: #4B837F;
 
   --nav-height: 75px;
   --nav-height-mobile:65px;
@@ -89,5 +90,9 @@ p {
   @media (max-width: 600px) {
     font-size: 0.9rem;
   }
+}
+
+a {
+color: var(--accent-color);
 }
 `;

@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 import Link from 'next/link';
 import Modal from './Modal';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function NavCheckout() {
   const TotalPrice = useStore(state => state.totals.TotalPrice);
@@ -14,8 +16,8 @@ export default function NavCheckout() {
         <Link passHref href="/">
           <Button>
             <svg
-              width="16"
-              height="15"
+              width="20"
+              height="19"
               viewBox="0 0 16 15"
               fill="var(--text-maincolor)"
               xmlns="http://www.w3.org/2000/svg"
@@ -25,20 +27,34 @@ export default function NavCheckout() {
                 fill="var(--text-maincolor)"
               />
             </svg>
-            Shop
-            <br />
-            more
+            Shop more
           </Button>
         </Link>
         <MainButton onClick={() => setShowModal(true)}>
-          CONFIRM PURCHASE:{' '}
-          {TotalPrice.toLocaleString('de-DE', {
-            style: 'currency',
-            currency: 'EUR',
-          })}
+          <ButtonTextWrapper>submit order: </ButtonTextWrapper>
+          <h2 style={{ color: 'white' }}>
+            {TotalPrice.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </h2>
         </MainButton>
-        <Modal onClose={() => setShowModal(false)} show={showModal}>
-          Hello from the modal!
+        <Modal
+          onClose={() => setShowModal(false)}
+          show={showModal}
+          title="Thank you!"
+        >
+          <Message>
+            Your order has been trasmitted to our logistics center. You will
+            receive a shipping confirmation shortly.
+          </Message>
+          <Link href="/">Back to main page</Link>
+          <img
+            width="60px"
+            height="60px"
+            alt=""
+            src="https://icon-library.com/images/ajax-loading-icon/ajax-loading-icon-11.jpg"
+          ></img>
         </Modal>
       </NavElementWrapper>
     </NavBottom>
@@ -64,28 +80,37 @@ const NavBottom = styled.nav`
   }
 `;
 
+const ButtonTextWrapper = styled.div`
+  width: 50px;
+`;
+
 const NavElementWrapper = styled.div`
   display: grid;
   align-items: center;
-  gap: 1.6rem;
   grid-template-columns: 1fr 1fr;
   width: 800px;
   @media (max-width: 600px) {
     grid-template-columns: 136px 1fr;
-    gap: 1rem;
   }
+`;
+
+const Message = styled.p`
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 1rem 1rem;
+  text-align: center;
 `;
 
 const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.4rem;
-  padding: 1rem;
+  gap: 0.3rem;
+  padding: 1rem 1.6rem;
   background-color: transparent;
   border-style: none;
   text-decoration: none;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   color: 'var(--text-maincolor)';
   font-weight: 600;
   text-transform: uppercase;
@@ -95,9 +120,12 @@ const Button = styled.button`
 
 const MainButton = styled.button`
   display: flex;
+  justify-content: left;
+  flex-wrap: nowrap;
+  align-items: center;
   text-align: left;
-  gap: 0.4rem;
-  padding: 1rem;
+  gap: 1rem;
+  padding: 1rem 1.6rem;
   background-color: black;
   border-style: none;
   text-decoration: none;

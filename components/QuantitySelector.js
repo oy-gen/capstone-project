@@ -82,7 +82,7 @@ const StyledQuantityCounter = styled.span`
   text-align: center;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
-  font-weight: 200;
+  font-weight: 400;
   text-transform: uppercase;
   color: var(--text-lightcolor);
 `;
