@@ -4,7 +4,7 @@ import useStore from '../hooks/useStore';
 import Link from 'next/link';
 import Modal from './Modal';
 import { useState } from 'react';
-import Image from 'next/image';
+import ShortButton from './ShortButton'
 
 export default function NavCheckout() {
   const TotalPrice = useStore(state => state.totals.TotalPrice);
@@ -14,7 +14,7 @@ export default function NavCheckout() {
     <NavBottom>
       <NavElementWrapper>
         <Link passHref href="/">
-          <Button>
+          <ShortButton background="transparent" textcolor="var(--text-maincolor)">
             <svg
               width="20"
               height="19"
@@ -27,8 +27,7 @@ export default function NavCheckout() {
                 fill="var(--text-maincolor)"
               />
             </svg>
-            Shop more
-          </Button>
+          </ShortButton>
         </Link>
         <MainButton onClick={() => setShowModal(true)}>
           <ButtonTextWrapper>submit order: </ButtonTextWrapper>
@@ -39,22 +38,13 @@ export default function NavCheckout() {
             })}
           </h2>
         </MainButton>
-        <Modal
-          onClose={() => setShowModal(false)}
-          show={showModal}
-          title="Thank you!"
-        >
+        <Modal onClose={() => setShowModal(false)} show={showModal}>
+          <h2>Thank you!</h2>
           <Message>
-            Your order has been trasmitted to our logistics center. You will
-            receive a shipping confirmation shortly.
+            Your order has been trasmitted. You will receive an order
+            confirmation shortly.
           </Message>
           <Link href="/">Back to main page</Link>
-          <img
-            width="60px"
-            height="60px"
-            alt=""
-            src="https://icon-library.com/images/ajax-loading-icon/ajax-loading-icon-11.jpg"
-          ></img>
         </Modal>
       </NavElementWrapper>
     </NavBottom>

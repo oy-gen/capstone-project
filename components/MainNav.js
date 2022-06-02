@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 import Link from 'next/link';
+import ShortButton from './ShortButton';
 
 export default function Nav() {
   const SubTotalPrice = useStore(state => state.totals.SubTotalPrice);
   const TotalQuantity = useStore(state => state.totals.TotalQuantity);
- 
-
- 
 
   return (
     <NavBottom>
       <NavElementWrapper>
-        <Link passHref href="/checkout">
-          <Button>Checkout</Button>
+        <Link passHref href="/checkout" >
+          <ShortButton background="black" textcolor="white" disabled={TotalQuantity ===0}>
+            CHECKOUT
+          </ShortButton>
         </Link>
         <div>
           <h3>
@@ -53,22 +53,10 @@ const NavElementWrapper = styled.div`
   display: grid;
   align-items: center;
   gap: 1.6rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 800px;
   @media (max-width: 600px) {
     grid-template-columns: 136px 1fr;
     gap: 1rem;
   }
-`;
-
-const Button = styled.button`
-  background-color: black;
-  border-style: none;
-  font-size: 1rem;
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  text-transform: uppercase;
-  height: 100%;
-  width: 100%;
 `;

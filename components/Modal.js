@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-const Modal = ({ show, onClose, children, title }) => {
+const Modal = ({ show, onClose, children }) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -34,9 +34,7 @@ const Modal = ({ show, onClose, children, title }) => {
             </svg>
           </StyledCloseButton>
         </Link>
-        {title && <h2>{title}</h2>}
         {children}
-        
       </StyledModal>
     </StyledModalOverlay>
   ) : null;

@@ -60,7 +60,7 @@ export default function ProductCard({ product }) {
 
 const StyledCard = styled.div`
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 1fr 2fr;
   border-top: 1px solid lightgray;
   gap: 1rem;
   background-color: var(--background-color);
