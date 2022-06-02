@@ -1,7 +1,6 @@
-import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 import Link from 'next/link';
-import { ButtonM, ButtonL } from './Buttons';
+import { Button } from './Buttons';
 import NavWrapper from './NavWrapper';
 
 export default function Nav() {
@@ -11,13 +10,14 @@ export default function Nav() {
   return (
     <NavWrapper>
       <Link passHref href="/checkout">
-        <ButtonM
-          background="black"
+        <Button
+          gridcolumn="1/2"
+          background="var(--text-maincolor)"
           textcolor="white"
           disabled={TotalQuantity === 0}
         >
           CHECKOUT
-        </ButtonM>
+        </Button>
       </Link>
       <div style={{ paddingLeft: '1rem' }}>
         <h3>

@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import useStore from '../hooks/useStore';
 import Link from 'next/link';
 import Modal from './Modal';
 import NavWrapper from './NavWrapper';
 import { useState } from 'react';
-import { ButtonM, ButtonL } from './Buttons';
+import { Button } from './Buttons';
 
 export default function NavCheckout() {
   const [showModal, setShowModal] = useState(false);
@@ -12,7 +11,11 @@ export default function NavCheckout() {
   return (
     <NavWrapper>
       <Link passHref href="/">
-        <ButtonM background="transparent" textcolor="var(--text-maincolor)">
+        <Button
+          background="transparent"
+          textcolor="var(--text-maincolor)"
+          gridcolumn="1/2"
+        >
           <svg
             width="20"
             height="19"
@@ -25,15 +28,16 @@ export default function NavCheckout() {
               fill="var(--text-maincolor)"
             />
           </svg>
-        </ButtonM>
+        </Button>
       </Link>
-      <ButtonL
-        background="black"
+      <Button
+        gridcolumn="2/4"
+        background="var(--text-maincolor)"
         textcolor="white"
         onClick={() => setShowModal(true)}
       >
         submit order
-      </ButtonL>
+      </Button>
       <Modal onClose={() => setShowModal(false)} show={showModal}>
         <h2>Thank you!</h2>
         <Message>

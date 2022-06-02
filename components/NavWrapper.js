@@ -1,7 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
 import styled from 'styled-components';
-import useStore from '../hooks/useStore';
-import { useState } from 'react';
 
 export default function NavWrapper({ children }) {
   return (
@@ -36,6 +33,6 @@ const NavElementWrapper = styled.div`
   grid-template-columns: 1fr 2fr;
   width: 800px;
   @media (max-width: 600px) {
-    grid-template-columns: 136px 1fr;
+    grid-template-columns: 1.2fr 2fr;
   }
 `;

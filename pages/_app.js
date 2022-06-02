@@ -93,10 +93,10 @@ const GlobalStyle = createGlobalStyle`
   color: var(--text-lightcolor);
   font-size: 0.9rem;
   font-weight: 400;
+  padding-bottom: 0.4rem;
   }
 
   p {
-  font-family: 'Poppins', sans-serif;
   padding-bottom: 0.6rem;
   color: var(--text-lightcolor);
   font-weight: 300;
