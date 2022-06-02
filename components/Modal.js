@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -79,8 +79,8 @@ const StyledModalOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 102vw;
-  height: 102vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
