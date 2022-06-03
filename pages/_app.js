@@ -53,8 +53,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
-    height: 100%;
-    width: 100%;
     @media (max-width: 600px) {
     font-size: 1rem;
   }
