@@ -4,8 +4,7 @@ import CheckoutTable from '../components/CheckoutTable';
 import CheckoutNav from '../components/CheckoutNav';
 
 export default function Checkout() {
-  const products = useStore(state => state.products);
-
+  
   return (
     <>
       <Header />
