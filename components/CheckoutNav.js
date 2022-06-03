@@ -41,7 +41,7 @@ export default function NavCheckout() {
       <Modal onClose={() => setShowModal(false)} show={showModal}>
         <h2>Thank you!</h2>
         <Message>
-          Your order has been trasmitted. You will receive an order confirmation
+          Your order has been trasmitted. You will receive a confirmation email
           shortly.
         </Message>
         <Link href="/">Back to main page</Link>

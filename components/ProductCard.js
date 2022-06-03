@@ -88,14 +88,13 @@ export default function ProductCard({ product }) {
 
 const StyledCard = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1.3fr 2fr;
   border-top: 1px solid lightgray;
   gap: 1rem;
   background-color: var(--background-color);
   padding: 1rem 1rem 1rem 0;
   align-items: center;
   @media (max-width: 600px) {
-    grid-template-columns: 1.2fr 2fr;
     gap: 0rem;
   }
 `;

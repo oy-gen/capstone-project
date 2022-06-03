@@ -99,7 +99,7 @@ const GlobalStyle = createGlobalStyle`
   p {
   padding-bottom: 0.6rem;
   color: var(--text-lightcolor);
-  font-weight: 300;
+  font-weight: 400;
   @media (max-width: 600px) {
     font-size: 0.9rem;
   }

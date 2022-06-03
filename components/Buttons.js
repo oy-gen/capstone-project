@@ -19,3 +19,16 @@ export const SmallSquareButton = styled.button`
   color: var(--text-lightcolor);
   cursor: pointer;
 `;
+
+export const StyledCloseButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: 1px solid var(--text-lightcolor);
+  height: 1.6rem;
+  width: 1.6rem;
+  color: var(--text-lightcolor);
+`;
