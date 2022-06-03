@@ -4,10 +4,10 @@ import useStore from '../hooks/useStore';
 export default function CheckoutTable() {
   const products = useStore(state => state.products);
   const productsInCart = products.filter(product => product.quantity !== 0);
-  const totals = useStore(state => state.totals);
   const ParcelPrice = useStore(state => state.seller.ParcelPrice);
   const Taxes = useStore(state => state.seller.Taxes);
   const LocalPickup = useStore(state => state.buyer.LocalPickup);
+  const totals = useStore(state => state.totals);
   const {
     TotalTaxes,
     TotalPrice,
@@ -71,7 +71,7 @@ export default function CheckoutTable() {
           <tr>
             <td empty />
             <td empty />
-            <th align="right">TOTAL NET</th>
+            <th align="right">SUBTOTAL</th>
             <th align="right">
               {SubTotalPriceInclShipping.toLocaleString('de-DE', {
                 style: 'currency',
@@ -93,7 +93,7 @@ export default function CheckoutTable() {
           <tr>
             <td empty />
             <td empty />
-            <th align="right">TOTAL GROSS</th>
+            <th align="right">TOTAL</th>
             <th align="right">
               {TotalPrice.toLocaleString('de-DE', {
                 style: 'currency',

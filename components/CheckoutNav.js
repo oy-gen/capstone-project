@@ -4,9 +4,12 @@ import Modal from './Modal';
 import NavWrapper from './NavWrapper';
 import { useState } from 'react';
 import { Button } from './Buttons';
+import useStore from '../hooks/useStore';
 
 export default function NavCheckout() {
   const [showModal, setShowModal] = useState(false);
+  const totals = useStore(state => state.totals);
+  const { TotalPrice } = totals;
 
   return (
     <NavWrapper>
@@ -36,7 +39,11 @@ export default function NavCheckout() {
         textcolor="white"
         onClick={() => setShowModal(true)}
       >
-        submit order
+        submit order:{' '}
+        {TotalPrice.toLocaleString('de-DE', {
+          style: 'currency',
+          currency: 'EUR',
+        })}
       </Button>
       <Modal onClose={() => setShowModal(false)} show={showModal}>
         <h2>Thank you!</h2>
