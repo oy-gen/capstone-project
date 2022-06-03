@@ -19,15 +19,14 @@ export default function CheckoutTable() {
   return (
     <>
       <StyledTable>
-        <thead>
+        <tbody>
           <tr>
             <th align="left">product</th>
             <th align="center">QTY</th>
             <th align="right">unit</th>
             <th align="right">sum</th>
           </tr>
-        </thead>
-        <tbody>
+        
           {productsInCart.map(product => (
             <tr key={product.id}>
               <td align="left">
