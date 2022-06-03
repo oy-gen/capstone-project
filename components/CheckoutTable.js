@@ -19,85 +19,89 @@ export default function CheckoutTable() {
   return (
     <>
       <StyledTable>
-        <tr>
-          <th align="left">product</th>
-          <th align="center">QTY</th>
-          <th align="right">unit</th>
-          <th align="right">sum</th>
-        </tr>
-        {productsInCart.map(product => (
-          <tr key={product.id}>
-            <td align="left">
-              <strong>{product.name}</strong>
-            </td>
-            <td align="center">{product.quantity}</td>
-            <td align="right">
-              {product.WSprice.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </td>
-            <td align="right">
-              {product.sum.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </td>
-          </tr>
-        ))}
-        {LocalPickup || (
+        <thead>
           <tr>
-            <td align="left">
-              <strong>Shipping</strong>
-            </td>
-            <td align="center">{TotalParcels}</td>
-            <td align="right">
-              {ParcelPrice.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </td>
-            <td align="right">
-              {TotalShipping.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </td>
+            <th align="left">product</th>
+            <th align="center">QTY</th>
+            <th align="right">unit</th>
+            <th align="right">sum</th>
           </tr>
-        )}
-        <tr>
-          <td empty />
-          <td empty />
-          <th align="right">TOTAL NET</th>
-          <th align="right">
-            {SubTotalPriceInclShipping.toLocaleString('de-DE', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
-          </th>
-        </tr>
-        <tr>
-          <td empty />
-          <td empty />
-          <th align="right">VAT {Taxes}%</th>
-          <th align="right">
-            {TotalTaxes.toLocaleString('de-DE', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
-          </th>
-        </tr>
-        <tr>
-          <td empty />
-          <td empty />
-          <th align="right">TOTAL GROSS</th>
-          <th align="right">
-            {TotalPrice.toLocaleString('de-DE', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
-          </th>
-        </tr>
+        </thead>
+        <tbody>
+          {productsInCart.map(product => (
+            <tr key={product.id}>
+              <td align="left">
+                <strong>{product.name}</strong>
+              </td>
+              <td align="center">{product.quantity}</td>
+              <td align="right">
+                {product.WSprice.toLocaleString('de-DE', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}
+              </td>
+              <td align="right">
+                {product.sum.toLocaleString('de-DE', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}
+              </td>
+            </tr>
+          ))}
+          {LocalPickup || (
+            <tr>
+              <td align="left">
+                <strong>Shipping</strong>
+              </td>
+              <td align="center">{TotalParcels}</td>
+              <td align="right">
+                {ParcelPrice.toLocaleString('de-DE', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}
+              </td>
+              <td align="right">
+                {TotalShipping.toLocaleString('de-DE', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}
+              </td>
+            </tr>
+          )}
+          <tr>
+            <td empty />
+            <td empty />
+            <th align="right">TOTAL NET</th>
+            <th align="right">
+              {SubTotalPriceInclShipping.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </th>
+          </tr>
+          <tr>
+            <td empty />
+            <td empty />
+            <th align="right">VAT {Taxes}%</th>
+            <th align="right">
+              {TotalTaxes.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </th>
+          </tr>
+          <tr>
+            <td empty />
+            <td empty />
+            <th align="right">TOTAL GROSS</th>
+            <th align="right">
+              {TotalPrice.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </th>
+          </tr>
+        </tbody>
       </StyledTable>
     </>
   );

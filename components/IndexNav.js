@@ -16,12 +16,12 @@ export default function Nav() {
           textcolor="white"
           disabled={TotalQuantity === 0}
         >
-          CHECKOUT
+          PROCEED
         </Button>
       </Link>
       <div style={{ paddingLeft: '1rem' }}>
         <h3>
-          TOTAL PRICE:{' '}
+          SUBTOTAL:{' '}
           {SubTotalPrice.toLocaleString('de-DE', {
             style: 'currency',
             currency: 'EUR',
