@@ -91,7 +91,6 @@ const GlobalStyle = createGlobalStyle`
   color: var(--text-lightcolor);
   font-size: 0.9rem;
   font-weight: 400;
-  padding-bottom: 0.4rem;
   }
 
   p {

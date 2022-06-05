@@ -29,7 +29,8 @@ const Nav = styled.nav`
 
 const NavElementWrapper = styled.div`
   display: grid;
-  align-items: center;
+  align-items: stretch;
+  
   grid-template-columns: 1.2fr 2fr;
   width: 800px;
   @media (max-width: 600px) {

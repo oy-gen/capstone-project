@@ -2,6 +2,7 @@ import useStore from '../hooks/useStore';
 import Link from 'next/link';
 import { Button } from './Buttons';
 import NavWrapper from './NavWrapper';
+import styled from 'styled-components';
 
 export default function Nav() {
   const SubTotalPrice = useStore(state => state.totals.SubTotalPrice);
@@ -19,7 +20,7 @@ export default function Nav() {
           PROCEED
         </Button>
       </Link>
-      <div style={{ paddingLeft: '1rem' }}>
+      <Wrapper>
         <h3>
           SUBTOTAL:{' '}
           {SubTotalPrice.toLocaleString('de-DE', {
@@ -28,7 +29,12 @@ export default function Nav() {
           })}
         </h3>
         <h5>TOTAL PRODUCTS: {TotalQuantity}</h5>
-      </div>
+      </Wrapper>
     </NavWrapper>
   );
 }
+
+const Wrapper = styled.div`
+padding-left: 16px;
+align-self: center;
+`
