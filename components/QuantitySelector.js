@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
+import { SmallSquareButton } from './Buttons';
 
 export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
   const updateTotal = useStore(state => state.updateTotal);
-  
+
   return (
     <QuantityWrapper>
-      <StyledRemoveButton
+      <SmallSquareButton
         onClick={() => {
           setQuantity(id, (quantity = 0));
           updateTotal();
@@ -29,7 +30,7 @@ export default function QuantitySelector({ id, quantity }) {
             fill="var(--text-lightcolor)"
           />
         </svg>
-      </StyledRemoveButton>
+      </SmallSquareButton>
       <StyledSelector>
         <StyledQuantityButton
           onClick={() => {
@@ -63,7 +64,7 @@ const StyledSelector = styled.div`
   display: flex;
   align-items: center;
   border: 1px solid var(--text-lightcolor);
-  height: 45px;
+  height: 40px;
 `;
 
 const StyledQuantityButton = styled.button`
@@ -82,16 +83,7 @@ const StyledQuantityCounter = styled.span`
   text-align: center;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
-  font-weight: 200;
+  font-weight: 400;
   text-transform: uppercase;
   color: var(--text-lightcolor);
-`;
-
-const StyledRemoveButton = styled.button`
-  border: 1px solid var(--text-lightcolor);
-  height: 45px;
-  padding: 0 0.6rem;
-  text-transform: uppercase;
-  color: var(--text-lightcolor);
-  cursor: pointer;
 `;
