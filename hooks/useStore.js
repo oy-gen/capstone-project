@@ -186,8 +186,27 @@ const useStore = create(
           ParcelPrice: 9.9,
           Taxes: 19,
         },
+
         buyer: {
           LocalPickup: false,
+          ShippingBilling: false,
+          BillingFirstName: '',
+          BillingLastName: '',
+          BillingCompany: '',
+          BillingExtraAddressLine: '',
+          BillingStreetAndNumber: '',
+          BillingZip: '',
+          BillingCity: '',
+          BillingCountry: '',
+          BillingVAT: '',
+          ShippingFirstName: '',
+          ShippingLastName: '',
+          ShippingCompany: '',
+          ShippingExtraAddressLine: '',
+          ShippingStreetAndNumber: '',
+          ShippingZip: '',
+          ShippingCity: '',
+          ShippingCountry: '',
         },
 
         updateTotal: () => {
@@ -222,7 +241,24 @@ const useStore = create(
             };
           });
         },
-        
+        changeLocalPickup: (boolean) => {
+          set(state => {
+            return {
+              buyer: {
+                LocalPickup: boolean,
+              },
+            };
+          });
+        },
+        changeShippingBilling: (boolean) => {
+          set(state => {
+            return {
+              buyer: {
+                ShippingBilling: boolean,
+              },
+            };
+          });
+        },
         setQuantity: (id, quantity) => {
           set(state => {
             return {
