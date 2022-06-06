@@ -10,7 +10,7 @@ export default function Nav() {
 
   return (
     <NavWrapper>
-      <Link passHref href="/checkout">
+      <Link passHref href="/address">
         <Button
           gridcolumn="1/2"
           background="var(--text-maincolor)"
