@@ -35,6 +35,6 @@ export default function Nav() {
 }
 
 const Wrapper = styled.div`
-padding-left: 16px;
-align-self: center;
-`
+  padding-left: 16px;
+  align-self: center;
+`;
