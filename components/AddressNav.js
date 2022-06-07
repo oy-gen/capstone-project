@@ -5,13 +5,16 @@ import useStore from '../hooks/useStore';
 import * as React from 'react';
 import IconLeft from '../public/icon-left.svg';
 import styled from 'styled-components';
+import useHydration from '../hooks/useHydration';
 
 export default function AddressNav() {
+  const hydrated = useHydration();
   const totals = useStore(state => state.totals);
-  const { TotalShipping} = totals;
+  const { TotalShipping } = totals;
 
   return (
     <>
+    {hydrated && (
       <NavWrapper>
         <Link passHref href="/">
           <Button
@@ -43,6 +46,7 @@ export default function AddressNav() {
           </Button>
         </Link>
       </NavWrapper>
+      )}
     </>
   );
 }

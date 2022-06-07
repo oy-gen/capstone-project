@@ -3,14 +3,16 @@ import Link from 'next/link';
 import { Button } from './Buttons';
 import NavWrapper from './NavWrapper';
 import styled from 'styled-components';
-import IconRight from '../public/icon-right.svg'
-import IconLeft from '../public/icon-left.svg';
+import useHydration from '../hooks/useHydration';
 
 export default function Nav() {
+  const hydrated = useHydration();
   const SubTotalPrice = useStore(state => state.totals.SubTotalPrice);
   const TotalQuantity = useStore(state => state.totals.TotalQuantity);
 
   return (
+    <>
+    {hydrated && (
     <NavWrapper>
       <Link passHref href="/">
           <Button
@@ -42,6 +44,8 @@ export default function Nav() {
         </Button>
       </Link>
     </NavWrapper>
+    )},
+    </>
   );
 }
 

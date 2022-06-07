@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import QuantitySelector from './QuantitySelector';
 import { useState } from 'react';
 import { SmallSquareButton } from './Buttons';
-import InfoIcon from '../public/info-icon.svg'
+import InfoIcon from '../public/info-icon.svg';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
@@ -77,6 +77,7 @@ const StyledCard = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
+  padding-top: 0.6rem;
   gap: 0.6rem;
 `;
 

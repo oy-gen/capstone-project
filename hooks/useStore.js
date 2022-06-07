@@ -1,12 +1,11 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
+import { nanoid } from 'nanoid';
 
 const useStore = create(
   persist(
     set => {
       return {
-        
-
         products: [
           {
             name: 'Meister Candle Beige',
@@ -185,12 +184,14 @@ const useStore = create(
           ParcelPrice: 9.9,
           Taxes: 19,
           StoreLogo:
-          'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
+            'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
         },
 
         buyer: {
+          BuyerId: nanoid(),
           LocalPickup: false,
           ShippingBilling: false,
+          ProductsInCart: [],
           BillingFirstName: '',
           BillingLastName: '',
           BillingCompany: '',
@@ -242,7 +243,7 @@ const useStore = create(
             };
           });
         },
-        changeLocalPickup: (boolean) => {
+        changeLocalPickup: boolean => {
           set(state => {
             return {
               buyer: {
@@ -251,7 +252,7 @@ const useStore = create(
             };
           });
         },
-        changeShippingBilling: (boolean) => {
+        changeShippingBilling: boolean => {
           set(state => {
             return {
               buyer: {

@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import useStore from '../hooks/useStore';
 import useHydration from '../hooks/useHydration';
+import Checkbox from '@mui/material/Checkbox';
 
 export default function AddressForm() {
-  const CheckBox = props => <input type="checkbox" {...props} />;
   const hydrated = useHydration();
-  const buyer = useStore(state => state.buyer);
-  const { ShippingBilling, LocalPickup } = buyer;
+  const CheckBox = props => <input type="checkbox" {...props} />;
+  const ShippingBilling = useStore(state => state.buyer.ShippingBilling);
+  const LocalPickup = useStore(state => state.buyer.LocalPickup);
   const changeLocalPickup = useStore(state => state.changeLocalPickup);
   const changeShippingBilling = useStore(state => state.changeShippingBilling);
   function onCheckLocalPickup(event) {
@@ -24,15 +25,14 @@ export default function AddressForm() {
         : changeShippingBilling(false);
     }
   }
-  console.log(buyer);
 
   return (
     <>
       {hydrated && (
         <FormWrapper>
-          <h2>Enter Your Billing Address</h2>
+          <h2>Billing Address:</h2>
 
-          <Grid container spacing={2}>
+          <Grid container spacing={1.6}>
             <Grid item xs={12}>
               <TextField
                 required
@@ -123,19 +123,19 @@ export default function AddressForm() {
 
             <Grid item xs={12}>
               <label>
-                <CheckBox
+                <Checkbox
                   id="LocalPickup"
                   name="LocalPickup"
                   checked={LocalPickup}
                   onChange={onCheckLocalPickup}
                 />
-                <span>This is a local pickup order. No shipping required.</span>
+                <span>This is a local pickup order</span>
               </label>
             </Grid>
-            {LocalPickup !== true ? (
+            {!LocalPickup ? (
               <Grid item xs={12}>
                 <label>
-                  <CheckBox
+                  <Checkbox
                     id="ShippingBilling"
                     name="ShippingBilling"
                     checked={ShippingBilling}
@@ -149,8 +149,9 @@ export default function AddressForm() {
             )}
           </Grid>
           {ShippingBilling === true ? (
-            <Grid container spacing={2}>
+            <Grid container spacing={1.8}>
               <Grid item xs={12}>
+                <h2>Shipping Address:</h2>
                 <TextField
                   required
                   id="company"

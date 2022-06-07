@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
+import useHydration from '../hooks/useHydration';
 
 export default function Header() {
-  const StoreLogo = useStore(state => state.StoreLogo);
-
+  const hydrated = useHydration();
+  const StoreLogo = useStore(state => state.seller.StoreLogo);
   return (
-    <StyledHeader>
-      <StyledLogo src={StoreLogo} />
-    </StyledHeader>
+    <>
+      {hydrated && (
+        <StyledHeader>
+          <StyledLogo src={StoreLogo} />
+        </StyledHeader>
+      )}
+    </>
   );
 }
 
@@ -22,7 +27,7 @@ const StyledHeader = styled.header`
   right: 0;
   width: 100vw;
   height: var(--nav-height);
-  z-index: 999;
+  z-index: 2;
   @supports (backdrop-filter: blur(7px)) {
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(7px);

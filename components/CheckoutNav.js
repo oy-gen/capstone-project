@@ -9,8 +9,10 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import IconLeft from '../public/icon-left.svg';
+import useHydration from '../hooks/useHydration';
 
 export default function CheckoutNav() {
+  const hydrated = useHydration();
   const [showModal, setShowModal] = useState(false);
   const totals = useStore(state => state.totals);
   const { TotalPrice } = totals;
@@ -35,6 +37,8 @@ export default function CheckoutNav() {
 
   return (
     <>
+    {hydrated && (
+      <>
       {loading && (
         <Box
           sx={{
@@ -45,8 +49,7 @@ export default function CheckoutNav() {
           }}
         >
           <LinearProgress />
-        </Box>
-      )}
+        </Box>)}
       <NavWrapper>
         <Link passHref href="/address">
           <Button
@@ -84,7 +87,9 @@ export default function CheckoutNav() {
           </Message>
           <Link href="/">Back to main page</Link>
         </Modal>
-      </NavWrapper>
+      </NavWrapper> 
+      </>
+      )},
     </>
   );
 }
