@@ -2,13 +2,11 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Radio from '@mui/material/Radio';
 import useStore from '../hooks/useStore';
 import useHydration from '../hooks/useHydration';
 
 export default function AddressForm() {
+  const CheckBox = props => <input type="checkbox" {...props} />;
   const hydrated = useHydration();
   const buyer = useStore(state => state.buyer);
   const { ShippingBilling, LocalPickup } = buyer;
@@ -19,9 +17,9 @@ export default function AddressForm() {
       event.target.checked ? changeLocalPickup(true) : changeLocalPickup(false);
     }
   }
-  function onCheckShippingBilling(event_) {
+  function onCheckShippingBilling(event) {
     {
-      event_.target.checked
+      event.target.checked
         ? changeShippingBilling(true)
         : changeShippingBilling(false);
     }
@@ -124,34 +122,31 @@ export default function AddressForm() {
             </Grid>
 
             <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    id="LocalPickup"
-                    color="primary"
-                    name="LocalPickup"
-                    value="yes"
-                    checked={LocalPickup}
-                    onChange={onCheckLocalPickup}
-                  />
-                }
-                label="This is a local pickup order. No shipping required."
-              />
+              <label>
+                <CheckBox
+                  id="LocalPickup"
+                  name="LocalPickup"
+                  checked={LocalPickup}
+                  onChange={onCheckLocalPickup}
+                />
+                <span>This is a local pickup order. No shipping required.</span>
+              </label>
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    id="shippingBilling"
-                    color="primary"
+            {LocalPickup !== true ? (
+              <Grid item xs={12}>
+                <label>
+                  <CheckBox
+                    id="ShippingBilling"
                     name="ShippingBilling"
                     checked={ShippingBilling}
                     onChange={onCheckShippingBilling}
                   />
-                }
-                label="Use a different shipping address."
-              />
-            </Grid>
+                  <span>Use a different shipping address</span>
+                </label>
+              </Grid>
+            ) : (
+              ''
+            )}
           </Grid>
           {ShippingBilling === true ? (
             <Grid container spacing={2}>

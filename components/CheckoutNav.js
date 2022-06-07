@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import IconLeft from '../public/icon-left.svg';
 
-
 export default function CheckoutNav() {
   const [showModal, setShowModal] = useState(false);
   const totals = useStore(state => state.totals);
@@ -55,7 +54,7 @@ export default function CheckoutNav() {
             textcolor="var(--text-maincolor)"
             gridcolumn="1/2"
           >
-            <IconLeft width='20px' height='19px' />
+            <IconLeft width="20px" height="19px" />
           </Button>
         </Link>
         <Button
