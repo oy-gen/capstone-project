@@ -5,24 +5,27 @@ import TextField from '@mui/material/TextField';
 import useStore from '../hooks/useStore';
 import useHydration from '../hooks/useHydration';
 import Checkbox from '@mui/material/Checkbox';
+import { Formik } from 'formik';
 
 export default function AddressForm() {
   const hydrated = useHydration();
   const CheckBox = props => <input type="checkbox" {...props} />;
-  const ShippingBilling = useStore(state => state.buyer.ShippingBilling);
+  const DifferentShipping = useStore(state => state.buyer.DifferentShipping);
   const LocalPickup = useStore(state => state.buyer.LocalPickup);
   const changeLocalPickup = useStore(state => state.changeLocalPickup);
-  const changeShippingBilling = useStore(state => state.changeShippingBilling);
+  const changeDifferentShipping = useStore(
+    state => state.changeDifferentShipping
+  );
   function onCheckLocalPickup(event) {
     {
       event.target.checked ? changeLocalPickup(true) : changeLocalPickup(false);
     }
   }
-  function onCheckShippingBilling(event) {
+  function onCheckDifferentShipping(event) {
     {
       event.target.checked
-        ? changeShippingBilling(true)
-        : changeShippingBilling(false);
+        ? changeDifferentShipping(true)
+        : changeDifferentShipping(false);
     }
   }
 
@@ -40,7 +43,7 @@ export default function AddressForm() {
                 name="company"
                 label="Company"
                 fullWidth
-                autoComplete="shipping address-line1"
+                autoComplete="company"
                 variant="standard"
               />
             </Grid>
@@ -136,10 +139,10 @@ export default function AddressForm() {
               <Grid item xs={12}>
                 <label>
                   <Checkbox
-                    id="ShippingBilling"
-                    name="ShippingBilling"
-                    checked={ShippingBilling}
-                    onChange={onCheckShippingBilling}
+                    id="DifferentShipping"
+                    name="DifferentShipping"
+                    checked={DifferentShipping}
+                    onChange={onCheckDifferentShipping}
                   />
                   <span>Use a different shipping address</span>
                 </label>
@@ -148,7 +151,7 @@ export default function AddressForm() {
               ''
             )}
           </Grid>
-          {ShippingBilling === true ? (
+          {DifferentShipping === true ? (
             <Grid container spacing={1.8}>
               <Grid item xs={12}>
                 <h2>Shipping Address:</h2>

@@ -190,8 +190,13 @@ const useStore = create(
         buyer: {
           BuyerId: nanoid(),
           LocalPickup: false,
-          ShippingBilling: false,
-          ProductsInCart: [],
+          DifferentShipping: false,
+          ProductsInCart: [
+            {
+              id: '',
+              quantity: '',
+            },
+          ],
           BillingFirstName: '',
           BillingLastName: '',
           BillingCompany: '',
@@ -252,11 +257,11 @@ const useStore = create(
             };
           });
         },
-        changeShippingBilling: boolean => {
+        changeDifferentShipping: boolean => {
           set(state => {
             return {
               buyer: {
-                ShippingBilling: boolean,
+                DifferentShipping: boolean,
               },
             };
           });
