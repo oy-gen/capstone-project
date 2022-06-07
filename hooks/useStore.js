@@ -5,8 +5,7 @@ const useStore = create(
   persist(
     set => {
       return {
-        StoreLogo:
-          'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
+        
 
         products: [
           {
@@ -185,6 +184,8 @@ const useStore = create(
           ProductsInParcel: 20,
           ParcelPrice: 9.9,
           Taxes: 19,
+          StoreLogo:
+          'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
         },
 
         buyer: {

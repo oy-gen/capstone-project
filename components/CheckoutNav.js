@@ -48,7 +48,7 @@ export default function CheckoutNav() {
         </Box>
       )}
       <NavWrapper>
-        <Link passHref href="/">
+        <Link passHref href="/address">
           <Button
             background="transparent"
             textcolor="var(--text-maincolor)"
@@ -61,14 +61,20 @@ export default function CheckoutNav() {
           gridcolumn="2/4"
           background="var(--text-maincolor)"
           textcolor="white"
+          justify="left"
           disabled={loading}
           onClick={handleButtonClick}
         >
-          submit order:{' '}
-          {TotalPrice.toLocaleString('de-DE', {
-            style: 'currency',
-            currency: 'EUR',
-          })}
+          <Wrapper>
+            submit order
+            <h5>
+              Total price:{' '}
+              {TotalPrice.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </h5>
+          </Wrapper>
         </Button>
         <Modal onClose={() => setShowModal(false)} show={showModal}>
           <h2>Thank you!</h2>
@@ -88,4 +94,10 @@ const Message = styled.p`
   font-weight: 400;
   padding: 1rem 1rem;
   text-align: center;
+`;
+
+const Wrapper = styled.div`
+  text-align: left;
+  align-self: center;
+  justify-self: left;
 `;

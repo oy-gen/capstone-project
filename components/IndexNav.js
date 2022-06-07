@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Button } from './Buttons';
 import NavWrapper from './NavWrapper';
 import styled from 'styled-components';
+import IconRight from '../public/icon-right.svg'
+import IconLeft from '../public/icon-left.svg';
 
 export default function Nav() {
   const SubTotalPrice = useStore(state => state.totals.SubTotalPrice);
@@ -10,31 +12,41 @@ export default function Nav() {
 
   return (
     <NavWrapper>
+      <Link passHref href="/">
+          <Button
+            background="transparent"
+            textcolor="var(--text-maincolor)"
+            gridcolumn="1/2"
+          >
+          </Button>
+        </Link>
       <Link passHref href="/address">
         <Button
-          gridcolumn="1/2"
+          gridcolumn="2/4"
+          justify="left"
           background="var(--text-maincolor)"
           textcolor="white"
           disabled={TotalQuantity === 0}
+
         >
-          PROCEED
-        </Button>
-      </Link>
-      <Wrapper>
-        <h3>
+          <Wrapper>
+          PROCEED TO SHIPPING
+          <h5>
           SUBTOTAL:{' '}
           {SubTotalPrice.toLocaleString('de-DE', {
             style: 'currency',
             currency: 'EUR',
           })}
-        </h3>
-        <h5>TOTAL PRODUCTS: {TotalQuantity}</h5>
-      </Wrapper>
+        </h5>
+        </Wrapper>
+        </Button>
+      </Link>
     </NavWrapper>
   );
 }
 
 const Wrapper = styled.div`
-  padding-left: 16px;
+  text-align:left;
   align-self: center;
+  justify-self: flex-start;
 `;

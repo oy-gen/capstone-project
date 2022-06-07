@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
+  justify-content: ${props => props.justify};
   grid-column: ${props => props.gridcolumn};
   background-color: ${props => props.background};
   color: ${props => props.textcolor};
+  padding:0 16px;
   &:disabled {
     color: darkgrey;
-    background-color: grey;
+    background-color: #555555;
   }
 `;
 

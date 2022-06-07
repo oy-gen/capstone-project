@@ -22,6 +22,7 @@ const StyledHeader = styled.header`
   right: 0;
   width: 100vw;
   height: var(--nav-height);
+  z-index: 999;
   @supports (backdrop-filter: blur(7px)) {
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(7px);
