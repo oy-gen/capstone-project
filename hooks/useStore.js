@@ -199,7 +199,7 @@ const useStore = create(
           BillingCompany: '',
           BillingExtraAddressLine: '',
           BillingStreetAndNumber: '',
-          BillingOptionalLine:'',
+          BillingOptionalLine: '',
           BillingZip: '',
           BillingCity: '',
           BillingCountry: '',
@@ -222,17 +222,19 @@ const useStore = create(
 
         setQuantity_: (productId, Pquantity) => {
           set(state => {
+            
             return {
               CART: [
-                      {
-                        id: productId,
-                        quantity: Pquantity,
-                      },
-                      ...state.CART,
-                    ],
-                  };
-                });
-              },
+                {
+                  id: productId,
+                  quantity: Pquantity,
+                },
+                ...state.CART,
+              ],
+              
+            };
+          });
+        },
 
         setQuantity: (productId, quantity) => {
           set(state => {
@@ -246,7 +248,6 @@ const useStore = create(
                     }
                   : product
               ),
-              
             };
           });
         },
@@ -288,6 +289,7 @@ const useStore = create(
             return {
               buyer: {
                 LocalPickup: boolean,
+                TotalShipping: { LocalPickup: true ? 0 : '' },
               },
             };
           });
@@ -302,7 +304,8 @@ const useStore = create(
           });
         },
       };
-    }, {
+    },
+    {
       name: 'OrderInfo',
       getStorage: () => ({
         setItem: (...args) => window.localStorage.setItem(...args),

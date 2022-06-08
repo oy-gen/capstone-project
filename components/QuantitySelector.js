@@ -6,6 +6,7 @@ import TrashIcon from '../public/trash-icon.svg';
 export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
   const updateTotal = useStore(state => state.updateTotal);
+  const ProductsInCart = useStore(state => state.CART);
 
   return (
     <QuantityWrapper>
@@ -15,7 +16,7 @@ export default function QuantitySelector({ id, quantity }) {
           updateTotal();
         }}
       >
-        <TrashIcon/>
+        <TrashIcon />
       </SmallSquareButton>
       <StyledSelector>
         <StyledQuantityButton
@@ -31,6 +32,7 @@ export default function QuantitySelector({ id, quantity }) {
           onClick={() => {
             setQuantity(id, Math.min(quantity + 1, 20));
             updateTotal();
+            console.log(ProductsInCart);
           }}
         >
           {'+'}
