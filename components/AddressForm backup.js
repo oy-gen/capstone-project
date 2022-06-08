@@ -5,25 +5,10 @@ import TextField from '@mui/material/TextField';
 import useStore from '../hooks/useStore';
 import useHydration from '../hooks/useHydration';
 import Checkbox from '@mui/material/Checkbox';
-import { useForm } from "react-hook-form";
-
 
 export default function AddressForm() {
-  // --------useForm consts-----------//
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-  };
-  // --------useForm consts-----------//
-  
-  
-  
-  
-  
-  
-  
-  
   const hydrated = useHydration();
+
   const DifferentShipping = useStore(state => state.buyer.DifferentShipping);
   const LocalPickup = useStore(state => state.buyer.LocalPickup);
   const changeLocalPickup = useStore(state => state.changeLocalPickup);
@@ -53,8 +38,8 @@ export default function AddressForm() {
             <Grid item xs={12}>
               <TextField
                 required
-                id="company"
-                name="company"
+                id="BillingCompany"
+                name="BillingCompany"
                 label="Company"
                 fullWidth
                 autoComplete="company"

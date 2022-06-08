@@ -169,6 +169,8 @@ const useStore = create(
           },
         ],
 
+        CART: [],
+
         totals: {
           TotalTaxes: 0,
           TotalPrice: 0,
@@ -188,15 +190,10 @@ const useStore = create(
         },
 
         buyer: {
-          BuyerId: nanoid(),
+          id: 1001,
+          BuyerEmail: '',
           LocalPickup: false,
           DifferentShipping: false,
-          ProductsInCart: [
-            {
-              id: '',
-              quantity: '',
-            },
-          ],
           BillingFirstName: '',
           BillingLastName: '',
           BillingCompany: '',
@@ -205,7 +202,6 @@ const useStore = create(
           BillingZip: '',
           BillingCity: '',
           BillingCountry: '',
-          BillingVAT: '',
           ShippingFirstName: '',
           ShippingLastName: '',
           ShippingCompany: '',
@@ -214,6 +210,43 @@ const useStore = create(
           ShippingZip: '',
           ShippingCity: '',
           ShippingCountry: '',
+          SubTotalPrice: 0,
+          SubTotalPriceInclShipping: 0,
+          TotalQuantity: 0,
+          TotalShipping: 0,
+          TotalParcels: 0,
+          TotalTaxes: 0,
+          TotalPrice: 0,
+        },
+
+        setQuantity_: (productId, Pquantity) => {
+          set(state => {
+            return {
+              CART: [
+                {
+                  id: productId,
+                  quantity: Pquantity,
+                },
+                ...state.CART,
+              ],
+            };
+          });
+        },
+
+        setQuantity: (productId, quantity) => {
+          set(state => {
+            return {
+              products: state.products.map(product =>
+                product.id === productId
+                  ? {
+                      ...product,
+                      quantity: quantity,
+                      sum: product.WSprice * quantity,
+                    }
+                  : product
+              ),
+            };
+          });
         },
 
         updateTotal: () => {
@@ -263,21 +296,6 @@ const useStore = create(
               buyer: {
                 DifferentShipping: boolean,
               },
-            };
-          });
-        },
-        setQuantity: (id, quantity) => {
-          set(state => {
-            return {
-              products: state.products.map(product =>
-                product.id === id
-                  ? {
-                      ...product,
-                      quantity: quantity,
-                      sum: product.WSprice * quantity,
-                    }
-                  : product
-              ),
             };
           });
         },
