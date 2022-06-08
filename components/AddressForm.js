@@ -1,29 +1,26 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import TextField from '@mui/material/TextField';
 import useStore from '../hooks/useStore';
 import useHydration from '../hooks/useHydration';
 import Checkbox from '@mui/material/Checkbox';
-import { useForm } from "react-hook-form";
-
+import { useForm } from 'react-hook-form';
 
 export default function AddressForm() {
-  // --------useForm consts-----------//
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-  };
-  // --------useForm consts-----------//
-  
-  
-  
-  
-  
-  
-  
-  
   const hydrated = useHydration();
+
+  // --------useForm const-----------//
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = data => {;
+    console.log(data);
+  };
+
+  // --------Checkbox Conditions-----------//
   const DifferentShipping = useStore(state => state.buyer.DifferentShipping);
   const LocalPickup = useStore(state => state.buyer.LocalPickup);
   const changeLocalPickup = useStore(state => state.changeLocalPickup);
@@ -49,108 +46,139 @@ export default function AddressForm() {
         <FormWrapper>
           <h2>Billing Address:</h2>
 
-          <Grid container spacing={1.6}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="company"
-                name="company"
-                label="Company"
-                fullWidth
-                autoComplete="company"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <div style={{ display: 'flex' }}>
-                <TextField
-                  required
-                  id="firstName"
-                  name="firstName"
-                  label="First name"
-                  fullWidth
-                  autoComplete="given-name"
-                  variant="standard"
-                />
-                <TextField
-                  required
-                  id="lastName"
-                  name="lastName"
-                  label="Last name"
-                  fullWidth
-                  autoComplete="family-name"
-                  variant="standard"
-                />
-              </div>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="streetandnumber"
-                name="streetandnumber"
-                label="Street and house number"
-                fullWidth
-                autoComplete="shipping address-line1"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="address2"
-                name="address2"
-                label="Address line 2"
-                fullWidth
-                autoComplete="shipping address-line2"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="city"
-                name="city"
-                label="City"
-                fullWidth
-                autoComplete="shipping address-level2"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="zip"
-                name="zip"
-                label="Zip / Postal code"
-                fullWidth
-                autoComplete="shipping postal-code"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="country"
-                name="country"
-                label="Country"
-                fullWidth
-                autoComplete="shipping country"
-                variant="standard"
-              />
-            </Grid>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <StyledInput
+              placeholder="Company*"
+              {...register('BillingCompany', {
+                required: false,
+                maxLength: 40,
+              })}
+            />
+            {errors?.BillingCompany?.type === 'maxLength' && (
+              <p>First name cannot exceed 40 characters</p>
+            )}
+            <StyledInput
+              placeholder="First Name*"
+              {...register('BillingFirstName', {
+                required: true,
+                maxLength: 20,
+                pattern: /^[A-Za-z]+$/i,
+              })}
+            />
+            {errors?.BillingFirstName?.type === 'required' && (
+              <p>This field is required</p>
+            )}
+            {errors?.BillingFirstName?.type === 'maxLength' && (
+              <p>First name cannot exceed 20 characters</p>
+            )}
+            {errors?.BillingFirstName?.type === 'pattern' && (
+              <p>Alphabetical characters only</p>
+            )}
+            <StyledInput
+              placeholder="Last Name*"
+              {...register('BillingLastName', {
+                required: true,
+                maxLength: 20,
+                pattern: /^[A-Za-z]+$/i,
+              })}
+            />
+            {errors?.BillingLastName?.type === 'required' && (
+              <p>This field is required</p>
+            )}
+            {errors?.BillingLastName?.type === 'maxLength' && (
+              <p>First name cannot exceed 20 characters</p>
+            )}
+            {errors?.BillingLastName?.type === 'pattern' && (
+              <p>Alphabetical characters only</p>
+            )}
 
-            <Grid item xs={12}>
-              <label>
-                <Checkbox
-                  id="LocalPickup"
-                  name="LocalPickup"
-                  checked={LocalPickup}
-                  onChange={onCheckLocalPickup}
-                />
-                <span>This is a local pickup order</span>
-              </label>
-            </Grid>
+            <StyledInput
+              placeholder="Street and number*"
+              {...register('BillingStreetAndNumber', {
+                required: true,
+                maxLength: 40,
+              })}
+            />
+            {errors?.BillingStreetAndNumber?.type === 'required' && (
+              <p>This field is required</p>
+            )}
+            {errors?.BillingStreetAndNumber?.type === 'maxLength' && (
+              <p>First name cannot exceed 40 characters</p>
+            )}
+
+            <StyledInput
+              placeholder="Optional line"
+              {...register('BillingOptionalLine', {
+                required: false,
+                maxLength: 40,
+                pattern: /^[A-Za-z]+$/i,
+              })}
+            />
+            {errors?.BillingOptionalLine?.type === 'maxLength' && (
+              <p>First name cannot exceed 40 characters</p>
+            )}
+            {errors?.BillingOptionalLine?.type === 'pattern' && (
+              <p>Alphabetical characters only</p>
+            )}
+
+            <StyledInput
+              placeholder="ZIP*"
+              {...register('BillingZip', {
+                required: true,
+                maxLength: 40,
+              })}
+            />
+            {errors?.BillingZip?.type === 'required' && (
+              <p>This field is required</p>
+            )}
+            {errors?.BillingZip?.type === 'maxLength' && (
+              <p>First name cannot exceed 40 characters</p>
+            )}
+
+            <StyledInput
+              placeholder="City*"
+              {...register('BillingCity', {
+                required: true,
+                maxLength: 40,
+              })}
+            />
+            {errors?.BillingCity?.type === 'required' && (
+              <p>This field is required</p>
+            )}
+            {errors?.BillingCity?.type === 'maxLength' && (
+              <p>First name cannot exceed 40 characters</p>
+            )}
+            {errors?.BillingCity?.type === 'pattern' && (
+              <p>Alphabetical characters only</p>
+            )}
+
+            <StyledInput
+              placeholder="Country*"
+              {...register('BillingCountry', {
+                required: true,
+                maxLength: 40,
+              })}
+            />
+            {errors?.BillingCountry?.type === 'required' && (
+              <p>This field is required</p>
+            )}
+            {errors?.BillingCountry?.type === 'maxLength' && (
+              <p>First name cannot exceed 40 characters</p>
+            )}
+            {errors?.BillingCountry?.type === 'pattern' && (
+              <p>Alphabetical characters only</p>
+            )}
+            <label>
+              <Checkbox
+                id="LocalPickup"
+                name="LocalPickup"
+                checked={LocalPickup}
+                onChange={onCheckLocalPickup}
+              />
+              <span>This is a local pickup order</span>
+            </label>
             {!LocalPickup ? (
-              <Grid item xs={12}>
+              <div>
                 <label>
                   <Checkbox
                     id="DifferentShipping"
@@ -160,110 +188,150 @@ export default function AddressForm() {
                   />
                   <span>Use a different shipping address</span>
                 </label>
-              </Grid>
+              </div>
             ) : (
               ''
             )}
-          </Grid>
-          {DifferentShipping === true ? (
-            <Grid container spacing={1.8}>
-              <Grid item xs={12}>
+
+            {DifferentShipping === true ? (
+              <div>
                 <h2>Shipping Address:</h2>
-                <TextField
-                  required
-                  id="company"
-                  name="company"
-                  label="Company"
-                  fullWidth
-                  autoComplete="shipping address-line1"
-                  variant="standard"
+                <StyledInput
+                  placeholder="Company*"
+                  {...register('ShippingCompany', {
+                    required: false,
+                    maxLength: 40,
+                  })}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <div style={{ display: 'flex' }}>
-                  <TextField
-                    required
-                    id="firstName"
-                    name="firstName"
-                    label="First name"
-                    fullWidth
-                    autoComplete="given-name"
-                    variant="standard"
-                  />
-                  <TextField
-                    required
-                    id="lastName"
-                    name="lastName"
-                    label="Last name"
-                    fullWidth
-                    autoComplete="family-name"
-                    variant="standard"
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="streetandnumber"
-                  name="streetandnumber"
-                  label="Street and house number"
-                  fullWidth
-                  autoComplete="shipping address-line1"
-                  variant="standard"
+                {errors?.ShippingCompany?.type === 'maxLength' && (
+                  <p>First name cannot exceed 40 characters</p>
+                )}
+                <StyledInput
+                  placeholder="First Name*"
+                  {...register('ShippingFirstName', {
+                    required: true,
+                    maxLength: 20,
+                    pattern: /^[A-Za-z]+$/i,
+                  })}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="address2"
-                  name="address2"
-                  label="Address line 2"
-                  fullWidth
-                  autoComplete="shipping address-line2"
-                  variant="standard"
+                {errors?.ShippingFirstName?.type === 'required' && (
+                  <p>This field is required</p>
+                )}
+                {errors?.ShippingFirstName?.type === 'maxLength' && (
+                  <p>First name cannot exceed 20 characters</p>
+                )}
+                {errors?.ShippingFirstName?.type === 'pattern' && (
+                  <p>Alphabetical characters only</p>
+                )}
+                <StyledInput
+                  placeholder="Last Name*"
+                  {...register('ShippingLastName', {
+                    required: true,
+                    maxLength: 20,
+                    pattern: /^[A-Za-z]+$/i,
+                  })}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="city"
-                  name="city"
-                  label="City"
-                  fullWidth
-                  autoComplete="shipping address-level2"
-                  variant="standard"
+                {errors?.ShippingLastName?.type === 'required' && (
+                  <p>This field is required</p>
+                )}
+                {errors?.ShippingLastName?.type === 'maxLength' && (
+                  <p>First name cannot exceed 20 characters</p>
+                )}
+                {errors?.ShippingLastName?.type === 'pattern' && (
+                  <p>Alphabetical characters only</p>
+                )}
+
+                <StyledInput
+                  placeholder="Street and number*"
+                  {...register('ShippingStreetAndNumber', {
+                    required: true,
+                    maxLength: 40,
+                  })}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="zip"
-                  name="zip"
-                  label="Zip / Postal code"
-                  fullWidth
-                  autoComplete="shipping postal-code"
-                  variant="standard"
+                {errors?.ShippingStreetAndNumber?.type === 'required' && (
+                  <p>This field is required</p>
+                )}
+                {errors?.ShippingStreetAndNumber?.type === 'maxLength' && (
+                  <p>First name cannot exceed 40 characters</p>
+                )}
+
+                <StyledInput
+                  placeholder="Optional line"
+                  {...register('ShippingOptionalLine', {
+                    required: false,
+                    maxLength: 40,
+                    pattern: /^[A-Za-z]+$/i,
+                  })}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="country"
-                  name="country"
-                  label="Country"
-                  fullWidth
-                  autoComplete="shipping country"
-                  variant="standard"
+                {errors?.ShippingOptionalLine?.type === 'maxLength' && (
+                  <p>First name cannot exceed 40 characters</p>
+                )}
+                {errors?.ShippingOptionalLine?.type === 'pattern' && (
+                  <p>Alphabetical characters only</p>
+                )}
+
+                <StyledInput
+                  placeholder="ZIP*"
+                  {...register('ShippingZip', {
+                    required: true,
+                    maxLength: 40,
+                  })}
                 />
-              </Grid>
-            </Grid>
-          ) : (
-            ''
-          )}
+                {errors?.ShippingZip?.type === 'required' && (
+                  <p>This field is required</p>
+                )}
+                {errors?.ShippingZip?.type === 'maxLength' && (
+                  <p>First name cannot exceed 40 characters</p>
+                )}
+
+                <StyledInput
+                  placeholder="City*"
+                  {...register('ShippingCity', {
+                    required: true,
+                    maxLength: 40,
+                  })}
+                />
+                {errors?.ShippingCity?.type === 'required' && (
+                  <p>This field is required</p>
+                )}
+                {errors?.ShippingCity?.type === 'maxLength' && (
+                  <p>First name cannot exceed 40 characters</p>
+                )}
+                {errors?.ShippingCity?.type === 'pattern' && (
+                  <p>Alphabetical characters only</p>
+                )}
+
+                <StyledInput
+                  placeholder="Country*"
+                  {...register('ShippingCountry', {
+                    required: true,
+                    maxLength: 40,
+                  })}
+                />
+                {errors?.ShippingCountry?.type === 'required' && (
+                  <p>This field is required</p>
+                )}
+                {errors?.ShippingCountry?.type === 'maxLength' && (
+                  <p>First name cannot exceed 40 characters</p>
+                )}
+                {errors?.ShippingCountry?.type === 'pattern' && (
+                  <p>Alphabetical characters only</p>
+                )}
+              </div>
+            ) : (
+              ''
+            )}
+
+            <input type="submit" />
+          </form>
         </FormWrapper>
       )}
     </>
   );
 }
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<AddressForm />, rootElement);
 
 const FormWrapper = styled.form`
   padding: 2rem 1rem;
@@ -271,4 +339,14 @@ const FormWrapper = styled.form`
   flex-direction: column;
   align-items: center;
   z-index: 0;
+`;
+
+const StyledInput = styled.input`
+  width: 90vw;
+  font-size: 1rem;
+  line-height: 1rem;
+  border: 1px solid white;
+  padding: 5px;
+  margin-bottom: 1rem;
+  color: var(--light-textcolor);
 `;

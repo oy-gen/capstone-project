@@ -199,6 +199,7 @@ const useStore = create(
           BillingCompany: '',
           BillingExtraAddressLine: '',
           BillingStreetAndNumber: '',
+          BillingOptionalLine:'',
           BillingZip: '',
           BillingCity: '',
           BillingCountry: '',
@@ -223,15 +224,15 @@ const useStore = create(
           set(state => {
             return {
               CART: [
-                {
-                  id: productId,
-                  quantity: Pquantity,
-                },
-                ...state.CART,
-              ],
-            };
-          });
-        },
+                      {
+                        id: productId,
+                        quantity: Pquantity,
+                      },
+                      ...state.CART,
+                    ],
+                  };
+                });
+              },
 
         setQuantity: (productId, quantity) => {
           set(state => {
@@ -245,6 +246,7 @@ const useStore = create(
                     }
                   : product
               ),
+              
             };
           });
         },
@@ -300,8 +302,7 @@ const useStore = create(
           });
         },
       };
-    },
-    {
+    }, {
       name: 'OrderInfo',
       getStorage: () => ({
         setItem: (...args) => window.localStorage.setItem(...args),
