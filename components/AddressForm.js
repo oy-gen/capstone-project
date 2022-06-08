@@ -16,7 +16,7 @@ export default function AddressForm() {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = data => {;
+  const onSubmit = data => {
     console.log(data);
   };
 
@@ -330,10 +330,10 @@ export default function AddressForm() {
   );
 }
 
-const rootElement = document.getElementById('root');
-ReactDOM.render(<AddressForm />, rootElement);
+// const rootElement = document.getElementById('root');
+// ReactDOM.render(<AddressForm />, rootElement);
 
-const FormWrapper = styled.form`
+const FormWrapper = styled.div`
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
