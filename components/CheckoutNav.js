@@ -7,7 +7,6 @@ import { Button } from './Buttons';
 import useStore from '../hooks/useStore';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import LinearProgress from '@mui/material/LinearProgress';
 import IconLeft from '../public/icon-left.svg';
 import useHydration from '../hooks/useHydration';
 
@@ -37,59 +36,59 @@ export default function CheckoutNav() {
 
   return (
     <>
-    {hydrated && (
-      <>
-      {loading && (
-        <Box
-          sx={{
-            width: '100%',
-            position: 'fixed',
-            bottom: 'var(--nav-height-mobile)',
-            zIndex: '2',
-          }}
-        >
-          <LinearProgress />
-        </Box>)}
-      <NavWrapper>
-        <Link passHref href="/address">
-          <Button
-            background="transparent"
-            textcolor="var(--text-maincolor)"
-            gridcolumn="1/2"
-          >
-            <IconLeft width="20px" height="19px" />
-          </Button>
-        </Link>
-        <Button
-          gridcolumn="2/4"
-          background="var(--text-maincolor)"
-          textcolor="white"
-          justify="left"
-          disabled={loading}
-          onClick={handleButtonClick}
-        >
-          <Wrapper>
-            submit order
-            <h5>
-              Total price:{' '}
-              {TotalPrice.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </h5>
-          </Wrapper>
-        </Button>
-        <Modal onClose={() => setShowModal(false)} show={showModal}>
-          <h2>Thank you!</h2>
-          <Message>
-            Your order has been trasmitted. You will receive a confirmation
-            email shortly.
-          </Message>
-          <Link href="/">Back to main page</Link>
-        </Modal>
-      </NavWrapper> 
-      </>
-      )},
+      {hydrated && (
+        <>
+          {loading && (
+            <Box
+              sx={{
+                width: '100%',
+                position: 'fixed',
+                bottom: 'var(--nav-height-mobile)',
+                zIndex: '2',
+              }}
+            >
+            </Box>
+          )}
+          <NavWrapper>
+            <Link passHref href="/address">
+              <Button
+                background="transparent"
+                textcolor="var(--text-maincolor)"
+                gridcolumn="1/2"
+              >
+                <IconLeft width="20px" height="19px" />
+              </Button>
+            </Link>
+            <Button
+              gridcolumn="2/4"
+              background="var(--text-maincolor)"
+              textcolor="white"
+              justify="left"
+              disabled={loading}
+              onClick={handleButtonClick}
+            >
+              <Wrapper>
+                submit order
+                <h5>
+                  Total price:{' '}
+                  {TotalPrice.toLocaleString('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  })}
+                </h5>
+              </Wrapper>
+            </Button>
+            <Modal onClose={() => setShowModal(false)} show={showModal}>
+              <h2>Thank you!</h2>
+              <Message>
+                Your order has been trasmitted. You will receive a confirmation
+                email shortly.
+              </Message>
+              <Link href="/">Back to main page</Link>
+            </Modal>
+          </NavWrapper>
+        </>
+      )}
     </>
   );
 }

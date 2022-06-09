@@ -197,7 +197,7 @@ const useStore = create(
           BillingFirstName: '',
           BillingLastName: '',
           BillingCompany: '',
-          BillingExtraAddressLine: '',
+          BillingOptionalLine: '',
           BillingStreetAndNumber: '',
           BillingOptionalLine: '',
           BillingZip: '',
@@ -206,23 +206,15 @@ const useStore = create(
           ShippingFirstName: '',
           ShippingLastName: '',
           ShippingCompany: '',
-          ShippingExtraAddressLine: '',
+          ShippingOptionalLine: '',
           ShippingStreetAndNumber: '',
           ShippingZip: '',
           ShippingCity: '',
           ShippingCountry: '',
-          SubTotalPrice: 0,
-          SubTotalPriceInclShipping: 0,
-          TotalQuantity: 0,
-          TotalShipping: 0,
-          TotalParcels: 0,
-          TotalTaxes: 0,
-          TotalPrice: 0,
         },
 
         setQuantity_: (productId, Pquantity) => {
           set(state => {
-            
             return {
               CART: [
                 {
@@ -231,7 +223,17 @@ const useStore = create(
                 },
                 ...state.CART,
               ],
-              
+            };
+          });
+        },
+
+        setBuyerData: data => {
+          set(state => {
+            return {
+              buyer: {
+                ...state.buyer,
+                ...data,
+              },
             };
           });
         },
@@ -263,8 +265,10 @@ const useStore = create(
             const calcTotalParcels = Math.ceil(
               calcTotalProducts / state.seller.ProductsInParcel
             );
-            const calcTotalShipping =
-              calcTotalParcels * state.seller.ParcelPrice;
+            const calcTotalShipping = !state.buyer.LocalPickup
+              ? calcTotalParcels * state.seller.ParcelPrice
+              : 0;
+            calcTotalParcels * state.seller.ParcelPrice;
             const calcSubTotalPriceInclShipping =
               calcSubTotalPrice + calcTotalShipping;
             const calcTotalTaxes =
@@ -280,25 +284,6 @@ const useStore = create(
                 TotalShipping: calcTotalShipping,
                 TotalQuantity: calcTotalProducts,
                 TotalParcels: calcTotalParcels,
-              },
-            };
-          });
-        },
-        changeLocalPickup: boolean => {
-          set(state => {
-            return {
-              buyer: {
-                LocalPickup: boolean,
-                TotalShipping: { LocalPickup: true ? 0 : '' },
-              },
-            };
-          });
-        },
-        changeDifferentShipping: boolean => {
-          set(state => {
-            return {
-              buyer: {
-                DifferentShipping: boolean,
               },
             };
           });

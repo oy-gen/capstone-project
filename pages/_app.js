@@ -107,7 +107,14 @@ const GlobalStyle = createGlobalStyle`
   @media (max-width: 600px) {
     font-size: 0.9rem;
   }
+}
+span {
+  color: var(--text-darkcolor);
+  font-weight: 400;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
   }
+}
 
   a {
   color: var(--accent-color);

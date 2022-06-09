@@ -12,45 +12,44 @@ export default function Nav() {
 
   return (
     <>
-    {hydrated && (
-    <NavWrapper>
-      <Link passHref href="/">
-          <Button
-            background="transparent"
-            textcolor="var(--text-maincolor)"
-            gridcolumn="1/2"
-          >
-          </Button>
-        </Link>
-      <Link passHref href="/address">
-        <Button
-          gridcolumn="2/4"
-          justify="left"
-          background="var(--text-maincolor)"
-          textcolor="white"
-          disabled={TotalQuantity === 0}
-
-        >
-          <Wrapper>
-          PROCEED TO SHIPPING
-          <h5>
-          SUBTOTAL:{' '}
-          {SubTotalPrice.toLocaleString('de-DE', {
-            style: 'currency',
-            currency: 'EUR',
-          })}
-        </h5>
-        </Wrapper>
-        </Button>
-      </Link>
-    </NavWrapper>
-    )},
+      {hydrated && (
+        <NavWrapper>
+          <Link passHref href="/">
+            <Button
+              background="transparent"
+              textcolor="var(--text-maincolor)"
+              gridcolumn="1/2"
+            ></Button>
+          </Link>
+          <Link passHref href="/address">
+            <Button
+              gridcolumn="2/4"
+              justify="left"
+              background="var(--text-maincolor)"
+              textcolor="white"
+              disabled={TotalQuantity === 0}
+            >
+              <Wrapper>
+                PROCEED TO SHIPPING
+                <h5>
+                  SUBTOTAL:{' '}
+                  {SubTotalPrice.toLocaleString('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  })}
+                </h5>
+              </Wrapper>
+            </Button>
+          </Link>
+        </NavWrapper>
+      )}
+      ,
     </>
   );
 }
 
 const Wrapper = styled.div`
-  text-align:left;
+  text-align: left;
   align-self: center;
   justify-self: flex-start;
 `;

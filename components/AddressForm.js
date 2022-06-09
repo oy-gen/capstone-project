@@ -1,13 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 import useHydration from '../hooks/useHydration';
-import Checkbox from '@mui/material/Checkbox';
 import { useForm } from 'react-hook-form';
+import { Checkbox } from '@mui/material';
+import Link from 'next/link';
+import NavWrapper from './NavWrapper';
+import { Button } from './Buttons';
+import IconLeft from '../public/icon-left.svg';
 
 export default function AddressForm() {
+  const totals = useStore(state => state.totals);
+  const { SubTotalPrice } = totals;
+  const updateTotal = useStore(state => state.updateTotal);
   const hydrated = useHydration();
+  const router = useRouter();
+  const setBuyerData = useStore(state => state.setBuyerData);
   const buyer = useStore(state => state.buyer);
 
   // --------useForm const-----------//
@@ -17,50 +25,30 @@ export default function AddressForm() {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = data => {
-    console.log(data);
-  };
 
-  // --------Checkbox Conditions-----------//
-  const DifferentShipping = useStore(state => state.buyer.DifferentShipping);
-  const LocalPickup = useStore(state => state.buyer.LocalPickup);
-  const changeLocalPickup = useStore(state => state.changeLocalPickup);
-  const changeDifferentShipping = useStore(
-    state => state.changeDifferentShipping
-  );
-  function onCheckLocalPickup(event) {
-    {
-      event.target.checked ? changeLocalPickup(true) : changeLocalPickup(false);
-    }
-  }
-  function onCheckDifferentShipping(event) {
-    {
-      event.target.checked
-        ? changeDifferentShipping(true)
-        : changeDifferentShipping(false);
-    }
-  }
+  const onSubmit = data => {
+    setBuyerData(data);
+    updateTotal();
+    console.log(buyer);
+    console.log(totals);
+    router.push('/checkout');
+  };
+  const showCheckbox = watch('LocalPickup', false);
+  const showShippingAddress = watch('DifferentShipping', false);
+  // --------useForm const-----------//
 
   return (
     <>
       {hydrated && (
-        <FormWrapper>
-          <h2>Billing Address:</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormWrapper>
+            <StyledHeadline>
+              {showShippingAddress
+                ? 'Billing Address'
+                : 'Shipping & Billing Address'}
+            </StyledHeadline>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <StyledInput
-                placeholder="Company"
-                {...register('BillingCompany', {
-                  required: false,
-                  maxLength: 40,
-                })}
-              />
-              {errors?.BillingCompany?.type === 'maxLength' && (
-                <StyledWarning>
-                  First name cannot exceed 40 characters
-                </StyledWarning>
-              )}
               <StyledInput
                 placeholder="First Name*"
                 {...register('BillingFirstName', {
@@ -70,16 +58,15 @@ export default function AddressForm() {
                 })}
               />
               {errors?.BillingFirstName?.type === 'required' && (
-                <StyledWarning>This field is required</StyledWarning>
+                <StyledWarning>required</StyledWarning>
               )}
               {errors?.BillingFirstName?.type === 'maxLength' && (
-                <StyledWarning>
-                  First name cannot exceed 20 characters
-                </StyledWarning>
+                <StyledWarning>20 characters max</StyledWarning>
               )}
               {errors?.BillingFirstName?.type === 'pattern' && (
-                <StyledWarning>Alphabetical characters only</StyledWarning>
+                <StyledWarning>Alphabetical only</StyledWarning>
               )}
+
               <StyledInput
                 placeholder="Last Name*"
                 {...register('BillingLastName', {
@@ -89,15 +76,39 @@ export default function AddressForm() {
                 })}
               />
               {errors?.BillingLastName?.type === 'required' && (
-                <StyledWarning>This field is required</StyledWarning>
+                <StyledWarning>required</StyledWarning>
               )}
               {errors?.BillingLastName?.type === 'maxLength' && (
-                <StyledWarning>
-                  First name cannot exceed 20 characters
-                </StyledWarning>
+                <StyledWarning>20 characters max</StyledWarning>
               )}
               {errors?.BillingLastName?.type === 'pattern' && (
-                <StyledWarning>Alphabetical characters only</StyledWarning>
+                <StyledWarning>Alphabetical only</StyledWarning>
+              )}
+
+              <StyledInput
+                type="text"
+                placeholder="Email*"
+                {...register('BuyerEmail', {
+                  required: true,
+                  pattern: /^\S+@\S+$/i,
+                })}
+              />
+              {errors?.BuyerEmail?.type === 'required' && (
+                <StyledWarning>required</StyledWarning>
+              )}
+
+              {errors?.BuyerEmail?.type === 'pattern' && (
+                <StyledWarning>email not correct</StyledWarning>
+              )}
+              <StyledInput
+                placeholder="Company"
+                {...register('BillingCompany', {
+                  required: false,
+                  maxLength: 20,
+                })}
+              />
+              {errors?.BillingCompany?.type === 'maxLength' && (
+                <StyledWarning>20 characters max</StyledWarning>
               )}
 
               <StyledInput
@@ -108,122 +119,101 @@ export default function AddressForm() {
                 })}
               />
               {errors?.BillingStreetAndNumber?.type === 'required' && (
-                <StyledWarning>This field is required</StyledWarning>
+                <StyledWarning>required</StyledWarning>
               )}
               {errors?.BillingStreetAndNumber?.type === 'maxLength' && (
-                <StyledWarning>
-                  First name cannot exceed 40 characters
-                </StyledWarning>
+                <StyledWarning>F40 characters max</StyledWarning>
               )}
 
               <StyledInput
                 placeholder="Optional line"
                 {...register('BillingOptionalLine', {
                   required: false,
-                  maxLength: 40,
-                  pattern: /^[A-Za-z]+$/i,
+                  maxLength: 20,
                 })}
               />
               {errors?.BillingOptionalLine?.type === 'maxLength' && (
-                <StyledWarning>
-                  First name cannot exceed 40 characters
-                </StyledWarning>
-              )}
-              {errors?.BillingOptionalLine?.type === 'pattern' && (
-                <StyledWarning>Alphabetical characters only</StyledWarning>
+                <StyledWarning>too long</StyledWarning>
               )}
 
               <StyledInput
                 placeholder="ZIP*"
                 {...register('BillingZip', {
                   required: true,
-                  maxLength: 40,
+                  maxLength: 10,
                 })}
               />
               {errors?.BillingZip?.type === 'required' && (
-                <StyledWarning>This field is required</StyledWarning>
+                <StyledWarning>required</StyledWarning>
               )}
               {errors?.BillingZip?.type === 'maxLength' && (
-                <StyledWarning>
-                  First name cannot exceed 40 characters
-                </StyledWarning>
+                <StyledWarning>10 characters max</StyledWarning>
               )}
 
               <StyledInput
                 placeholder="City*"
                 {...register('BillingCity', {
                   required: true,
-                  maxLength: 40,
+                  maxLength: 20,
                 })}
               />
               {errors?.BillingCity?.type === 'required' && (
-                <StyledWarning>This field is required</StyledWarning>
+                <StyledWarning>required</StyledWarning>
               )}
               {errors?.BillingCity?.type === 'maxLength' && (
-                <StyledWarning>
-                  First name cannot exceed 40 characters
-                </StyledWarning>
+                <StyledWarning>20 characters max</StyledWarning>
               )}
               {errors?.BillingCity?.type === 'pattern' && (
-                <StyledWarning>Alphabetical characters only</StyledWarning>
+                <StyledWarning>Alphabetical only</StyledWarning>
               )}
-
               <StyledInput
                 placeholder="Country*"
                 {...register('BillingCountry', {
                   required: true,
-                  maxLength: 40,
+                  maxLength: 20,
+                  pattern: /^[A-Za-z]+$/i,
                 })}
               />
               {errors?.BillingCountry?.type === 'required' && (
-                <StyledWarning>This field is required</StyledWarning>
+                <StyledWarning>required</StyledWarning>
               )}
               {errors?.BillingCountry?.type === 'maxLength' && (
-                <StyledWarning>
-                  First name cannot exceed 40 characters
-                </StyledWarning>
+                <StyledWarning>20 characters max</StyledWarning>
               )}
               {errors?.BillingCountry?.type === 'pattern' && (
-                <StyledWarning>Alphabetical characters only</StyledWarning>
+                <StyledWarning>Alphabetical only</StyledWarning>
               )}
             </div>
-            <div>
-              <input
+            <CheckboxWrapper>
+              <Checkbox
                 type="checkbox"
-                onChange={() => onCheckLocalPickup}
+                disabled={showShippingAddress}
                 {...register('LocalPickup', {})}
               />
-              <span>This is a local pickup order</span>
-            </div>
 
-            {!LocalPickup ? (
-              <div>
-                <input
+              {showShippingAddress ? (
+                <span style={{ color: 'grey' }}>
+                  Disable different shipping for local pickup
+                </span>
+              ) : (
+                <span style={{ color: 'var(--text-maincolor)' }}>
+                  This is a local pickup order
+                </span>
+              )}
+            </CheckboxWrapper>
+            {!showCheckbox && (
+              <CheckboxWrapper>
+                <Checkbox
                   type="checkbox"
-                  onChange={() => onCheckDifferentShipping}
                   {...register('DifferentShipping', {})}
                 />
                 <span>Use a different shipping address</span>
-              </div>
-            ) : (
-              ''
+              </CheckboxWrapper>
             )}
 
-            {DifferentShipping === true ? (
-              <div>
-                <h2>Shipping Address:</h2>
-                <StyledInput
-                  placeholder="Company"
-                  {...register('ShippingCompany', {
-                    required: false,
-                    maxLength: 40,
-                  })}
-                />
-                {errors?.ShippingCompany?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 40 characters
-                  </StyledWarning>
-                )}
+            {showShippingAddress && (
+              <div style={{}}>
+                <StyledHeadline>Shipping address:</StyledHeadline>
                 <StyledInput
                   placeholder="First Name*"
                   {...register('ShippingFirstName', {
@@ -233,7 +223,7 @@ export default function AddressForm() {
                   })}
                 />
                 {errors?.ShippingFirstName?.type === 'required' && (
-                  <StyledWarning>This field is required</StyledWarning>
+                  <StyledWarning>required</StyledWarning>
                 )}
                 {errors?.ShippingFirstName?.type === 'maxLength' && (
                   <StyledWarning>
@@ -252,7 +242,7 @@ export default function AddressForm() {
                   })}
                 />
                 {errors?.ShippingLastName?.type === 'required' && (
-                  <StyledWarning>This field is required</StyledWarning>
+                  <StyledWarning>required</StyledWarning>
                 )}
                 {errors?.ShippingLastName?.type === 'maxLength' && (
                   <StyledWarning>
@@ -262,22 +252,19 @@ export default function AddressForm() {
                 {errors?.ShippingLastName?.type === 'pattern' && (
                   <StyledWarning>Alphabetical characters only</StyledWarning>
                 )}
-
                 <StyledInput
-                  type="text"
-                  placeholder="Email"
-                  {...register('BuyerEmail', {
-                    required: true,
-                    pattern: /^\S+@\S+$/i,
+                  placeholder="Company"
+                  {...register('ShippingCompany', {
+                    required: false,
+                    maxLength: 40,
                   })}
                 />
-                {errors?.BuyerEmail?.type === 'required' && (
-                  <StyledWarning>This field is required</StyledWarning>
+                {errors?.ShippingCompany?.type === 'maxLength' && (
+                  <StyledWarning>
+                    First name cannot exceed 40 characters
+                  </StyledWarning>
                 )}
 
-                {errors?.BuyerEmail?.type === 'pattern' && (
-                  <StyledWarning>This is not a correct email</StyledWarning>
-                )}
                 <StyledInput
                   placeholder="Street and number*"
                   {...register('ShippingStreetAndNumber', {
@@ -286,7 +273,7 @@ export default function AddressForm() {
                   })}
                 />
                 {errors?.ShippingStreetAndNumber?.type === 'required' && (
-                  <StyledWarning>This field is required</StyledWarning>
+                  <StyledWarning>required</StyledWarning>
                 )}
                 {errors?.ShippingStreetAndNumber?.type === 'maxLength' && (
                   <StyledWarning>
@@ -299,7 +286,6 @@ export default function AddressForm() {
                   {...register('ShippingOptionalLine', {
                     required: false,
                     maxLength: 40,
-                    pattern: /^[A-Za-z]+$/i,
                   })}
                 />
                 {errors?.ShippingOptionalLine?.type === 'maxLength' && (
@@ -319,7 +305,7 @@ export default function AddressForm() {
                   })}
                 />
                 {errors?.ShippingZip?.type === 'required' && (
-                  <StyledWarning>This field is required</StyledWarning>
+                  <StyledWarning>required</StyledWarning>
                 )}
                 {errors?.ShippingZip?.type === 'maxLength' && (
                   <StyledWarning>
@@ -335,7 +321,7 @@ export default function AddressForm() {
                   })}
                 />
                 {errors?.ShippingCity?.type === 'required' && (
-                  <StyledWarning>This field is required</StyledWarning>
+                  <StyledWarning>required</StyledWarning>
                 )}
                 {errors?.ShippingCity?.type === 'maxLength' && (
                   <StyledWarning>
@@ -354,7 +340,7 @@ export default function AddressForm() {
                   })}
                 />
                 {errors?.ShippingCountry?.type === 'required' && (
-                  <StyledWarning>This field is required</StyledWarning>
+                  <StyledWarning>required</StyledWarning>
                 )}
                 {errors?.ShippingCountry?.type === 'maxLength' && (
                   <StyledWarning>
@@ -365,39 +351,94 @@ export default function AddressForm() {
                   <StyledWarning>Alphabetical characters only</StyledWarning>
                 )}
               </div>
-            ) : (
-              ''
             )}
+          </FormWrapper>
+          <NavWrapper>
+            <Link passHref href="/">
+              <Button
+                background="transparent"
+                textcolor="var(--text-maincolor)"
+                gridcolumn="1/2"
+              >
+                <IconLeft width="20px" height="19px" />
+              </Button>
+            </Link>
 
-            <input type="submit" />
-          </form>
-        </FormWrapper>
+            <Button
+              type="submit"
+              justify="left"
+              gridcolumn="2/4"
+              background="var(--text-maincolor)"
+              textcolor="white"
+            >
+              <ButtonContentWrapper>
+                PROCEED TO Checkout
+                <h5>
+                  SUBTOTAL:{' '}
+                  {SubTotalPrice.toLocaleString('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  })}
+                </h5>
+              </ButtonContentWrapper>
+            </Button>
+          </NavWrapper>
+        </form>
       )}
     </>
   );
 }
 
-//const rootElement = document.getElementById('root');
-// ReactDOM.render(<AddressForm />, rootElement);
-
 const FormWrapper = styled.div`
-  padding: 2rem 1rem;
+  position: relative;
+  padding: 0 1rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 0;
 `;
 
+const StyledHeadline = styled.h2`
+  text-align: center;
+  margin: 30px auto 30px;
+`;
+const CheckboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+`;
+
 const StyledInput = styled.input`
-  width: 90vw;
+  width: 100%;
   font-size: 1rem;
-  line-height: 1rem;
-  border: 1px solid white;
+  line-height: 1.6rem;
+  border-style: none;
+  background-color: transparent;
+  border-bottom: 1px solid lightgrey;
   padding: 5px;
   margin-bottom: 1rem;
-  color: var(--light-textcolor);
+  color: var(--text-darkcolor);
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: var(--text-lightcolor);
+  }
+
+  &:focus {
+    border-style: none;
+    outline: none;
+    border-bottom: 2px solid var(--accent-color);
+  }
 `;
 
 const StyledWarning = styled.p`
-  color: #bf1650;
+  position: absolute;
+  color: var(--signal-color);
+  margin: -2.7rem 0.9rem 0 0;
+  right: 1rem;
+`;
+
+const ButtonContentWrapper = styled.div`
+  text-align: left;
+  justify-self: flex-start;
 `;
