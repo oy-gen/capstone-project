@@ -24,6 +24,7 @@ export const BigButton = styled.button`
 `;
 
 export const SmallSquareButton = styled.button`
+  justify-content: center;
   border: 1px solid var(--text-lightcolor);
   height: 40px;
   width: 40px;

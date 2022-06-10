@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { Checkbox } from '@mui/material';
 import Link from 'next/link';
 import NavWrapper from './NavWrapper';
-import { Button } from './Buttons';
 import IconLeft from '../public/icon-left.svg';
 import { BigButton, SmallButton } from './Buttons';
 
@@ -46,16 +45,15 @@ export default function AddressForm() {
             <StyledHeadline>
               {showShippingAddress
                 ? 'Billing Address'
-                : 'Shipping & Billing Address'}
+                : 'Billing & Shipping Address'}
             </StyledHeadline>
 
             <div>
               <StyledInput
-                placeholder="First Name*"
+                placeholder="First Name/s*"
                 {...register('BillingFirstName', {
                   required: true,
                   maxLength: 20,
-                  pattern: /^[A-Za-z]+$/i,
                 })}
               />
               {errors?.BillingFirstName?.type === 'required' && (
@@ -64,16 +62,12 @@ export default function AddressForm() {
               {errors?.BillingFirstName?.type === 'maxLength' && (
                 <StyledWarning>20 characters max</StyledWarning>
               )}
-              {errors?.BillingFirstName?.type === 'pattern' && (
-                <StyledWarning>Alphabetical only</StyledWarning>
-              )}
 
               <StyledInput
                 placeholder="Last Name*"
                 {...register('BillingLastName', {
                   required: true,
                   maxLength: 20,
-                  pattern: /^[A-Za-z]+$/i,
                 })}
               />
               {errors?.BillingLastName?.type === 'required' && (
@@ -81,9 +75,6 @@ export default function AddressForm() {
               )}
               {errors?.BillingLastName?.type === 'maxLength' && (
                 <StyledWarning>20 characters max</StyledWarning>
-              )}
-              {errors?.BillingLastName?.type === 'pattern' && (
-                <StyledWarning>Alphabetical only</StyledWarning>
               )}
 
               <StyledInput
@@ -220,7 +211,6 @@ export default function AddressForm() {
                   {...register('ShippingFirstName', {
                     required: true,
                     maxLength: 20,
-                    pattern: /^[A-Za-z]+$/i,
                   })}
                 />
                 {errors?.ShippingFirstName?.type === 'required' && (
@@ -231,15 +221,11 @@ export default function AddressForm() {
                     First name cannot exceed 20 characters
                   </StyledWarning>
                 )}
-                {errors?.ShippingFirstName?.type === 'pattern' && (
-                  <StyledWarning>Alphabetical characters only</StyledWarning>
-                )}
                 <StyledInput
                   placeholder="Last Name*"
                   {...register('ShippingLastName', {
                     required: true,
                     maxLength: 20,
-                    pattern: /^[A-Za-z]+$/i,
                   })}
                 />
                 {errors?.ShippingLastName?.type === 'required' && (
@@ -250,9 +236,7 @@ export default function AddressForm() {
                     First name cannot exceed 20 characters
                   </StyledWarning>
                 )}
-                {errors?.ShippingLastName?.type === 'pattern' && (
-                  <StyledWarning>Alphabetical characters only</StyledWarning>
-                )}
+
                 <StyledInput
                   placeholder="Company"
                   {...register('ShippingCompany', {
