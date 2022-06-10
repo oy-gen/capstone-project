@@ -1,6 +1,5 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
-import { nanoid } from 'nanoid';
 
 const useStore = create(
   persist(
@@ -213,32 +212,37 @@ const useStore = create(
           ShippingCountry: '',
         },
 
-        setQuantity_: (productId, Pquantity) => {
-          set(state => {
-            return {
-              CART: [
-                {
-                  id: productId,
-                  quantity: Pquantity,
-                },
-                ...state.CART,
-              ],
-            };
-          });
-        },
-
-        setBuyerData: data => {
-          set(state => {
-            return {
-              buyer: {
-                ...state.buyer,
-                ...data,
-              },
-            };
-          });
-        },
-
         setQuantity: (productId, quantity) => {
+          set(state => {
+            const productExists = state.CART.some(
+              product => (product.id = productId)
+            ); 
+            console.log(productExists, productId);
+            if (productExists) {
+              // return {
+              //   CART: state.CART.map(product =>
+              //     product.id === productId
+              //       ? {
+              //           ...product,
+              //           quantity: quantity,
+              //         }
+              //       : product
+              //   ),
+              // };
+            } else {
+              return {
+                CART: [
+                  {
+                    id: productId,
+                    quantity: quantity,
+                  },
+                  ...state.CART,
+                ],
+              };
+            }
+          });
+        },
+        setQuantity_: (productId, quantity) => {
           set(state => {
             return {
               products: state.products.map(product =>
@@ -250,6 +254,17 @@ const useStore = create(
                     }
                   : product
               ),
+            };
+          });
+        },
+
+        setBuyerData: data => {
+          set(state => {
+            return {
+              buyer: {
+                ...state.buyer,
+                ...data,
+              },
             };
           });
         },
