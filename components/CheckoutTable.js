@@ -39,11 +39,11 @@ export default function CheckoutTable() {
   return (
     <>
       <AddressSection>
-        <div >
+        <div>
           <StyledHeadline align="left">
             {DifferentShipping
               ? 'Billing Address'
-              : 'Shipping & Billing Address'}
+              : 'Billing / Shipping Address'}
           </StyledHeadline>
           {BillingCompany.length > 0 && (
             <StyledLine>{BillingCompany}</StyledLine>
@@ -62,7 +62,7 @@ export default function CheckoutTable() {
           <StyledLine>{BuyerEmail}</StyledLine>
         </div>
         {DifferentShipping && (
-          <div >
+          <div>
             <StyledHeadline>shipping address</StyledHeadline>
             {ShippingCompany.length > 0 && (
               <StyledLine>{ShippingCompany}</StyledLine>
@@ -211,7 +211,6 @@ const StyledTable = styled.table`
 
 const AddressSection = styled.section`
   display: flex;
-  justify-content: left;
   gap: 1rem;
   padding: 0 1rem;
 `;

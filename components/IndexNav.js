@@ -1,9 +1,9 @@
 import useStore from '../hooks/useStore';
 import Link from 'next/link';
-import { Button } from './Buttons';
-import NavWrapper from './NavWrapper';
 import styled from 'styled-components';
 import useHydration from '../hooks/useHydration';
+import NavWrapper from './NavWrapper';
+import { BigButton, SmallButton } from './Buttons';
 
 export default function Nav() {
   const hydrated = useHydration();
@@ -15,20 +15,10 @@ export default function Nav() {
       {hydrated && (
         <NavWrapper>
           <Link passHref href="/">
-            <Button
-              background="transparent"
-              textcolor="var(--text-maincolor)"
-              gridcolumn="1/2"
-            ></Button>
+            <SmallButton />
           </Link>
           <Link passHref href="/address">
-            <Button
-              gridcolumn="2/4"
-              justify="left"
-              background="var(--text-maincolor)"
-              textcolor="white"
-              disabled={TotalQuantity === 0}
-            >
+            <BigButton disabled={TotalQuantity === 0}>
               <Wrapper>
                 PROCEED TO SHIPPING
                 <h5>
@@ -39,7 +29,7 @@ export default function Nav() {
                   })}
                 </h5>
               </Wrapper>
-            </Button>
+            </BigButton>
           </Link>
         </NavWrapper>
       )}
@@ -49,7 +39,6 @@ export default function Nav() {
 }
 
 const Wrapper = styled.div`
-  text-align: left;
   align-self: center;
   justify-self: flex-start;
 `;

@@ -9,6 +9,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import IconLeft from '../public/icon-left.svg';
 import useHydration from '../hooks/useHydration';
+import { BigButton, SmallButton } from './Buttons';
 
 export default function CheckoutNav() {
   const hydrated = useHydration();
@@ -46,27 +47,15 @@ export default function CheckoutNav() {
                 bottom: 'var(--nav-height-mobile)',
                 zIndex: '2',
               }}
-            >
-            </Box>
+            ></Box>
           )}
           <NavWrapper>
             <Link passHref href="/address">
-              <Button
-                background="transparent"
-                textcolor="var(--text-maincolor)"
-                gridcolumn="1/2"
-              >
-                <IconLeft width="20px" height="19px" />
-              </Button>
+              <SmallButton>
+                <IconLeft />
+              </SmallButton>
             </Link>
-            <Button
-              gridcolumn="2/4"
-              background="var(--text-maincolor)"
-              textcolor="white"
-              justify="left"
-              disabled={loading}
-              onClick={handleButtonClick}
-            >
+            <BigButton disabled={loading} onClick={handleButtonClick}>
               <Wrapper>
                 submit order
                 <h5>
@@ -77,7 +66,7 @@ export default function CheckoutNav() {
                   })}
                 </h5>
               </Wrapper>
-            </Button>
+            </BigButton>
             <Modal onClose={() => setShowModal(false)} show={showModal}>
               <h2>Thank you!</h2>
               <Message>

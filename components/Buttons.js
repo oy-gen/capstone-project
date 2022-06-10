@@ -1,11 +1,22 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
-  justify-content: ${props => props.justify};
-  grid-column: ${props => props.gridcolumn};
-  background-color: ${props => props.background};
-  color: ${props => props.textcolor};
-  padding:0 16px;
+export const SmallButton = styled.button`
+  justify-content: center;
+  grid-column: 1/2;
+  background-color: transparent;
+  color: var(--text-maincolor);
+  padding: 0 16px;
+  &:disabled {
+    color: darkgrey;
+    background-color: #555555;
+  }
+`;
+
+export const BigButton = styled.button`
+  grid-column: 2/4;
+  background-color: black;
+  color: white;
+  padding: 0 16px;
   &:disabled {
     color: darkgrey;
     background-color: #555555;

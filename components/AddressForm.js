@@ -8,6 +8,7 @@ import Link from 'next/link';
 import NavWrapper from './NavWrapper';
 import { Button } from './Buttons';
 import IconLeft from '../public/icon-left.svg';
+import { BigButton, SmallButton } from './Buttons';
 
 export default function AddressForm() {
   const totals = useStore(state => state.totals);
@@ -355,22 +356,12 @@ export default function AddressForm() {
           </FormWrapper>
           <NavWrapper>
             <Link passHref href="/">
-              <Button
-                background="transparent"
-                textcolor="var(--text-maincolor)"
-                gridcolumn="1/2"
-              >
-                <IconLeft width="20px" height="19px" />
-              </Button>
+              <SmallButton>
+                <IconLeft />
+              </SmallButton>
             </Link>
 
-            <Button
-              type="submit"
-              justify="left"
-              gridcolumn="2/4"
-              background="var(--text-maincolor)"
-              textcolor="white"
-            >
+            <BigButton type="submit">
               <ButtonContentWrapper>
                 PROCEED TO Checkout
                 <h5>
@@ -381,7 +372,7 @@ export default function AddressForm() {
                   })}
                 </h5>
               </ButtonContentWrapper>
-            </Button>
+            </BigButton>
           </NavWrapper>
         </form>
       )}

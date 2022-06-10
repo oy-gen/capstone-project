@@ -51,8 +51,8 @@ const GlobalStyle = createGlobalStyle`
   }
    
   button {
+    text-align: left;
     display:flex;
-    justify-content: center;
     align-items: center;
     gap: 0.6rem;
     border-style: none;
