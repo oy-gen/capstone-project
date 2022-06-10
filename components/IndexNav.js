@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import useHydration from '../hooks/useHydration';
 import NavWrapper from './NavWrapper';
 import { BigButton, SmallButton } from './Buttons';
+import {GetSubTotal} from './Calculations';
 
 export default function Nav() {
   const hydrated = useHydration();
-  const SubTotalPrice = useStore(state => state.totals.SubTotalPrice);
-  const TotalQuantity = useStore(state => state.totals.TotalQuantity);
+  // const getSubTotal = useStore(state => state.getSubTotal);
+  const subTotal = GetSubTotal();
 
   return (
     <>
@@ -18,12 +19,12 @@ export default function Nav() {
             <SmallButton />
           </Link>
           <Link passHref href="/address">
-            <BigButton disabled={TotalQuantity === 0}>
+            <BigButton disabled={subTotal === 0}>
               <Wrapper>
                 PROCEED TO SHIPPING
                 <h5>
                   SUBTOTAL:{' '}
-                  {SubTotalPrice.toLocaleString('de-DE', {
+                  {subTotal.toLocaleString('de-DE', {
                     style: 'currency',
                     currency: 'EUR',
                   })}

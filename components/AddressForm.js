@@ -8,34 +8,36 @@ import Link from 'next/link';
 import NavWrapper from './NavWrapper';
 import IconLeft from '../public/icon-left.svg';
 import { BigButton, SmallButton } from './Buttons';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React from 'react';
+import FormValidation from './FormValidation';
+import { GetSubTotal } from './Calculations';
 
 export default function AddressForm() {
   const totals = useStore(state => state.totals);
-  const { SubTotalPrice } = totals;
+  const subTotal = GetSubTotal();
   const updateTotal = useStore(state => state.updateTotal);
   const hydrated = useHydration();
   const router = useRouter();
   const setBuyerData = useStore(state => state.setBuyerData);
-  const buyer = useStore(state => state.buyer);
+  const schema = FormValidation;
 
-  // --------useForm const-----------//
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = data => {
     setBuyerData(data);
     updateTotal();
-    console.log(buyer);
-    console.log(totals);
     router.push('/checkout');
   };
   const showCheckbox = watch('LocalPickup', false);
   const showShippingAddress = watch('DifferentShipping', false);
-  // --------useForm const-----------//
 
   return (
     <>
@@ -50,137 +52,64 @@ export default function AddressForm() {
 
             <div>
               <StyledInput
-                placeholder="First Name/s*"
-                {...register('BillingFirstName', {
-                  required: true,
-                  maxLength: 20,
-                })}
+                placeholder="First Name*"
+                {...register('BillingFirstName')}
               />
-              {errors?.BillingFirstName?.type === 'required' && (
-                <StyledWarning>required</StyledWarning>
-              )}
-              {errors?.BillingFirstName?.type === 'maxLength' && (
-                <StyledWarning>20 characters max</StyledWarning>
-              )}
+              <StyledWarning>{errors?.BillingFirstName?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="Last Name*"
-                {...register('BillingLastName', {
-                  required: true,
-                  maxLength: 20,
-                })}
+                {...register('BillingLastName')}
               />
-              {errors?.BillingLastName?.type === 'required' && (
-                <StyledWarning>required</StyledWarning>
-              )}
-              {errors?.BillingLastName?.type === 'maxLength' && (
-                <StyledWarning>20 characters max</StyledWarning>
-              )}
+              <StyledWarning>{errors?.BillingLastName?.message}</StyledWarning>
 
               <StyledInput
                 type="text"
                 placeholder="Email*"
-                {...register('BuyerEmail', {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
+                {...register('BuyerEmail')}
               />
-              {errors?.BuyerEmail?.type === 'required' && (
-                <StyledWarning>required</StyledWarning>
-              )}
-
-              {errors?.BuyerEmail?.type === 'pattern' && (
-                <StyledWarning>email not correct</StyledWarning>
-              )}
+              <StyledWarning>{errors?.BuyerEmail?.message}</StyledWarning>
               <StyledInput
                 placeholder="Company"
-                {...register('BillingCompany', {
-                  required: false,
-                  maxLength: 20,
-                })}
+                {...register('BillingCompany')}
               />
-              {errors?.BillingCompany?.type === 'maxLength' && (
-                <StyledWarning>20 characters max</StyledWarning>
-              )}
-
-              <StyledInput
-                placeholder="Street and number*"
-                {...register('BillingStreetAndNumber', {
-                  required: true,
-                  maxLength: 40,
-                })}
-              />
-              {errors?.BillingStreetAndNumber?.type === 'required' && (
-                <StyledWarning>required</StyledWarning>
-              )}
-              {errors?.BillingStreetAndNumber?.type === 'maxLength' && (
-                <StyledWarning>F40 characters max</StyledWarning>
-              )}
+              <StyledWarning>{errors?.BillingCompany?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="Optional line"
-                {...register('BillingOptionalLine', {
-                  required: false,
-                  maxLength: 20,
-                })}
+                {...register('BillingOptionalLine')}
               />
-              {errors?.BillingOptionalLine?.type === 'maxLength' && (
-                <StyledWarning>too long</StyledWarning>
-              )}
+              <StyledWarning>
+                {errors?.BillingOptionalLine?.message}
+              </StyledWarning>
 
               <StyledInput
-                placeholder="ZIP*"
-                {...register('BillingZip', {
-                  required: true,
-                  maxLength: 10,
-                })}
+                placeholder="Street and number*"
+                {...register('BillingStreetAndNumber')}
               />
-              {errors?.BillingZip?.type === 'required' && (
-                <StyledWarning>required</StyledWarning>
-              )}
-              {errors?.BillingZip?.type === 'maxLength' && (
-                <StyledWarning>10 characters max</StyledWarning>
-              )}
+              <StyledWarning>
+                {errors?.BillingStreetAndNumber?.message}
+              </StyledWarning>
 
-              <StyledInput
-                placeholder="City*"
-                {...register('BillingCity', {
-                  required: true,
-                  maxLength: 20,
-                })}
-              />
-              {errors?.BillingCity?.type === 'required' && (
-                <StyledWarning>required</StyledWarning>
-              )}
-              {errors?.BillingCity?.type === 'maxLength' && (
-                <StyledWarning>20 characters max</StyledWarning>
-              )}
-              {errors?.BillingCity?.type === 'pattern' && (
-                <StyledWarning>Alphabetical only</StyledWarning>
-              )}
+              <StyledInput placeholder="ZIP*" {...register('BillingZip')} />
+              <StyledWarning>{errors?.BillingZip?.message}</StyledWarning>
+
+              <StyledInput placeholder="City*" {...register('BillingCity')} />
+
+              <StyledWarning>{errors?.BillingCity?.message}</StyledWarning>
+
               <StyledInput
                 placeholder="Country*"
-                {...register('BillingCountry', {
-                  required: true,
-                  maxLength: 20,
-                  pattern: /^[A-Za-z]+$/i,
-                })}
+                {...register('BillingCountry')}
               />
-              {errors?.BillingCountry?.type === 'required' && (
-                <StyledWarning>required</StyledWarning>
-              )}
-              {errors?.BillingCountry?.type === 'maxLength' && (
-                <StyledWarning>20 characters max</StyledWarning>
-              )}
-              {errors?.BillingCountry?.type === 'pattern' && (
-                <StyledWarning>Alphabetical only</StyledWarning>
-              )}
+              <StyledWarning>{errors?.BillingCountry?.message}</StyledWarning>
             </div>
+
             <CheckboxWrapper>
               <Checkbox
                 type="checkbox"
                 disabled={showShippingAddress}
-                {...register('LocalPickup', {})}
+                {...register('LocalPickup')}
               />
 
               {showShippingAddress ? (
@@ -193,148 +122,73 @@ export default function AddressForm() {
                 </span>
               )}
             </CheckboxWrapper>
+
             {!showCheckbox && (
               <CheckboxWrapper>
-                <Checkbox
-                  type="checkbox"
-                  {...register('DifferentShipping', {})}
-                />
+                <Checkbox type="checkbox" {...register('DifferentShipping')} />
                 <span>Use a different shipping address</span>
               </CheckboxWrapper>
             )}
 
             {showShippingAddress && (
-              <div style={{}}>
-                <StyledHeadline>Shipping address:</StyledHeadline>
+              <div>
                 <StyledInput
                   placeholder="First Name*"
-                  {...register('ShippingFirstName', {
-                    required: true,
-                    maxLength: 20,
-                  })}
+                  {...register('ShippingFirstName')}
                 />
-                {errors?.ShippingFirstName?.type === 'required' && (
-                  <StyledWarning>required</StyledWarning>
-                )}
-                {errors?.ShippingFirstName?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 20 characters
-                  </StyledWarning>
-                )}
+                <StyledWarning>
+                  {errors?.ShippingFirstName?.message}
+                </StyledWarning>
+
                 <StyledInput
                   placeholder="Last Name*"
-                  {...register('ShippingLastName', {
-                    required: true,
-                    maxLength: 20,
-                  })}
+                  {...register('ShippingLastName')}
                 />
-                {errors?.ShippingLastName?.type === 'required' && (
-                  <StyledWarning>required</StyledWarning>
-                )}
-                {errors?.ShippingLastName?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 20 characters
-                  </StyledWarning>
-                )}
+                <StyledWarning>
+                  {errors?.ShippingLastName?.message}
+                </StyledWarning>
 
                 <StyledInput
                   placeholder="Company"
-                  {...register('ShippingCompany', {
-                    required: false,
-                    maxLength: 40,
-                  })}
+                  {...register('ShippingCompany')}
                 />
-                {errors?.ShippingCompany?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 40 characters
-                  </StyledWarning>
-                )}
-
-                <StyledInput
-                  placeholder="Street and number*"
-                  {...register('ShippingStreetAndNumber', {
-                    required: true,
-                    maxLength: 40,
-                  })}
-                />
-                {errors?.ShippingStreetAndNumber?.type === 'required' && (
-                  <StyledWarning>required</StyledWarning>
-                )}
-                {errors?.ShippingStreetAndNumber?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 40 characters
-                  </StyledWarning>
-                )}
+                <StyledWarning>
+                  {errors?.ShippingCompany?.message}
+                </StyledWarning>
 
                 <StyledInput
                   placeholder="Optional line"
-                  {...register('ShippingOptionalLine', {
-                    required: false,
-                    maxLength: 40,
-                  })}
+                  {...register('ShippingOptionalLine')}
                 />
-                {errors?.ShippingOptionalLine?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 40 characters
-                  </StyledWarning>
-                )}
-                {errors?.ShippingOptionalLine?.type === 'pattern' && (
-                  <StyledWarning>Alphabetical characters only</StyledWarning>
-                )}
+                <StyledWarning>
+                  {errors?.ShippingOptionalLine?.message}
+                </StyledWarning>
 
                 <StyledInput
-                  placeholder="ZIP*"
-                  {...register('ShippingZip', {
-                    required: true,
-                    maxLength: 40,
-                  })}
+                  placeholder="Street and number*"
+                  {...register('ShippingStreetAndNumber')}
                 />
-                {errors?.ShippingZip?.type === 'required' && (
-                  <StyledWarning>required</StyledWarning>
-                )}
-                {errors?.ShippingZip?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 40 characters
-                  </StyledWarning>
-                )}
+                <StyledWarning>
+                  {errors?.ShippingStreetAndNumber?.message}
+                </StyledWarning>
+
+                <StyledInput placeholder="ZIP*" {...register('ShippingZip')} />
+                <StyledWarning>{errors?.ShippingZip?.message}</StyledWarning>
 
                 <StyledInput
                   placeholder="City*"
-                  {...register('ShippingCity', {
-                    required: true,
-                    maxLength: 40,
-                  })}
+                  {...register('ShippingCity')}
                 />
-                {errors?.ShippingCity?.type === 'required' && (
-                  <StyledWarning>required</StyledWarning>
-                )}
-                {errors?.ShippingCity?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 40 characters
-                  </StyledWarning>
-                )}
-                {errors?.ShippingCity?.type === 'pattern' && (
-                  <StyledWarning>Alphabetical characters only</StyledWarning>
-                )}
+
+                <StyledWarning>{errors?.ShippingCity?.message}</StyledWarning>
 
                 <StyledInput
                   placeholder="Country*"
-                  {...register('ShippingCountry', {
-                    required: true,
-                    maxLength: 40,
-                  })}
+                  {...register('ShippingCountry')}
                 />
-                {errors?.ShippingCountry?.type === 'required' && (
-                  <StyledWarning>required</StyledWarning>
-                )}
-                {errors?.ShippingCountry?.type === 'maxLength' && (
-                  <StyledWarning>
-                    First name cannot exceed 40 characters
-                  </StyledWarning>
-                )}
-                {errors?.ShippingCountry?.type === 'pattern' && (
-                  <StyledWarning>Alphabetical characters only</StyledWarning>
-                )}
+                <StyledWarning>
+                  {errors?.ShippingCountry?.message}
+                </StyledWarning>
               </div>
             )}
           </FormWrapper>
@@ -350,7 +204,7 @@ export default function AddressForm() {
                 PROCEED TO Checkout
                 <h5>
                   SUBTOTAL:{' '}
-                  {SubTotalPrice.toLocaleString('de-DE', {
+                  {subTotal.toLocaleString('de-DE', {
                     style: 'currency',
                     currency: 'EUR',
                   })}

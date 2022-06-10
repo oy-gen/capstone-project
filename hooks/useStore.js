@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 const useStore = create(
   persist(
-    set => {
+    (set, get) => {
       return {
         products: [
           {
@@ -19,8 +19,6 @@ const useStore = create(
             Geruch: neutral`,
             RRPprice: 29.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Mint',
@@ -35,8 +33,6 @@ const useStore = create(
           Geruch: neutral`,
             RRPprice: 29.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Black',
@@ -51,8 +47,6 @@ const useStore = create(
               Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Purpur',
@@ -67,8 +61,6 @@ const useStore = create(
                 Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.4,
-            quantity: 0,
-            sum: 0,
           },
 
           {
@@ -84,8 +76,6 @@ const useStore = create(
             Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.6,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Jade',
@@ -100,8 +90,6 @@ const useStore = create(
         Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.6,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Sun Candle',
@@ -116,8 +104,6 @@ const useStore = create(
         Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Prisma Candle Lavendel',
@@ -132,8 +118,6 @@ const useStore = create(
         Geruchsneutral`,
             RRPprice: 34.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Black Gold',
@@ -148,8 +132,6 @@ const useStore = create(
         Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.6,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Stein Sculpture',
@@ -163,8 +145,6 @@ const useStore = create(
         Größe: 18cm`,
             RRPprice: 34.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
         ],
 
@@ -198,7 +178,6 @@ const useStore = create(
           BillingCompany: '',
           BillingOptionalLine: '',
           BillingStreetAndNumber: '',
-          BillingOptionalLine: '',
           BillingZip: '',
           BillingCity: '',
           BillingCountry: '',
@@ -215,20 +194,19 @@ const useStore = create(
         setQuantity: (productId, quantity) => {
           set(state => {
             const productExists = state.CART.some(
-              product => (product.id = productId)
-            ); 
-            console.log(productExists, productId);
+              product => product.id === productId
+            );
             if (productExists) {
-              // return {
-              //   CART: state.CART.map(product =>
-              //     product.id === productId
-              //       ? {
-              //           ...product,
-              //           quantity: quantity,
-              //         }
-              //       : product
-              //   ),
-              // };
+              return {
+                CART: state.CART.map(product =>
+                  product.id === productId
+                    ? {
+                        ...product,
+                        quantity: quantity,
+                      }
+                    : product
+                ),
+              };
             } else {
               return {
                 CART: [
@@ -242,20 +220,47 @@ const useStore = create(
             }
           });
         },
-        setQuantity_: (productId, quantity) => {
-          set(state => {
-            return {
-              products: state.products.map(product =>
-                product.id === productId
-                  ? {
-                      ...product,
-                      quantity: quantity,
-                      sum: product.WSprice * quantity,
-                    }
-                  : product
-              ),
-            };
+        calcProductSum: productId => {
+          const WSprice = state.products.map(
+            product => product.id === productId
+          );
+          return {
+            CART: state.CART.map(product =>
+              product.id === productId
+                ? {
+                    sum: WSprice * quantity,
+                  }
+                : product
+            ),
+          };
+        },
+        getSubTotal: () => {
+          const cart = get().CART;
+          const products = get().products;
+
+          let price = 0;
+          cart.forEach(product => {
+            const currentProduct = products.find(
+              product_ => product_.id === product.id
+            );
+            const productSum = currentProduct.WSprice * product.quantity;
+            price += productSum;
+            // same as: price = price + productSum
           });
+          return price;
+        },
+
+        // const calcSubTotalPrice = state.products
+        // .map(product => product.sum)
+        // .reduce((prev, curr) => prev + curr);
+
+        getTotalQuantity: () => {
+          const cart = get().CART;
+          let quantity = 0;
+          cart.forEach(product => {
+            quantity += product.quantity;
+          });
+          return quantity;
         },
 
         setBuyerData: data => {
@@ -271,12 +276,9 @@ const useStore = create(
 
         updateTotal: () => {
           set(state => {
-            const calcSubTotalPrice = state.products
-              .map(product => product.sum)
-              .reduce((prev, curr) => prev + curr);
-            const calcTotalProducts = state.products
-              .map(product => product.quantity)
-              .reduce((prev, curr) => prev + curr);
+            const calcSubTotalPrice = state.getSubTotal();
+
+            const calcTotalProducts = state.getTotalQuantity();
             const calcTotalParcels = Math.ceil(
               calcTotalProducts / state.seller.ProductsInParcel
             );

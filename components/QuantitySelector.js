@@ -2,25 +2,15 @@ import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 import { SmallSquareButton } from './Buttons';
 import TrashIcon from '../public/trash-icon.svg';
-import { useEffect } from 'react';
 
-export default function QuantitySelector({ id }) {
+export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
-  const updateTotal = useStore(state => state.updateTotal);
-  const productsInCart = useStore(state => state.CART);
-  const currentProduct = productsInCart.find(product => product.id === id);
-  const quantity = currentProduct?.quantity ?? 0;
-
-  useEffect(()=>{
-console.log(productsInCart);
-  },[productsInCart])
 
   return (
     <QuantityWrapper>
       <SmallSquareButton
         onClick={() => {
           setQuantity(id, 0);
-          // updateTotal();
         }}
       >
         <TrashIcon />
@@ -29,7 +19,6 @@ console.log(productsInCart);
         <StyledQuantityButton
           onClick={() => {
             setQuantity(id, Math.max(quantity - 1, 0));
-            // updateTotal();
           }}
         >
           {'-'}
@@ -38,7 +27,6 @@ console.log(productsInCart);
         <StyledQuantityButton
           onClick={() => {
             setQuantity(id, Math.min(quantity + 1, 20));
-            // updateTotal();
           }}
         >
           {'+'}

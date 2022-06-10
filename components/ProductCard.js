@@ -3,12 +3,15 @@ import QuantitySelector from './QuantitySelector';
 import { useState } from 'react';
 import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
+import useStore from '../hooks/useStore';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
-  const { id, image, name, description, WSprice, RRPprice, quantity, sum } =
-    product;
-
+  const { id, image, name, description, WSprice, RRPprice } = product;
+  const productsInCart = useStore(state => state.CART);
+  const productFromCart = productsInCart.find(product => product.id === id);
+  const quantity = productFromCart?.quantity ?? 0;
+  const productSum = quantity * WSprice;
   return (
     <>
       <StyledCard key={id}>
@@ -32,7 +35,7 @@ export default function ProductCard({ product }) {
           <FlexWrapper>
             <h5>
               SUM:{' '}
-              {sum.toLocaleString('de-DE', {
+              {productSum.toLocaleString('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
               })}
@@ -43,7 +46,7 @@ export default function ProductCard({ product }) {
                   setShowDetails(!showDetails);
                 }}
               >
-                <InfoIcon/>
+                <InfoIcon />
               </SmallSquareButton>
               <QuantitySelector id={id} quantity={quantity} />
             </ButtonWrapper>
