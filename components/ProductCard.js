@@ -3,7 +3,6 @@ import QuantitySelector from './QuantitySelector';
 import { useState } from 'react';
 import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
-import useStore from '../hooks/useStore';
 import { GetFullInfo } from './Calculations';
 
 export default function ProductCard({ product }) {

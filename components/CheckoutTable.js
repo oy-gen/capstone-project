@@ -39,8 +39,6 @@ export default function CheckoutTable() {
     ShippingCountry,
   } = buyer;
 
-
-  console.log(DifferentShipping);
   return (
     <>
       <AddressSection>

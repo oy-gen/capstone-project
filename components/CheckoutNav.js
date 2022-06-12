@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import IconLeft from '../public/icon-left.svg';
 import { BigButton, SmallButton } from './Buttons';
 import { GetTotals } from './Calculations';
+import { LinearProgress } from '@mui/material';
 
 export default function CheckoutNav() {
   const [showModal, setShowModal] = useState(false);
@@ -41,7 +42,9 @@ export default function CheckoutNav() {
             bottom: 'var(--nav-height-mobile)',
             zIndex: '200',
           }}
-        ></Box>
+        >
+          <LinearProgress/>
+        </Box>
       )}
       <NavWrapper>
         <Link passHref href="/address">

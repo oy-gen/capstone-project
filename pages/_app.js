@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
   --text-maincolor: #1C1B1B;
   --text-lightcolor: #7E7E7E;
   --signal-color: #F94C43;
-  --accent-color: #4B837F;
+  --accent-color: #506bcc;
 
   --nav-height: 75px;
   --nav-height-mobile:65px;

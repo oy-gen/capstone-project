@@ -1,11 +1,11 @@
 import Header from '../components/Header';
-import AddressForm from '../components/AddressForm';
+import FormAddress from '../components/FormAddress';
 
 export default function Home() {
   return (
     <>
       <Header />
-      <AddressForm />
+      <FormAddress />
     </>
   );
 }
