@@ -150,16 +150,6 @@ const useStore = create(
 
         CART: [],
 
-        totals: {
-          TotalTaxes: 0,
-          TotalPrice: 0,
-          SubTotalPrice: 0,
-          SubTotalPriceInclShipping: 0,
-          TotalShipping: 0,
-          TotalQuantity: 0,
-          TotalParcels: 0,
-        },
-
         seller: {
           ProductsInParcel: 20,
           ParcelPrice: 9.9,
@@ -220,48 +210,6 @@ const useStore = create(
             }
           });
         },
-        calcProductSum: productId => {
-          const WSprice = state.products.map(
-            product => product.id === productId
-          );
-          return {
-            CART: state.CART.map(product =>
-              product.id === productId
-                ? {
-                    sum: WSprice * quantity,
-                  }
-                : product
-            ),
-          };
-        },
-        getSubTotal: () => {
-          const cart = get().CART;
-          const products = get().products;
-
-          let price = 0;
-          cart.forEach(product => {
-            const currentProduct = products.find(
-              product_ => product_.id === product.id
-            );
-            const productSum = currentProduct.WSprice * product.quantity;
-            price += productSum;
-            // same as: price = price + productSum
-          });
-          return price;
-        },
-
-        // const calcSubTotalPrice = state.products
-        // .map(product => product.sum)
-        // .reduce((prev, curr) => prev + curr);
-
-        getTotalQuantity: () => {
-          const cart = get().CART;
-          let quantity = 0;
-          cart.forEach(product => {
-            quantity += product.quantity;
-          });
-          return quantity;
-        },
 
         setBuyerData: data => {
           set(state => {
@@ -269,38 +217,6 @@ const useStore = create(
               buyer: {
                 ...state.buyer,
                 ...data,
-              },
-            };
-          });
-        },
-
-        updateTotal: () => {
-          set(state => {
-            const calcSubTotalPrice = state.getSubTotal();
-
-            const calcTotalProducts = state.getTotalQuantity();
-            const calcTotalParcels = Math.ceil(
-              calcTotalProducts / state.seller.ProductsInParcel
-            );
-            const calcTotalShipping = !state.buyer.LocalPickup
-              ? calcTotalParcels * state.seller.ParcelPrice
-              : 0;
-            calcTotalParcels * state.seller.ParcelPrice;
-            const calcSubTotalPriceInclShipping =
-              calcSubTotalPrice + calcTotalShipping;
-            const calcTotalTaxes =
-              calcSubTotalPriceInclShipping * (state.seller.Taxes / 100);
-            const calcTotalPrice =
-              calcSubTotalPriceInclShipping + calcTotalTaxes;
-            return {
-              totals: {
-                TotalTaxes: calcTotalTaxes,
-                TotalPrice: calcTotalPrice,
-                SubTotalPrice: calcSubTotalPrice,
-                SubTotalPriceInclShipping: calcSubTotalPriceInclShipping,
-                TotalShipping: calcTotalShipping,
-                TotalQuantity: calcTotalProducts,
-                TotalParcels: calcTotalParcels,
               },
             };
           });

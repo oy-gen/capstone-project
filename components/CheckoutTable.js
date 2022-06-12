@@ -1,20 +1,29 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
+import { GetProductSum } from './Calculations';
+import { GetFullInfo } from './Calculations';
+import { GetTotals } from './Calculations';
 
 export default function CheckoutTable() {
-  const products = useStore(state => state.products);
-  const buyer = useStore(state => state.buyer);
-  const productsInCart = products.filter(product => product.quantity !== 0);
-  const ParcelPrice = useStore(state => state.seller.ParcelPrice);
-  const Taxes = useStore(state => state.seller.Taxes);
-  const totals = useStore(state => state.totals);
   const {
-    TotalTaxes,
-    TotalPrice,
-    TotalShipping,
-    SubTotalPriceInclShipping,
-    TotalParcels,
-  } = totals;
+    totalTaxes,
+    totalPrice,
+    subTotalPriceInclShipping,
+    totalShipping,
+    totalParcels,
+  } = GetTotals();
+
+  const buyer = useStore(state => state.buyer);
+  const cart = useStore(state => state.CART);
+  const productsInCart = cart.filter(product => product.quantity > 0);
+  const parcelPrice = useStore(state => state.seller.ParcelPrice);
+  const taxes = useStore(state => state.seller.Taxes);
+
+
+  // console.log('Hallo');
+   console.log(GetTotals());
+  // console.log(GetTotals().totalShipping);
+
   const {
     BuyerEmail,
     DifferentShipping,
@@ -90,78 +99,72 @@ export default function CheckoutTable() {
             <th align="right">sum</th>
           </tr>
 
-          {productsInCart.map(product => (
-            <tr key={product.id}>
+          {productsInCart.map(productInCart => (
+            <tr key={productInCart.id}>
               <td align="left">
-                <strong>{product.name}</strong>
+                <strong>{GetFullInfo(productInCart.id).name}</strong>
               </td>
-              <td align="center">{product.quantity}</td>
+              <td align="center">{productInCart.quantity}</td>
               <td align="right">
-                {product.WSprice.toLocaleString('de-DE', {
+                {GetFullInfo(productInCart.id).WSprice.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
               </td>
               <td align="right">
-                {product.sum.toLocaleString('de-DE', {
+                {' '}
+                {GetFullInfo(productInCart.id).sum.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
               </td>
             </tr>
           ))}
-          {TotalShipping !== 0 && (
+
+          {totalShipping !== 0 && (
             <tr>
               <td align="left">
                 <strong>Shipping</strong>
               </td>
-              <td align="center">{TotalParcels}</td>
+              <td align="center">{totalParcels}</td>
               <td align="right">
-                {ParcelPrice.toLocaleString('de-DE', {
+                {parcelPrice.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
               </td>
-              <td align="right">
-                {TotalShipping.toLocaleString('de-DE', {
+              <td align="right">{totalShipping.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
-                })}
-              </td>
+                })}</td>
             </tr>
           )}
           <tr>
             <td empty />
             <td empty />
             <th align="right">SUBTOTAL</th>
-            <th align="right">
-              {SubTotalPriceInclShipping.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </th>
+            <th align="right">{subTotalPriceInclShipping.toLocaleString('de-DE', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}</th>
           </tr>
           <tr>
             <td empty />
             <td empty />
-            <th align="right">VAT {Taxes}%</th>
-            <th align="right">
-              {TotalTaxes.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </th>
+            <th align="right">VAT {taxes}%</th>
+            <th align="right">{totalTaxes.toLocaleString('de-DE', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}</th>
           </tr>
           <tr>
             <td empty />
             <td empty />
             <th align="right">TOTAL</th>
-            <th align="right">
-              {TotalPrice.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </th>
+            <th align="right">{totalPrice.toLocaleString('de-DE', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}</th>
           </tr>
         </tbody>
       </StyledTable>

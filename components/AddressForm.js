@@ -14,7 +14,6 @@ import FormValidation from './FormValidation';
 import { GetSubTotal } from './Calculations';
 
 export default function AddressForm() {
-  const totals = useStore(state => state.totals);
   const subTotal = GetSubTotal();
   const updateTotal = useStore(state => state.updateTotal);
   const hydrated = useHydration();
@@ -33,7 +32,6 @@ export default function AddressForm() {
 
   const onSubmit = data => {
     setBuyerData(data);
-    updateTotal();
     router.push('/checkout');
   };
   const showCheckbox = watch('LocalPickup', false);

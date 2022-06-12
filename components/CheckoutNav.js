@@ -3,19 +3,17 @@ import Link from 'next/link';
 import Modal from './Modal';
 import NavWrapper from './NavWrapper';
 import { useState } from 'react';
-import { Button } from './Buttons';
-import useStore from '../hooks/useStore';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import IconLeft from '../public/icon-left.svg';
 import useHydration from '../hooks/useHydration';
 import { BigButton, SmallButton } from './Buttons';
+import { GetTotals } from './Calculations';
 
 export default function CheckoutNav() {
   const hydrated = useHydration();
   const [showModal, setShowModal] = useState(false);
-  const totals = useStore(state => state.totals);
-  const { TotalPrice } = totals;
+  const { totalPrice } = GetTotals();
   const [loading, setLoading] = React.useState(false);
   const timer = React.useRef();
 
@@ -60,7 +58,7 @@ export default function CheckoutNav() {
                 submit order
                 <h5>
                   Total price:{' '}
-                  {TotalPrice.toLocaleString('de-DE', {
+                  {totalPrice.toLocaleString('de-DE', {
                     style: 'currency',
                     currency: 'EUR',
                   })}

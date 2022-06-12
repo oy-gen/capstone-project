@@ -8,7 +8,6 @@ import {GetSubTotal} from './Calculations';
 
 export default function Nav() {
   const hydrated = useHydration();
-  // const getSubTotal = useStore(state => state.getSubTotal);
   const subTotal = GetSubTotal();
 
   return (

@@ -24,7 +24,7 @@ const schema = yup
       .string()
       .trim()
       .required('required')
-      .max(20, '${max} characters max'),
+      .max(40, '${max} characters max'),
     BillingZip: yup
       .string()
       .trim()
@@ -57,7 +57,7 @@ const schema = yup
       .string()
       .trim()
       .required('required')
-      .max(20, '${max} characters max'),
+      .max(40, '${max} characters max'),
     ShippingZip: yup
       .string()
       .trim()
