@@ -11,11 +11,10 @@ import { BigButton, SmallButton } from './Buttons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import FormValidation from './FormValidation';
-import { GetSubTotal } from './Calculations';
+import { GetTotals } from './Calculations';
 
 export default function AddressForm() {
-  const subTotal = GetSubTotal();
-  const updateTotal = useStore(state => state.updateTotal);
+  const { subTotalPrice } = GetTotals();
   const hydrated = useHydration();
   const router = useRouter();
   const setBuyerData = useStore(state => state.setBuyerData);
@@ -202,7 +201,7 @@ export default function AddressForm() {
                 PROCEED TO Checkout
                 <h5>
                   SUBTOTAL:{' '}
-                  {subTotal.toLocaleString('de-DE', {
+                  {subTotalPrice.toLocaleString('de-DE', {
                     style: 'currency',
                     currency: 'EUR',
                   })}

@@ -9,7 +9,8 @@ export function GetProductSum(id, WSprice) {
 }
 
 export function GetTotals() {
-  const productsInCart = useStore(state => state.CART);
+  const cart = useStore(state => state.CART);
+  const productsInCart = cart.filter(product => product.quantity > 0);
   const products = useStore(state => state.products);
   const seller = useStore(state => state.seller);
   const buyer = useStore(state => state.buyer);
@@ -50,21 +51,6 @@ export function GetTotals() {
   };
 }
 
-export function GetSubTotal() {
-  const productsInCart = useStore(state => state.CART);
-  const products = useStore(state => state.products);
-
-  let price = 0;
-  productsInCart.forEach(productInCart => {
-    const currentProduct = products.find(
-      product => product.id === productInCart.id
-    );
-    const productSum = currentProduct.WSprice * productInCart.quantity;
-    price = price + productSum;
-  });
-  return price;
-}
-
 export function GetTotalQuantity() {
   const productsInCart = useStore(state => state.CART);
   let quantity = 0;
@@ -75,7 +61,8 @@ export function GetTotalQuantity() {
 }
 
 export function GetFullInfo(id) {
-  const productsInCart = useStore(state => state.CART);
+  const cart = useStore(state => state.CART);
+  const productsInCart = cart.filter(product => product.quantity > 0);
   const products = useStore(state => state.products);
 
   const currentProductInCart = productsInCart.find(

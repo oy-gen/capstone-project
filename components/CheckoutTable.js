@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
-import { GetProductSum } from './Calculations';
 import { GetFullInfo } from './Calculations';
 import { GetTotals } from './Calculations';
 
@@ -18,11 +17,6 @@ export default function CheckoutTable() {
   const productsInCart = cart.filter(product => product.quantity > 0);
   const parcelPrice = useStore(state => state.seller.ParcelPrice);
   const taxes = useStore(state => state.seller.Taxes);
-
-
-  // console.log('Hallo');
-   console.log(GetTotals());
-  // console.log(GetTotals().totalShipping);
 
   const {
     BuyerEmail,
@@ -45,6 +39,8 @@ export default function CheckoutTable() {
     ShippingCountry,
   } = buyer;
 
+
+  console.log(DifferentShipping);
   return (
     <>
       <AddressSection>
@@ -133,38 +129,46 @@ export default function CheckoutTable() {
                   currency: 'EUR',
                 })}
               </td>
-              <td align="right">{totalShipping.toLocaleString('de-DE', {
+              <td align="right">
+                {totalShipping.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
-                })}</td>
+                })}
+              </td>
             </tr>
           )}
           <tr>
             <td empty />
             <td empty />
             <th align="right">SUBTOTAL</th>
-            <th align="right">{subTotalPriceInclShipping.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}</th>
+            <th align="right">
+              {subTotalPriceInclShipping.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </th>
           </tr>
           <tr>
             <td empty />
             <td empty />
             <th align="right">VAT {taxes}%</th>
-            <th align="right">{totalTaxes.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}</th>
+            <th align="right">
+              {totalTaxes.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </th>
           </tr>
           <tr>
             <td empty />
             <td empty />
             <th align="right">TOTAL</th>
-            <th align="right">{totalPrice.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}</th>
+            <th align="right">
+              {totalPrice.toLocaleString('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </th>
           </tr>
         </tbody>
       </StyledTable>

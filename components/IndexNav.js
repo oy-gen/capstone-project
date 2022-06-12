@@ -1,14 +1,13 @@
-import useStore from '../hooks/useStore';
 import Link from 'next/link';
 import styled from 'styled-components';
 import useHydration from '../hooks/useHydration';
 import NavWrapper from './NavWrapper';
 import { BigButton, SmallButton } from './Buttons';
-import {GetSubTotal} from './Calculations';
+import { GetTotals } from './Calculations';
 
 export default function Nav() {
   const hydrated = useHydration();
-  const subTotal = GetSubTotal();
+  const { subTotalPrice } = GetTotals();
 
   return (
     <>
@@ -18,12 +17,12 @@ export default function Nav() {
             <SmallButton />
           </Link>
           <Link passHref href="/address">
-            <BigButton disabled={subTotal === 0}>
+            <BigButton disabled={subTotalPrice === 0}>
               <Wrapper>
                 PROCEED TO SHIPPING
                 <h5>
                   SUBTOTAL:{' '}
-                  {subTotal.toLocaleString('de-DE', {
+                  {subTotalPrice.toLocaleString('de-DE', {
                     style: 'currency',
                     currency: 'EUR',
                   })}

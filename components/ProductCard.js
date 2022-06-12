@@ -4,14 +4,17 @@ import { useState } from 'react';
 import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
 import useStore from '../hooks/useStore';
-import { GetProductSum } from './Calculations';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
   const { id, image, name, description, WSprice, RRPprice } = product;
-  const productsInCart = useStore(state => state.CART);
-  const productFromCart = productsInCart.find(product => product.id === id);
-  const quantity = productFromCart?.quantity ?? 0;
+  const cart = useStore(state => state.CART);
+
+  const productInCart = cart.find(product => product.id === id);
+  const quantity = productInCart?.quantity ?? 0;
+  //const quantity = productInCart.quantity;
+  const productSum = quantity * WSprice;
+
   return (
     <>
       <StyledCard key={id}>
@@ -35,7 +38,7 @@ export default function ProductCard({ product }) {
           <FlexWrapper>
             <h5>
               SUM:{' '}
-              {GetProductSum(id, WSprice).toLocaleString('de-DE', {
+              {productSum.toLocaleString('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
               })}
@@ -111,4 +114,3 @@ const StyledImage = styled.img`
   max-width: 300px;
   width: 100%;
 `;
-
