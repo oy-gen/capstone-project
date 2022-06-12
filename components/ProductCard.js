@@ -4,16 +4,12 @@ import { useState } from 'react';
 import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
 import useStore from '../hooks/useStore';
+import { GetFullInfo } from './Calculations';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
   const { id, image, name, description, WSprice, RRPprice } = product;
-  const cart = useStore(state => state.CART);
-
-  const productInCart = cart.find(product => product.id === id);
-  const quantity = productInCart?.quantity ?? 0;
-  //const quantity = productInCart.quantity;
-  const productSum = quantity * WSprice;
+  const { sum, quantity } = GetFullInfo(product.id);
 
   return (
     <>
@@ -38,7 +34,7 @@ export default function ProductCard({ product }) {
           <FlexWrapper>
             <h5>
               SUM:{' '}
-              {productSum.toLocaleString('de-DE', {
+              {sum.toLocaleString('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
               })}

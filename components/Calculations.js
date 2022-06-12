@@ -1,13 +1,5 @@
 import useStore from '../hooks/useStore';
 
-export function GetProductSum(id, WSprice) {
-  const productsInCart = useStore(state => state.CART);
-  const productFromCart = productsInCart.find(product => product.id === id);
-  const quantity = productFromCart?.quantity ?? 0;
-  const productSum = quantity * WSprice;
-  return productSum;
-}
-
 export function GetTotals() {
   const cart = useStore(state => state.CART);
   const productsInCart = cart.filter(product => product.quantity > 0);
@@ -51,15 +43,6 @@ export function GetTotals() {
   };
 }
 
-export function GetTotalQuantity() {
-  const productsInCart = useStore(state => state.CART);
-  let quantity = 0;
-  productsInCart.forEach(product => {
-    quantity += product.quantity;
-  });
-  return quantity;
-}
-
 export function GetFullInfo(id) {
   const cart = useStore(state => state.CART);
   const productsInCart = cart.filter(product => product.quantity > 0);
@@ -68,13 +51,16 @@ export function GetFullInfo(id) {
   const currentProductInCart = productsInCart.find(
     productInCart => productInCart.id === id
   );
+  const quantity = currentProductInCart?.quantity ?? 0;
   const currentProduct = products.find(product => product.id === id);
-
+  const WSprice = currentProduct.WSprice;
+  const name = currentProduct.name;
+  const sum = quantity * WSprice;
   return {
-    id: id,
-    quantity: currentProductInCart.quantity,
-    name: currentProduct.name,
-    WSprice: currentProduct.WSprice,
-    sum: currentProductInCart.quantity * currentProduct.WSprice,
+    id,
+    quantity,
+    name,
+    WSprice,
+    sum,
   };
 }
