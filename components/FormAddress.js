@@ -12,6 +12,12 @@ import { BigButton, SmallButton } from './Buttons';
 import { GetTotals } from '../hooks/useCalculation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormValidation from './FormValidation';
+import ShippingAddress from './FormShippingAddress';
+import {
+  StyledWarning,
+  StyledInput,
+  StyledHeadline,
+} from './FormStyledComponents';
 
 export default function AddressForm() {
   const { subTotalPrice } = GetTotals();
@@ -33,14 +39,6 @@ export default function AddressForm() {
     BillingZip,
     BillingCity,
     BillingCountry,
-    ShippingFirstName,
-    ShippingLastName,
-    ShippingCompany,
-    ShippingOptionalLine,
-    ShippingStreetAndNumber,
-    ShippingZip,
-    ShippingCity,
-    ShippingCountry,
   } = buyer;
 
   const {
@@ -167,74 +165,7 @@ export default function AddressForm() {
 
             {showShippingAddress && (
               <div>
-                <StyledHeadline>Shipping Address:</StyledHeadline>
-                <StyledInput
-                  placeholder="First Name*"
-                  {...register('ShippingFirstName')}
-                />
-                <StyledWarning>
-                  {errors?.ShippingFirstName?.message}
-                </StyledWarning>
-
-                <StyledInput
-                  placeholder="Last Name*"
-                  defaultValue={ShippingLastName}
-                  {...register('ShippingLastName')}
-                />
-                <StyledWarning>
-                  {errors?.ShippingLastName?.message}
-                </StyledWarning>
-
-                <StyledInput
-                  placeholder="Company"
-                  defaultValue={ShippingCompany}
-                  {...register('ShippingCompany')}
-                />
-                <StyledWarning>
-                  {errors?.ShippingCompany?.message}
-                </StyledWarning>
-
-                <StyledInput
-                  placeholder="Optional line"
-                  defaultValue={ShippingOptionalLine}
-                  {...register('ShippingOptionalLine')}
-                />
-                <StyledWarning>
-                  {errors?.ShippingOptionalLine?.message}
-                </StyledWarning>
-
-                <StyledInput
-                  placeholder="Street and number*"
-                  defaultValue={ShippingStreetAndNumber}
-                  {...register('ShippingStreetAndNumber')}
-                />
-                <StyledWarning>
-                  {errors?.ShippingStreetAndNumber?.message}
-                </StyledWarning>
-
-                <StyledInput
-                  placeholder="ZIP*"
-                  defaultValue={ShippingZip}
-                  {...register('ShippingZip')}
-                />
-                <StyledWarning>{errors?.ShippingZip?.message}</StyledWarning>
-
-                <StyledInput
-                  placeholder="City*"
-                  defaultValue={ShippingCity}
-                  {...register('ShippingCity')}
-                />
-
-                <StyledWarning>{errors?.ShippingCity?.message}</StyledWarning>
-
-                <StyledInput
-                  placeholder="Country*"
-                  defaultValue={ShippingCountry}
-                  {...register('ShippingCountry')}
-                />
-                <StyledWarning>
-                  {errors?.ShippingCountry?.message}
-                </StyledWarning>
+                <ShippingAddress register={register} errors={errors} />
               </div>
             )}
           </FormWrapper>
@@ -273,47 +204,10 @@ const FormWrapper = styled.div`
   z-index: 0;
 `;
 
-const StyledHeadline = styled.h2`
-  text-align: center;
-  margin: 30px auto 30px;
-`;
 const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
   align-self: flex-start;
-`;
-
-const StyledInput = styled.input`
-  width: 90vw;
-  font-size: 1rem;
-  line-height: 1.6rem;
-  border-style: none;
-  background-color: transparent;
-  border-bottom: 1px solid lightgrey;
-  padding: 5px 100px 0 0;
-  margin-bottom: 1rem;
-  color: var(--text-darkcolor);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: var(--text-lightcolor);
-  }
-
-  &:focus {
-    border-style: none;
-    outline: none;
-    border-bottom: 2px solid var(--accent-color);
-  }
-`;
-
-const StyledWarning = styled.p`
-  position: absolute;
-  color: var(--signal-color);
-  margin: -2.4rem 0.5rem 0 0;
-  right: 1rem;
 `;
 
 const ButtonContentWrapper = styled.div`
