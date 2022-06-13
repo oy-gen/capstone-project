@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import useHydration from '../hooks/useHydration';
 import NavWrapper from './NavWrapper';
 import { BigButton, SmallButton } from './Buttons';
-import { GetTotals } from './Calculations';
+import { GetTotals } from '../hooks/useCalculation';
 
 export default function Nav() {
   const hydrated = useHydration();

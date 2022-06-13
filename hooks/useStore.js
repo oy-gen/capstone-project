@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 const useStore = create(
   persist(
-    (set) => {
+    set => {
       return {
         products: [
           {
@@ -192,7 +192,7 @@ const useStore = create(
                   product.id === productId
                     ? {
                         ...product,
-                        quantity: quantity,
+                        quantity,
                       }
                     : product
                 ),
@@ -202,7 +202,7 @@ const useStore = create(
                 CART: [
                   {
                     id: productId,
-                    quantity: quantity,
+                    quantity,
                   },
                   ...state.CART,
                 ],

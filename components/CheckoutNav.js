@@ -7,7 +7,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import IconLeft from '../public/icon-left.svg';
 import { BigButton, SmallButton } from './Buttons';
-import { GetTotals } from './Calculations';
+import { GetTotals } from '../hooks/useCalculation';
 import { LinearProgress } from '@mui/material';
 
 export default function CheckoutNav() {
@@ -43,7 +43,7 @@ export default function CheckoutNav() {
             zIndex: '200',
           }}
         >
-          <LinearProgress/>
+          <LinearProgress />
         </Box>
       )}
       <NavWrapper>

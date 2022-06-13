@@ -9,7 +9,7 @@ import { Checkbox } from '@mui/material';
 import NavWrapper from './NavWrapper';
 import IconLeft from '../public/icon-left.svg';
 import { BigButton, SmallButton } from './Buttons';
-import { GetTotals } from './Calculations';
+import { GetTotals } from '../hooks/useCalculation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormValidation from './FormValidation';
 
@@ -235,15 +235,18 @@ const CheckboxWrapper = styled.div`
 `;
 
 const StyledInput = styled.input`
-  width: 100%;
+  width: 90vw;
   font-size: 1rem;
   line-height: 1.6rem;
   border-style: none;
   background-color: transparent;
   border-bottom: 1px solid lightgrey;
-  padding: 5px;
+  padding: 5px 100px 0 0;
   margin-bottom: 1rem;
   color: var(--text-darkcolor);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 
   ::placeholder,
   ::-webkit-input-placeholder {
@@ -260,7 +263,7 @@ const StyledInput = styled.input`
 const StyledWarning = styled.p`
   position: absolute;
   color: var(--signal-color);
-  margin: -2.7rem 0.9rem 0 0;
+  margin: -2.4rem 0.5rem 0 0;
   right: 1rem;
 `;
 

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
-import { GetFullInfo } from './Calculations';
-import { GetTotals } from './Calculations';
+import { GetFullInfo } from '../hooks/useCalculation';
+import { GetTotals } from '../hooks/useCalculation';
+import CheckoutAddressSection from './CheckoutAddressSection';
 
 export default function CheckoutTable() {
   const {
@@ -12,78 +13,14 @@ export default function CheckoutTable() {
     totalParcels,
   } = GetTotals();
 
-  const buyer = useStore(state => state.buyer);
   const cart = useStore(state => state.CART);
   const productsInCart = cart.filter(product => product.quantity > 0);
   const parcelPrice = useStore(state => state.seller.ParcelPrice);
   const taxes = useStore(state => state.seller.Taxes);
 
-  const {
-    BuyerEmail,
-    DifferentShipping,
-    BillingFirstName,
-    BillingLastName,
-    BillingCompany,
-    BillingStreetAndNumber,
-    BillingOptionalLine,
-    BillingZip,
-    BillingCity,
-    BillingCountry,
-    ShippingFirstName,
-    ShippingLastName,
-    ShippingCompany,
-    ShippingOptionalLine,
-    ShippingStreetAndNumber,
-    ShippingZip,
-    ShippingCity,
-    ShippingCountry,
-  } = buyer;
-
   return (
     <>
-      <AddressSection>
-        <div>
-          <StyledHeadline align="left">
-            {DifferentShipping
-              ? 'Billing Address'
-              : 'Billing / Shipping Address'}
-          </StyledHeadline>
-          {BillingCompany.length > 0 && (
-            <StyledLine>{BillingCompany}</StyledLine>
-          )}
-          <StyledLine>
-            {BillingFirstName} {BillingLastName}
-          </StyledLine>
-          <StyledLine>{BillingStreetAndNumber}</StyledLine>
-          {BillingOptionalLine.length > 0 && (
-            <StyledLine>{BillingOptionalLine}</StyledLine>
-          )}
-          <StyledLine>
-            {BillingZip} {BillingCity}
-          </StyledLine>
-          <StyledLine>{BillingCountry}</StyledLine>
-          <StyledLine>{BuyerEmail}</StyledLine>
-        </div>
-        {DifferentShipping && (
-          <div>
-            <StyledHeadline>shipping address</StyledHeadline>
-            {ShippingCompany.length > 0 && (
-              <StyledLine>{ShippingCompany}</StyledLine>
-            )}
-            <StyledLine>
-              {ShippingFirstName} {ShippingLastName}
-            </StyledLine>
-            <StyledLine>{ShippingStreetAndNumber}</StyledLine>
-            {ShippingOptionalLine.length > 0 && (
-              <StyledLine>{ShippingOptionalLine}</StyledLine>
-            )}
-            <StyledLine>
-              {ShippingZip} {ShippingCity}
-            </StyledLine>
-            <StyledLine>{ShippingCountry}</StyledLine>
-          </div>
-        )}
-      </AddressSection>
+      <CheckoutAddressSection />
       <StyledTable>
         <tbody>
           <tr>
@@ -136,8 +73,8 @@ export default function CheckoutTable() {
             </tr>
           )}
           <tr>
-            <td empty />
-            <td empty />
+            <td />
+            <td />
             <th align="right">SUBTOTAL</th>
             <th align="right">
               {subTotalPriceInclShipping.toLocaleString('de-DE', {
@@ -147,8 +84,8 @@ export default function CheckoutTable() {
             </th>
           </tr>
           <tr>
-            <td empty />
-            <td empty />
+            <td />
+            <td />
             <th align="right">VAT {taxes}%</th>
             <th align="right">
               {totalTaxes.toLocaleString('de-DE', {
@@ -158,8 +95,8 @@ export default function CheckoutTable() {
             </th>
           </tr>
           <tr>
-            <td empty />
-            <td empty />
+            <td />
+            <td />
             <th align="right">TOTAL</th>
             <th align="right">
               {totalPrice.toLocaleString('de-DE', {
@@ -212,21 +149,4 @@ const StyledTable = styled.table`
     border: 0;
     background-color: var(--background-color);
   }
-`;
-
-const AddressSection = styled.section`
-  display: flex;
-  gap: 1rem;
-  padding: 0 1rem;
-`;
-
-const StyledLine = styled.p`
-  line-height: 0.6rem;
-  color: var(--text-maincolor);
-`;
-
-const StyledHeadline = styled.h2`
-  font-size: 14px;
-  text-align: ${props => props.align};
-  margin: 30px auto 10px;
 `;

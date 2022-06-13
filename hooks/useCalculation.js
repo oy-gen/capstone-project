@@ -1,4 +1,4 @@
-import useStore from '../hooks/useStore';
+import useStore from './useStore';
 
 export function GetTotals() {
   const cart = useStore(state => state.CART);
