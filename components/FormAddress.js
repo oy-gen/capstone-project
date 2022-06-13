@@ -30,7 +30,6 @@ export default function AddressForm() {
   const {
     BuyerEmail,
     LocalPickup,
-    DifferentShipping,
     BillingFirstName,
     BillingLastName,
     BillingCompany,
