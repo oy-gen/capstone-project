@@ -160,11 +160,7 @@ export default function AddressForm() {
 
             {!showCheckbox && (
               <CheckboxWrapper>
-                <Checkbox
-                  type="checkbox"
-                  defaultChecked={showShippingAddress}
-                  {...register('DifferentShipping')}
-                />
+                <Checkbox type="checkbox" {...register('DifferentShipping')} />
                 <span>Use a different shipping address</span>
               </CheckboxWrapper>
             )}
@@ -174,7 +170,6 @@ export default function AddressForm() {
                 <StyledHeadline>Shipping Address:</StyledHeadline>
                 <StyledInput
                   placeholder="First Name*"
-                  defaultValue={ShippingFirstName}
                   {...register('ShippingFirstName')}
                 />
                 <StyledWarning>
