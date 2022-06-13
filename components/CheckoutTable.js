@@ -1,23 +1,26 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
+import { GetFullInfo } from '../hooks/useCalculation';
+import { GetTotals } from '../hooks/useCalculation';
+import CheckoutAddressSection from './CheckoutAddressSection';
 
 export default function CheckoutTable() {
-  const products = useStore(state => state.products);
-  const productsInCart = products.filter(product => product.quantity !== 0);
-  const ParcelPrice = useStore(state => state.seller.ParcelPrice);
-  const Taxes = useStore(state => state.seller.Taxes);
-  const LocalPickup = useStore(state => state.buyer.LocalPickup);
-  const totals = useStore(state => state.totals);
   const {
-    TotalTaxes,
-    TotalPrice,
-    TotalShipping,
-    SubTotalPriceInclShipping,
-    TotalParcels,
-  } = totals;
+    totalTaxes,
+    totalPrice,
+    subTotalPriceInclShipping,
+    totalShipping,
+    totalParcels,
+  } = GetTotals();
+
+  const cart = useStore(state => state.CART);
+  const productsInCart = cart.filter(product => product.quantity > 0);
+  const parcelPrice = useStore(state => state.seller.ParcelPrice);
+  const taxes = useStore(state => state.seller.Taxes);
 
   return (
     <>
+      <CheckoutAddressSection />
       <StyledTable>
         <tbody>
           <tr>
@@ -26,41 +29,43 @@ export default function CheckoutTable() {
             <th align="right">unit</th>
             <th align="right">sum</th>
           </tr>
-        
-          {productsInCart.map(product => (
-            <tr key={product.id}>
+
+          {productsInCart.map(productInCart => (
+            <tr key={productInCart.id}>
               <td align="left">
-                <strong>{product.name}</strong>
+                <strong>{GetFullInfo(productInCart.id).name}</strong>
               </td>
-              <td align="center">{product.quantity}</td>
+              <td align="center">{productInCart.quantity}</td>
               <td align="right">
-                {product.WSprice.toLocaleString('de-DE', {
+                {GetFullInfo(productInCart.id).WSprice.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
               </td>
               <td align="right">
-                {product.sum.toLocaleString('de-DE', {
+                {' '}
+                {GetFullInfo(productInCart.id).sum.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
               </td>
             </tr>
           ))}
-          {LocalPickup || (
+
+          {totalShipping !== 0 && (
             <tr>
               <td align="left">
                 <strong>Shipping</strong>
               </td>
-              <td align="center">{TotalParcels}</td>
+              <td align="center">{totalParcels}</td>
               <td align="right">
-                {ParcelPrice.toLocaleString('de-DE', {
+                {parcelPrice.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
               </td>
               <td align="right">
-                {TotalShipping.toLocaleString('de-DE', {
+                {totalShipping.toLocaleString('de-DE', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
@@ -68,33 +73,33 @@ export default function CheckoutTable() {
             </tr>
           )}
           <tr>
-            <td empty />
-            <td empty />
+            <td />
+            <td />
             <th align="right">SUBTOTAL</th>
             <th align="right">
-              {SubTotalPriceInclShipping.toLocaleString('de-DE', {
+              {subTotalPriceInclShipping.toLocaleString('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
               })}
             </th>
           </tr>
           <tr>
-            <td empty />
-            <td empty />
-            <th align="right">VAT {Taxes}%</th>
+            <td />
+            <td />
+            <th align="right">VAT {taxes}%</th>
             <th align="right">
-              {TotalTaxes.toLocaleString('de-DE', {
+              {totalTaxes.toLocaleString('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
               })}
             </th>
           </tr>
           <tr>
-            <td empty />
-            <td empty />
+            <td />
+            <td />
             <th align="right">TOTAL</th>
             <th align="right">
-              {TotalPrice.toLocaleString('de-DE', {
+              {totalPrice.toLocaleString('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
               })}
@@ -108,7 +113,7 @@ export default function CheckoutTable() {
 
 const StyledTable = styled.table`
   font-size: 0.9rem;
-  padding: 1rem 0;
+  padding: 1rem 0 3rem;
   color: var(--text-maincolor);
   width: 100%;
   border-spacing: 0;

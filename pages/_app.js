@@ -1,12 +1,19 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { SessionProvider } from 'next-auth/react';
+import useHydration from '../hooks/useHydration';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  const hydrated = useHydration();
+
   return (
-    <SessionProvider session={session}>
-      <GlobalStyle></GlobalStyle>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <>
+      {hydrated && (
+        <SessionProvider session={session}>
+          <GlobalStyle></GlobalStyle>
+          <Component {...pageProps} />
+        </SessionProvider>
+      )}
+    </>
   );
 }
 
@@ -21,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
   --text-maincolor: #1C1B1B;
   --text-lightcolor: #7E7E7E;
   --signal-color: #F94C43;
-  --accent-color: #4B837F;
+  --accent-color: #506bcc;
 
   --nav-height: 75px;
   --nav-height-mobile:65px;
@@ -44,8 +51,8 @@ const GlobalStyle = createGlobalStyle`
   }
    
   button {
+    text-align: left;
     display:flex;
-    justify-content: center;
     align-items: center;
     gap: 0.6rem;
     border-style: none;
@@ -100,7 +107,14 @@ const GlobalStyle = createGlobalStyle`
   @media (max-width: 600px) {
     font-size: 0.9rem;
   }
+}
+span {
+  color: var(--text-darkcolor);
+  font-weight: 400;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
   }
+}
 
   a {
   color: var(--accent-color);

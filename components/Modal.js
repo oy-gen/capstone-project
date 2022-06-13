@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import Link from 'next/link';
 
 export default function Modal({ show, children }) {
   const [isBrowser, setIsBrowser] = useState(false);
@@ -39,13 +38,14 @@ const StyledModal = styled.div`
 `;
 
 const StyledModalOverlay = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
 `;

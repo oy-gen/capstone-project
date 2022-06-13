@@ -5,9 +5,6 @@ const useStore = create(
   persist(
     set => {
       return {
-        StoreLogo:
-          'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
-
         products: [
           {
             name: 'Meister Candle Beige',
@@ -22,8 +19,6 @@ const useStore = create(
             Geruch: neutral`,
             RRPprice: 29.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Mint',
@@ -38,8 +33,6 @@ const useStore = create(
           Geruch: neutral`,
             RRPprice: 29.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Black',
@@ -54,8 +47,6 @@ const useStore = create(
               Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Purpur',
@@ -70,8 +61,6 @@ const useStore = create(
                 Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.4,
-            quantity: 0,
-            sum: 0,
           },
 
           {
@@ -87,8 +76,6 @@ const useStore = create(
             Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.6,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Jade',
@@ -103,8 +90,6 @@ const useStore = create(
         Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.6,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Sun Candle',
@@ -119,8 +104,6 @@ const useStore = create(
         Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Prisma Candle Lavendel',
@@ -135,8 +118,6 @@ const useStore = create(
         Geruchsneutral`,
             RRPprice: 34.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Candle Black Gold',
@@ -151,8 +132,6 @@ const useStore = create(
         Geruch: neutral`,
             RRPprice: 34.9,
             WSprice: 19.6,
-            quantity: 0,
-            sum: 0,
           },
           {
             name: 'Meister Stein Sculpture',
@@ -166,75 +145,79 @@ const useStore = create(
         Größe: 18cm`,
             RRPprice: 34.9,
             WSprice: 17.4,
-            quantity: 0,
-            sum: 0,
           },
         ],
 
-        totals: {
-          TotalTaxes: 0,
-          TotalPrice: 0,
-          SubTotalPrice: 0,
-          SubTotalPriceInclShipping: 0,
-          TotalShipping: 0,
-          TotalQuantity: 0,
-          TotalParcels: 0,
-        },
+        CART: [],
 
         seller: {
           ProductsInParcel: 20,
           ParcelPrice: 9.9,
           Taxes: 19,
-        },
-        buyer: {
-          LocalPickup: false,
+          StoreLogo:
+            'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
         },
 
-        updateTotal: () => {
+        buyer: {
+          id: 1001,
+          BuyerEmail: '',
+          LocalPickup: false,
+          DifferentShipping: false,
+          BillingFirstName: '',
+          BillingLastName: '',
+          BillingCompany: '',
+          BillingOptionalLine: '',
+          BillingStreetAndNumber: '',
+          BillingZip: '',
+          BillingCity: '',
+          BillingCountry: '',
+          ShippingFirstName: '',
+          ShippingLastName: '',
+          ShippingCompany: '',
+          ShippingOptionalLine: '',
+          ShippingStreetAndNumber: '',
+          ShippingZip: '',
+          ShippingCity: '',
+          ShippingCountry: '',
+        },
+
+        setQuantity: (productId, quantity) => {
           set(state => {
-            const calcSubTotalPrice = state.products
-              .map(product => product.sum)
-              .reduce((prev, curr) => prev + curr);
-            const calcTotalProducts = state.products
-              .map(product => product.quantity)
-              .reduce((prev, curr) => prev + curr);
-            const calcTotalParcels = Math.ceil(
-              calcTotalProducts / state.seller.ProductsInParcel
+            const productExists = state.CART.some(
+              product => product.id === productId
             );
-            const calcTotalShipping =
-              calcTotalParcels * state.seller.ParcelPrice;
-            const calcSubTotalPriceInclShipping =
-              calcSubTotalPrice + calcTotalShipping;
-            const calcTotalTaxes =
-              calcSubTotalPriceInclShipping * (state.seller.Taxes / 100);
-            const calcTotalPrice =
-              calcSubTotalPriceInclShipping + calcTotalTaxes;
-            return {
-              totals: {
-                TotalTaxes: calcTotalTaxes,
-                TotalPrice: calcTotalPrice,
-                SubTotalPrice: calcSubTotalPrice,
-                SubTotalPriceInclShipping: calcSubTotalPriceInclShipping,
-                TotalShipping: calcTotalShipping,
-                TotalQuantity: calcTotalProducts,
-                TotalParcels: calcTotalParcels,
-              },
-            };
+            if (productExists) {
+              return {
+                CART: state.CART.map(product =>
+                  product.id === productId
+                    ? {
+                        ...product,
+                        quantity,
+                      }
+                    : product
+                ),
+              };
+            } else {
+              return {
+                CART: [
+                  {
+                    id: productId,
+                    quantity,
+                  },
+                  ...state.CART,
+                ],
+              };
+            }
           });
         },
-        
-        setQuantity: (id, quantity) => {
+
+        setBuyerData: data => {
           set(state => {
             return {
-              products: state.products.map(product =>
-                product.id === id
-                  ? {
-                      ...product,
-                      quantity: quantity,
-                      sum: product.WSprice * quantity,
-                    }
-                  : product
-              ),
+              buyer: {
+                ...state.buyer,
+                ...data,
+              },
             };
           });
         },
