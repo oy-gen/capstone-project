@@ -129,6 +129,7 @@ export default function AddressForm() {
 
             {showShippingAddress && (
               <div>
+                <StyledHeadline>Shipping Address:</StyledHeadline>
                 <StyledInput
                   placeholder="First Name*"
                   {...register('ShippingFirstName')}
