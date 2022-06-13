@@ -13,26 +13,15 @@ import { GetTotals } from '../hooks/useCalculation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormValidation from './FormValidation';
 
-export default function AddressForm() {
+export default function FormEdit() {
   const { subTotalPrice } = GetTotals();
   const hydrated = useHydration();
   const router = useRouter();
   const setBuyerData = useStore(state => state.setBuyerData);
   const schema = FormValidation;
-  const buyer = useStore(state => state.buyer);
-
   const {
-    BuyerEmail,
     LocalPickup,
     DifferentShipping,
-    BillingFirstName,
-    BillingLastName,
-    BillingCompany,
-    BillingStreetAndNumber,
-    BillingOptionalLine,
-    BillingZip,
-    BillingCity,
-    BillingCountry,
     ShippingFirstName,
     ShippingLastName,
     ShippingCompany,
@@ -73,14 +62,12 @@ export default function AddressForm() {
             <div>
               <StyledInput
                 placeholder="First Name*"
-                defaultValue={BillingFirstName}
                 {...register('BillingFirstName')}
               />
               <StyledWarning>{errors?.BillingFirstName?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="Last Name*"
-                defaultValue={BillingLastName}
                 {...register('BillingLastName')}
               />
               <StyledWarning>{errors?.BillingLastName?.message}</StyledWarning>
@@ -88,20 +75,17 @@ export default function AddressForm() {
               <StyledInput
                 type="text"
                 placeholder="Email*"
-                defaultValue={BuyerEmail}
                 {...register('BuyerEmail')}
               />
               <StyledWarning>{errors?.BuyerEmail?.message}</StyledWarning>
               <StyledInput
                 placeholder="Company"
-                defaultValue={BillingCompany}
                 {...register('BillingCompany')}
               />
               <StyledWarning>{errors?.BillingCompany?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="Optional line"
-                defaultValue={BillingOptionalLine}
                 {...register('BillingOptionalLine')}
               />
               <StyledWarning>
@@ -110,30 +94,21 @@ export default function AddressForm() {
 
               <StyledInput
                 placeholder="Street and number*"
-                defaultValue={BillingStreetAndNumber}
                 {...register('BillingStreetAndNumber')}
               />
               <StyledWarning>
                 {errors?.BillingStreetAndNumber?.message}
               </StyledWarning>
 
-              <StyledInput
-                placeholder="ZIP*"
-                defaultValue={BillingZip}
-                {...register('BillingZip')}
-              />
+              <StyledInput placeholder="ZIP*" {...register('BillingZip')} />
               <StyledWarning>{errors?.BillingZip?.message}</StyledWarning>
 
-              <StyledInput
-                placeholder="City*"
-                defaultValue={BillingCity}
-                {...register('BillingCity')}
-              />
+              <StyledInput placeholder="City*" {...register('BillingCity')} />
+
               <StyledWarning>{errors?.BillingCity?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="Country*"
-                defaultValue={BillingCountry}
                 {...register('BillingCountry')}
               />
               <StyledWarning>{errors?.BillingCountry?.message}</StyledWarning>
@@ -143,7 +118,6 @@ export default function AddressForm() {
               <Checkbox
                 type="checkbox"
                 disabled={showShippingAddress}
-                defaultChecked={LocalPickup}
                 {...register('LocalPickup')}
               />
 
@@ -160,11 +134,7 @@ export default function AddressForm() {
 
             {!showCheckbox && (
               <CheckboxWrapper>
-                <Checkbox
-                  type="checkbox"
-                  defaultChecked={showShippingAddress}
-                  {...register('DifferentShipping')}
-                />
+                <Checkbox type="checkbox" {...register('DifferentShipping')} />
                 <span>Use a different shipping address</span>
               </CheckboxWrapper>
             )}
@@ -174,7 +144,6 @@ export default function AddressForm() {
                 <StyledHeadline>Shipping Address:</StyledHeadline>
                 <StyledInput
                   placeholder="First Name*"
-                  defaultValue={ShippingFirstName}
                   {...register('ShippingFirstName')}
                 />
                 <StyledWarning>
@@ -183,7 +152,6 @@ export default function AddressForm() {
 
                 <StyledInput
                   placeholder="Last Name*"
-                  defaultValue={ShippingLastName}
                   {...register('ShippingLastName')}
                 />
                 <StyledWarning>
@@ -192,7 +160,6 @@ export default function AddressForm() {
 
                 <StyledInput
                   placeholder="Company"
-                  defaultValue={ShippingCompany}
                   {...register('ShippingCompany')}
                 />
                 <StyledWarning>
@@ -201,7 +168,6 @@ export default function AddressForm() {
 
                 <StyledInput
                   placeholder="Optional line"
-                  defaultValue={ShippingOptionalLine}
                   {...register('ShippingOptionalLine')}
                 />
                 <StyledWarning>
@@ -210,23 +176,17 @@ export default function AddressForm() {
 
                 <StyledInput
                   placeholder="Street and number*"
-                  defaultValue={ShippingStreetAndNumber}
                   {...register('ShippingStreetAndNumber')}
                 />
                 <StyledWarning>
                   {errors?.ShippingStreetAndNumber?.message}
                 </StyledWarning>
 
-                <StyledInput
-                  placeholder="ZIP*"
-                  defaultValue={ShippingZip}
-                  {...register('ShippingZip')}
-                />
+                <StyledInput placeholder="ZIP*" {...register('ShippingZip')} />
                 <StyledWarning>{errors?.ShippingZip?.message}</StyledWarning>
 
                 <StyledInput
                   placeholder="City*"
-                  defaultValue={ShippingCity}
                   {...register('ShippingCity')}
                 />
 
@@ -234,7 +194,6 @@ export default function AddressForm() {
 
                 <StyledInput
                   placeholder="Country*"
-                  defaultValue={ShippingCountry}
                   {...register('ShippingCountry')}
                 />
                 <StyledWarning>
