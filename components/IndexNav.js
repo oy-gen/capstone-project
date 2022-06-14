@@ -13,7 +13,7 @@ export default function Nav() {
     <>
       {hydrated && (
         <NavWrapper>
-          <Link passHref href="/">
+          <Link passHref href="/shopping">
             <SmallButton />
           </Link>
           <Link passHref href="/address">
