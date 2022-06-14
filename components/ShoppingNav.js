@@ -4,6 +4,7 @@ import useHydration from '../hooks/useHydration';
 import NavWrapper from './NavWrapper';
 import { BigButton, SmallButton } from './Buttons';
 import { GetTotals } from '../hooks/useCalculation';
+import IconLeft from '../public/icon-left.svg';
 
 export default function Nav() {
   const hydrated = useHydration();
@@ -13,8 +14,10 @@ export default function Nav() {
     <>
       {hydrated && (
         <NavWrapper>
-          <Link passHref href="/shopping">
-            <SmallButton />
+          <Link passHref href="/">
+            <SmallButton>
+              <IconLeft />
+            </SmallButton>
           </Link>
           <Link passHref href="/address">
             <BigButton disabled={subTotalPrice === 0}>

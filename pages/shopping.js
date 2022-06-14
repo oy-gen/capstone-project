@@ -1,6 +1,6 @@
 import useStore from '../hooks/useStore';
 import ProductCard from '../components/ProductCard';
-import IndexNav from '../components/IndexNav';
+import IndexNav from '../components/ShoppingNav';
 import Header from '../components/Header';
 
 export default function Home() {
