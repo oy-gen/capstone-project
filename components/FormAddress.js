@@ -81,14 +81,6 @@ export default function AddressForm() {
                 {...register('BillingLastName')}
               />
               <StyledWarning>{errors?.BillingLastName?.message}</StyledWarning>
-
-              <StyledInput
-                type="text"
-                placeholder="Email*"
-                defaultValue={BuyerEmail}
-                {...register('BuyerEmail')}
-              />
-              <StyledWarning>{errors?.BuyerEmail?.message}</StyledWarning>
               <StyledInput
                 placeholder="Company"
                 defaultValue={BillingCompany}

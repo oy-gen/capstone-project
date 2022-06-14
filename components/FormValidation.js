@@ -13,12 +13,6 @@ const schema = yup
       .trim()
       .required('required')
       .max(30, '${max} characters max'),
-    BuyerEmail: yup
-      .string()
-      .trim()
-      .required('required')
-      .email('email incorrect')
-      .max(40, '${max} characters max'),
     BillingCompany: yup.string().trim().max(30, '${max} characters max'),
     BillingOptionalLine: yup.string().trim().max(30, '${max} characters max'),
     BillingStreetAndNumber: yup

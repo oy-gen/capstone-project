@@ -156,10 +156,13 @@ const useStore = create(
           Taxes: 19,
           StoreLogo:
             'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
+          BackgroundImage:
+            'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-geometrische-Designkerze-Raute-Set_6f7ddb1c-1083-48f5-8a4f-8185bd4f156c.jpg?v=1613518298',
         },
 
         buyer: {
-          id: 1001,
+          BuyerId: 1001,
+          BuyerPassword: '',
           BuyerEmail: '',
           LocalPickup: false,
           DifferentShipping: false,
