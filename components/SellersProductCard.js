@@ -57,6 +57,7 @@ export default function ProductCard({ product }) {
               <StyledImage src={image} alt={name} />
               <InfoWrapper>
                 <h3>{name}</h3>
+                <p>BARCODE: {id}</p>
               </InfoWrapper>
               <InputWrapper>
                 <h4>
@@ -66,6 +67,7 @@ export default function ProductCard({ product }) {
                     currency: 'EUR',
                   })}
                 </h4>
+
                 <StyledInput
                   key={id}
                   defaultValue={fullInfo.WSprice.toFixed(2)}
