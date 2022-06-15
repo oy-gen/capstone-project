@@ -4,60 +4,68 @@ import { useState } from 'react';
 import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
 import { useFullInfo } from '../hooks/useCalculation';
+import useHydration from '../hooks/useHydration';
 
 export default function ProductCard({ product }) {
+  const hydrated = useHydration();
   const [showDetails, setShowDetails] = useState();
   const { id, image, name, description, WSprice, RRPprice } = product;
   const { sum, quantity } = useFullInfo(product.id);
 
   return (
     <>
-      <StyledCard key={id}>
-        <StyledImage src={image} alt="" />
-        <TitleWrapper>
-          <h2>{name}</h2>
-          <h4>
-            WS PRICE:{' '}
-            {WSprice.toLocaleString('de-DE', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
-            <span style={{ fontWeight: '400', textDecoration: 'line-through' }}>
-              {'  '}
-              {RRPprice.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </span>
-          </h4>
-          <FlexWrapper>
-            <h5>
-              SUM:{' '}
-              {sum.toLocaleString('de-DE', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </h5>
-            <ButtonWrapper>
-              <SmallSquareButton
-                onClick={() => {
-                  setShowDetails(!showDetails);
-                }}
-              >
-                <InfoIcon />
-              </SmallSquareButton>
-              <QuantitySelector id={id} quantity={quantity} />
-            </ButtonWrapper>
-          </FlexWrapper>
-        </TitleWrapper>
-      </StyledCard>
-      {showDetails && (
-        <ExtraInfoWrapper>
-          <p>
-            <strong>BARCODE: </strong> {id}
-          </p>
-          <p>{description}</p>
-        </ExtraInfoWrapper>
+      {hydrated && (
+        <>
+          <StyledCard key={id}>
+            <StyledImage src={image} alt={name} />
+            <TitleWrapper>
+              <h2>{name}</h2>
+              <h4>
+                WS PRICE:{' '}
+                {WSprice.toLocaleString('de-DE', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}
+                <span
+                  style={{ fontWeight: '400', textDecoration: 'line-through' }}
+                >
+                  {'  '}
+                  {RRPprice.toLocaleString('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  })}
+                </span>
+              </h4>
+              <FlexWrapper>
+                <h5>
+                  SUM:{' '}
+                  {sum.toLocaleString('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  })}
+                </h5>
+                <ButtonWrapper>
+                  <SmallSquareButton
+                    onClick={() => {
+                      setShowDetails(!showDetails);
+                    }}
+                  >
+                    <InfoIcon />
+                  </SmallSquareButton>
+                  <QuantitySelector id={id} quantity={quantity} />
+                </ButtonWrapper>
+              </FlexWrapper>
+            </TitleWrapper>
+          </StyledCard>
+          {showDetails && (
+            <ExtraInfoWrapper>
+              <p>
+                <strong>BARCODE: </strong> {id}
+              </p>
+              <p>{description}</p>
+            </ExtraInfoWrapper>
+          )}
+        </>
       )}
     </>
   );
