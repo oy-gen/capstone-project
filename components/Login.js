@@ -50,7 +50,7 @@ export default function Login() {
               {...register('password')}
             />
 
-            {open && <Toast message="wrong user or password" />}
+            {open && <Toast message="wrong user name or password" />}
             <NavWrapper>
               <LoginButton type="submit">Enter</LoginButton>
             </NavWrapper>
