@@ -23,12 +23,11 @@ export default function AddressForm() {
   const { subTotalPrice } = GetTotals();
   const hydrated = useHydration();
   const router = useRouter();
-  const setBuyerData = useStore(state => state.setBuyerData);
+  const setUserData = useStore(state => state.setUserData);
   const schema = FormValidation;
-  const buyer = useStore(state => state.buyer);
+  const user = useStore(state => state.user);
 
   const {
-    BuyerEmail,
     LocalPickup,
     BillingFirstName,
     BillingLastName,
@@ -38,7 +37,7 @@ export default function AddressForm() {
     BillingZip,
     BillingCity,
     BillingCountry,
-  } = buyer;
+  } = user;
 
   const {
     register,
@@ -50,7 +49,7 @@ export default function AddressForm() {
   });
 
   const onSubmit = data => {
-    setBuyerData(data);
+    setUserData(data);
     router.push('/checkout');
   };
   const showCheckbox = watch('LocalPickup', false);

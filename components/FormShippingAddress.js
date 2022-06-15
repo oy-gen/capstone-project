@@ -9,7 +9,7 @@ import {
 
 const ShippingAddress = ({ register, errors }) => {
   const hydrated = useHydration();
-  const buyer = useStore(state => state.buyer);
+  const user = useStore(state => state.user);
   const {
     ShippingFirstName,
     ShippingLastName,
@@ -19,7 +19,7 @@ const ShippingAddress = ({ register, errors }) => {
     ShippingZip,
     ShippingCity,
     ShippingCountry,
-  } = buyer;
+  } = user;
 
   return (
     <>

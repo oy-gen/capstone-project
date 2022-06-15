@@ -32,7 +32,7 @@ const useStore = create(
           Größe:19cm
           Geruch: neutral`,
             RRPprice: 29.9,
-            WSprice: 17.4,
+            WSprice: 17.7,
           },
           {
             name: 'Meister Candle Black',
@@ -46,7 +46,7 @@ const useStore = create(
               Größe:19cm
               Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.4,
+            WSprice: 14.4,
           },
           {
             name: 'Meister Candle Purpur',
@@ -60,7 +60,7 @@ const useStore = create(
                 Größe:19cm
                 Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.4,
+            WSprice: 19.6,
           },
 
           {
@@ -75,7 +75,7 @@ const useStore = create(
             Größe:19cm
             Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.6,
+            WSprice: 12.6,
           },
           {
             name: 'Meister Candle Jade',
@@ -89,7 +89,7 @@ const useStore = create(
         Größe:19cm
         Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.6,
+            WSprice: 13.6,
           },
           {
             name: 'Sun Candle',
@@ -149,7 +149,18 @@ const useStore = create(
         ],
 
         cart: [],
-        discounts: [],
+        prices: [
+          { id: '633710796576', WSprice: 15.6 },
+          { id: '633710796637', WSprice: 14.6 },
+          { id: '4170000002000', WSprice: 17 },
+          { id: '633710796569', WSprice: 17 },
+          { id: '633710796606', WSprice: 17 },
+          { id: '4170000036258', WSprice: 71 },
+          { id: '633710796613', WSprice: 17 },
+          { id: '633710796552', WSprice: 14 },
+          { id: '633710796521', WSprice: 17 },
+          { id: '633710796507', WSprice: 15 },
+        ],
 
         seller: {
           ProductsInParcel: 20,
@@ -161,10 +172,11 @@ const useStore = create(
             'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-geometrische-Designkerze-Raute-Set_6f7ddb1c-1083-48f5-8a4f-8185bd4f156c.jpg?v=1613518298',
         },
 
-        buyer: {
-          BuyerId: 1001,
-          BuyerPassword: '',
-          BuyerEmail: '',
+        user: {
+          userId: 1001,
+          userIsSeller: false,
+          userPassword: '',
+          userEmail: '',
           LocalPickup: false,
           DifferentShipping: false,
           BillingFirstName: '',
@@ -185,6 +197,35 @@ const useStore = create(
           ShippingCountry: '',
         },
 
+        setWSprice: data => {
+          set(state => {
+            const priceExists = state.prices.some(
+              product => product.id === data.id
+            );
+            if (priceExists) {
+              return {
+                prices: state.prices.map(product =>
+                  product.id === data.id
+                    ? {
+                        ...product,
+                        WSprice: data.WSprice,
+                      }
+                    : product
+                ),
+              };
+            } else {
+              return {
+                prices: [
+                  {
+                    id: data.id,
+                    WSprice: data.WSprice,
+                  },
+                  ...state.prices,
+                ],
+              };
+            }
+          });
+        },
         setQuantity: (productId, quantity) => {
           set(state => {
             const productExists = state.cart.some(
@@ -215,11 +256,11 @@ const useStore = create(
           });
         },
 
-        setBuyerData: data => {
+        setUserData: data => {
           set(state => {
             return {
-              buyer: {
-                ...state.buyer,
+              user: {
+                ...state.user,
                 ...data,
               },
             };

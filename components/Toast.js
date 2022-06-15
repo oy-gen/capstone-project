@@ -10,6 +10,7 @@ export default function Toast({ message }) {
 }
 
 const StyledToastContainer = styled.div`
+  place-self: center;
   opacity: 0;
   font-weight: 600;
   display: flex;

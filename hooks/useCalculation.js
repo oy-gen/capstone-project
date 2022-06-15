@@ -5,7 +5,7 @@ export function GetTotals() {
   const productsInCart = cart.filter(product => product.quantity > 0);
   const products = useStore(state => state.products);
   const seller = useStore(state => state.seller);
-  const buyer = useStore(state => state.buyer);
+  const user = useStore(state => state.user);
 
   let subTotalPrice = 0;
   let productSum = 0;
@@ -24,7 +24,7 @@ export function GetTotals() {
 
   const totalParcels = Math.ceil(totalProducts / seller.ProductsInParcel);
 
-  const totalShipping = !buyer.LocalPickup
+  const totalShipping = !user.LocalPickup
     ? totalParcels * seller.ParcelPrice
     : 0;
 
@@ -47,13 +47,15 @@ export function useFullInfo(id) {
   const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
   const products = useStore(state => state.products);
+  const productPrices = useStore(state => state.prices);
 
+  const discountedProduct = productPrices.find(product => product.id === id);
+  const currentProduct = products.find(product => product.id === id);
   const currentProductInCart = productsInCart.find(
     productInCart => productInCart.id === id
   );
+  const WSprice = discountedProduct?.WSprice ?? currentProduct.RRPprice;
   const quantity = currentProductInCart?.quantity ?? 0;
-  const currentProduct = products.find(product => product.id === id);
-  const WSprice = currentProduct.WSprice;
   const name = currentProduct.name;
   const sum = quantity * WSprice;
   return {

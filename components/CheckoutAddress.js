@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 
 export default function CheckoutAddressSection() {
-  const buyer = useStore(state => state.buyer);
+  const user = useStore(state => state.user);
   const {
-    BuyerEmail,
+    userEmail,
     DifferentShipping,
     BillingFirstName,
     BillingLastName,
@@ -22,7 +22,7 @@ export default function CheckoutAddressSection() {
     ShippingZip,
     ShippingCity,
     ShippingCountry,
-  } = buyer;
+  } = user;
 
   return (
     <AddressSection>
@@ -42,7 +42,7 @@ export default function CheckoutAddressSection() {
           {BillingZip} {BillingCity}
         </StyledLine>
         <StyledLine>{BillingCountry}</StyledLine>
-        <StyledLine>{BuyerEmail}</StyledLine>
+        <StyledLine>{userEmail}</StyledLine>
       </div>
       {DifferentShipping && (
         <div>
