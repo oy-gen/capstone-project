@@ -148,7 +148,8 @@ const useStore = create(
           },
         ],
 
-        CART: [],
+        cart: [],
+        discounts: [],
 
         seller: {
           ProductsInParcel: 20,
@@ -186,12 +187,12 @@ const useStore = create(
 
         setQuantity: (productId, quantity) => {
           set(state => {
-            const productExists = state.CART.some(
+            const productExists = state.cart.some(
               product => product.id === productId
             );
             if (productExists) {
               return {
-                CART: state.CART.map(product =>
+                cart: state.cart.map(product =>
                   product.id === productId
                     ? {
                         ...product,
@@ -202,12 +203,12 @@ const useStore = create(
               };
             } else {
               return {
-                CART: [
+                cart: [
                   {
                     id: productId,
                     quantity,
                   },
-                  ...state.CART,
+                  ...state.cart,
                 ],
               };
             }
