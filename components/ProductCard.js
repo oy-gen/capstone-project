@@ -9,8 +9,8 @@ import useHydration from '../hooks/useHydration';
 export default function ProductCard({ product }) {
   const hydrated = useHydration();
   const [showDetails, setShowDetails] = useState();
-  const { id, image, name, description, WSprice, RRPprice } = product;
-  const { sum, quantity } = useFullInfo(product.id);
+  const { id, image, name, description, RRPprice } = product;
+  const { sum, quantity, WSprice } = useFullInfo(product.id);
 
   return (
     <>

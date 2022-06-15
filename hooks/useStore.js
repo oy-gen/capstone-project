@@ -18,7 +18,6 @@ const useStore = create(
             Größe:19cm
             Geruch: neutral`,
             RRPprice: 29.9,
-            WSprice: 17.4,
           },
           {
             name: 'Meister Candle Mint',
@@ -32,7 +31,6 @@ const useStore = create(
           Größe:19cm
           Geruch: neutral`,
             RRPprice: 29.9,
-            WSprice: 17.7,
           },
           {
             name: 'Meister Candle Black',
@@ -46,7 +44,6 @@ const useStore = create(
               Größe:19cm
               Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 14.4,
           },
           {
             name: 'Meister Candle Purpur',
@@ -60,7 +57,6 @@ const useStore = create(
                 Größe:19cm
                 Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.6,
           },
 
           {
@@ -75,7 +71,6 @@ const useStore = create(
             Größe:19cm
             Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 12.6,
           },
           {
             name: 'Meister Candle Jade',
@@ -89,7 +84,6 @@ const useStore = create(
         Größe:19cm
         Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 13.6,
           },
           {
             name: 'Sun Candle',
@@ -103,7 +97,6 @@ const useStore = create(
         Brenndauer: 50h+
         Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 17.4,
           },
           {
             name: 'Prisma Candle Lavendel',
@@ -117,7 +110,6 @@ const useStore = create(
         Brenndauer: 40h
         Geruchsneutral`,
             RRPprice: 34.9,
-            WSprice: 17.4,
           },
           {
             name: 'Meister Candle Black Gold',
@@ -131,7 +123,6 @@ const useStore = create(
         Größe:19cm
         Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.6,
           },
           {
             name: 'Meister Stein Sculpture',
@@ -144,13 +135,12 @@ const useStore = create(
         Farbe: Schneeweiß
         Größe: 18cm`,
             RRPprice: 34.9,
-            WSprice: 17.4,
           },
         ],
 
         cart: [],
         prices: [
-          { id: '633710796576', WSprice: 15.6 },
+          { id: '633710796576', WSprice: 13 },
           { id: '633710796637', WSprice: 14.6 },
           { id: '4170000002000', WSprice: 17 },
           { id: '633710796569', WSprice: 17 },

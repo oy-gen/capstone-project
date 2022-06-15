@@ -14,6 +14,7 @@ export default function ProductCard({ product }) {
   const hydrated = useHydration();
   const { id, name, RRPprice, image } = product;
   const fullInfo = useFullInfo(product.id);
+  const prices = useStore(state => state.prices);
 
   const setWSprice = useStore(state => state.setWSprice);
   const schema = yup
@@ -75,6 +76,7 @@ export default function ProductCard({ product }) {
                 <ButtonSubmit
                   onClick={() => {
                     checkErrors();
+                    console.log(prices);
                   }}
                   type="submit"
                 >
