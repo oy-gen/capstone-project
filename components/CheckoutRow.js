@@ -1,8 +1,4 @@
-import styled from 'styled-components';
-import useStore from '../hooks/useStore';
 import { useFullInfo } from '../hooks/useCalculation';
-import { GetTotals } from '../hooks/useCalculation';
-import CheckoutAddressSection from './CheckoutAddressSection';
 
 export default function TableRow({ productInCart }) {
   const fullInfo = useFullInfo(productInCart.id);

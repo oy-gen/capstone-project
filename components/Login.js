@@ -20,8 +20,11 @@ export default function Login() {
   const onSubmit = () => {
     const user = getValues('user');
     const password = getValues('password');
-    if (password === '1234' && user === 'Tom') {
+    if (user === 'Tom' && password === '1234') {
       router.push('/shopping');
+    }
+    if (user === 'Eva' && password === '1234') {
+      router.push('/sellerspage');
     } else {
       setOpen(true);
       setTimeout(() => {
