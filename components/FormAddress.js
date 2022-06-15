@@ -161,7 +161,7 @@ export default function AddressForm() {
             )}
           </FormWrapper>
           <NavWrapper>
-            <Link passHref href="/">
+            <Link passHref href="/shopping">
               <SmallButton>
                 <IconLeft />
               </SmallButton>

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
-import { GetFullInfo } from '../hooks/useCalculation';
+import { useFullInfo } from '../hooks/useCalculation';
 import { GetTotals } from '../hooks/useCalculation';
-import CheckoutAddressSection from './CheckoutAddressSection';
+import TableRow from './CheckoutRow';
 
 export default function CheckoutTable() {
   const {
@@ -13,14 +13,13 @@ export default function CheckoutTable() {
     totalParcels,
   } = GetTotals();
 
-  const cart = useStore(state => state.CART);
+  const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
   const parcelPrice = useStore(state => state.seller.ParcelPrice);
   const taxes = useStore(state => state.seller.Taxes);
-
+  const fullInfo = useFullInfo;
   return (
     <>
-      <CheckoutAddressSection />
       <StyledTable>
         <tbody>
           <tr>
@@ -31,25 +30,7 @@ export default function CheckoutTable() {
           </tr>
 
           {productsInCart.map(productInCart => (
-            <tr key={productInCart.id}>
-              <td align="left">
-                <strong>{GetFullInfo(productInCart.id).name}</strong>
-              </td>
-              <td align="center">{productInCart.quantity}</td>
-              <td align="right">
-                {GetFullInfo(productInCart.id).WSprice.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
-              </td>
-              <td align="right">
-                {' '}
-                {GetFullInfo(productInCart.id).sum.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
-              </td>
-            </tr>
+            <TableRow key={productInCart.id} productInCart={productInCart} />
           ))}
 
           {totalShipping !== 0 && (

@@ -1,7 +1,7 @@
 import useStore from './useStore';
 
 export function GetTotals() {
-  const cart = useStore(state => state.CART);
+  const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
   const products = useStore(state => state.products);
   const seller = useStore(state => state.seller);
@@ -43,8 +43,8 @@ export function GetTotals() {
   };
 }
 
-export function GetFullInfo(id) {
-  const cart = useStore(state => state.CART);
+export function useFullInfo(id) {
+  const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
   const products = useStore(state => state.products);
 

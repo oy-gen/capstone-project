@@ -3,12 +3,12 @@ import QuantitySelector from './QuantitySelector';
 import { useState } from 'react';
 import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
-import { GetFullInfo } from '../hooks/useCalculation';
+import { useFullInfo } from '../hooks/useCalculation';
 
 export default function ProductCard({ product }) {
   const [showDetails, setShowDetails] = useState();
   const { id, image, name, description, WSprice, RRPprice } = product;
-  const { sum, quantity } = GetFullInfo(product.id);
+  const { sum, quantity } = useFullInfo(product.id);
 
   return (
     <>

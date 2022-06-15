@@ -4,7 +4,7 @@ import useHydration from '../hooks/useHydration';
 import NavWrapper from './NavWrapper';
 import { BigButton, SmallButton } from './Buttons';
 import { GetTotals } from '../hooks/useCalculation';
-import IconLeft from '../public/icon-left.svg';
+import Icon from '../public/logout.svg';
 
 export default function Nav() {
   const hydrated = useHydration();
@@ -16,7 +16,7 @@ export default function Nav() {
         <NavWrapper>
           <Link passHref href="/">
             <SmallButton>
-              <IconLeft />
+              <Icon />
             </SmallButton>
           </Link>
           <Link passHref href="/address">
