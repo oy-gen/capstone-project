@@ -23,6 +23,18 @@ export const BigButton = styled.button`
   }
 `;
 
+export const LoginButton = styled.button`
+justify-content: center;
+  grid-column: 1/4;
+  background-color: black;
+  color: white;
+  padding: 0 16px;
+  &:disabled {
+    color: darkgrey;
+    background-color: #555555;
+  }
+`;
+
 export const SmallSquareButton = styled.button`
   justify-content: center;
   border: 1px solid var(--text-lightcolor);

@@ -25,7 +25,7 @@ const ShippingAddress = ({ register, errors }) => {
     <>
       {hydrated && (
         <>
-          <StyledHeadline>Shipping Address:</StyledHeadline>
+          <StyledHeadline>Shipping Address</StyledHeadline>
           <StyledInput
             placeholder="First Name*"
             defaultValue={ShippingFirstName}
