@@ -78,7 +78,7 @@ export default function ProductCard({ product }) {
                 <ButtonSubmit
                   onClick={() => {
                     checkErrors();
-                    console.log(prices);
+                    // console.log(prices);
                   }}
                   type="submit"
                 >

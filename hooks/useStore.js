@@ -245,7 +245,7 @@ const useStore = create(
         loadUser: async () => {
           const response = await fetch('/api/users');
           const json = await response.json();
-          console.log(json.data[0]);
+          // console.log(json.data[0]);
           const partialUser = json.data[0];
           set(state => {
             return {
@@ -257,7 +257,7 @@ const useStore = create(
           });
         },
         setUserData: async data => {
-          console.log('setuserdata', user);
+          // console.log('setuserdata', user);
           const user = get().user;
           const response = await fetch('/api/users', {
             method: 'PATCH',
@@ -267,7 +267,7 @@ const useStore = create(
             },
           });
           const json = await response.json();
-          console.log(json);
+          // console.log(json);
           set(state => {
             return {
               user: {
