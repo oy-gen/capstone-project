@@ -3,15 +3,20 @@ import User from '../../../models/User';
 
 export default async function handler(request, response) {
   await dbConnect();
-
+  console.log('requestbody', request.body);
   switch (request.method) {
-    case 'POST':
+    case 'PATCH':
       try {
-        const users = await User.create(
-          req.body
+        const { _id, ...rest } = request.body;
+        await User.findByIdAndUpdate(
+          _id,
+          rest
         ); /* create a new model in the database */
-        response.status(201).json({ success: true, data: users });
+        const user = await User.findById(_id).exec();
+        console.log('Hier', user);
+        response.status(201).json({ success: true, data: user });
       } catch (error) {
+        console.error(error);
         response.status(400).json({ success: false });
       }
       break;
@@ -25,7 +30,7 @@ export default async function handler(request, response) {
         response.status(400).json({ success: false });
       }
       break;
-    case 'PATCH':
+    case 'PUT':
       response.status(200).send('update data');
       break;
     case 'DELETE':

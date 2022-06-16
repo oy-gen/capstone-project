@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 const useStore = create(
   persist(
-    set => {
+    (set, get) => {
       return {
         products: [
           {
@@ -163,28 +163,25 @@ const useStore = create(
         },
 
         user: {
-          userId: 1001,
-          userIsSeller: false,
-          userPassword: '',
-          userEmail: '',
-          LocalPickup: false,
-          DifferentShipping: false,
-          BillingFirstName: '',
-          BillingLastName: '',
-          BillingCompany: '',
-          BillingOptionalLine: '',
-          BillingStreetAndNumber: '',
-          BillingZip: '',
-          BillingCity: '',
-          BillingCountry: '',
-          ShippingFirstName: '',
-          ShippingLastName: '',
-          ShippingCompany: '',
-          ShippingOptionalLine: '',
-          ShippingStreetAndNumber: '',
-          ShippingZip: '',
-          ShippingCity: '',
-          ShippingCountry: '',
+          isSeller: false,
+          localPickup: false,
+          differentShipping: false,
+          billingFirstName: '',
+          billingLastName: '',
+          billingCompany: '',
+          billingOptionalLine: '',
+          billingStreetAndNumber: '',
+          billingZip: '',
+          billingCity: '',
+          billingCountry: '',
+          shippingFirstName: '',
+          shippingLastName: '',
+          shippingCompany: '',
+          shippingOptionalLine: '',
+          shippingStreetAndNumber: '',
+          shippingZip: '',
+          shippingCity: '',
+          shippingCountry: '',
         },
 
         setWSprice: data => {
@@ -245,13 +242,37 @@ const useStore = create(
             }
           });
         },
-
-        setUserData: data => {
+        loadUser: async () => {
+          const response = await fetch('/api/users');
+          const json = await response.json();
+          console.log(json.data[0]);
+          const partialUser = json.data[0];
           set(state => {
             return {
               user: {
                 ...state.user,
-                ...data,
+                ...partialUser,
+              },
+            };
+          });
+        },
+        setUserData: async data => {
+          console.log('setuserdata', user);
+          const user = get().user;
+          const response = await fetch('/api/users', {
+            method: 'PATCH',
+            body: JSON.stringify({ ...data, _id: user._id }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const json = await response.json();
+          console.log(json);
+          set(state => {
+            return {
+              user: {
+                ...state.user,
+                ...json.data,
               },
             };
           });

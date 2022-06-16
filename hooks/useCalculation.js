@@ -49,7 +49,7 @@ export function GetTotals() {
 
   const totalParcels = Math.ceil(totalProducts / seller.ProductsInParcel);
 
-  const totalShipping = !user.LocalPickup
+  const totalShipping = !user.localPickup
     ? totalParcels * seller.ParcelPrice
     : 0;
 

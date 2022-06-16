@@ -28,15 +28,15 @@ export default function AddressForm() {
   const user = useStore(state => state.user);
 
   const {
-    LocalPickup,
-    BillingFirstName,
-    BillingLastName,
-    BillingCompany,
-    BillingStreetAndNumber,
-    BillingOptionalLine,
-    BillingZip,
-    BillingCity,
-    BillingCountry,
+    localPickup,
+    billingFirstName,
+    billingLastName,
+    billingCompany,
+    billingStreetAndNumber,
+    billingOptionalLine,
+    billingZip,
+    billingCity,
+    billingCountry,
   } = user;
 
   const {
@@ -52,8 +52,8 @@ export default function AddressForm() {
     setUserData(data);
     router.push('/checkout');
   };
-  const showCheckbox = watch('LocalPickup', false);
-  const showShippingAddress = watch('DifferentShipping', false);
+  const showCheckbox = watch('localPickup', false);
+  const showShippingAddress = watch('differentShipping', false);
 
   return (
     <>
@@ -69,70 +69,70 @@ export default function AddressForm() {
             <div>
               <StyledInput
                 placeholder="First Name*"
-                defaultValue={BillingFirstName}
-                {...register('BillingFirstName')}
+                defaultValue={billingFirstName}
+                {...register('billingFirstName')}
               />
-              <StyledWarning>{errors?.BillingFirstName?.message}</StyledWarning>
+              <StyledWarning>{errors?.billingFirstName?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="Last Name*"
-                defaultValue={BillingLastName}
-                {...register('BillingLastName')}
+                defaultValue={billingLastName}
+                {...register('billingLastName')}
               />
-              <StyledWarning>{errors?.BillingLastName?.message}</StyledWarning>
+              <StyledWarning>{errors?.billingLastName?.message}</StyledWarning>
               <StyledInput
                 placeholder="Company"
-                defaultValue={BillingCompany}
-                {...register('BillingCompany')}
+                defaultValue={billingCompany}
+                {...register('billingCompany')}
               />
-              <StyledWarning>{errors?.BillingCompany?.message}</StyledWarning>
+              <StyledWarning>{errors?.billingCompany?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="Optional line"
-                defaultValue={BillingOptionalLine}
-                {...register('BillingOptionalLine')}
+                defaultValue={billingOptionalLine}
+                {...register('billingOptionalLine')}
               />
               <StyledWarning>
-                {errors?.BillingOptionalLine?.message}
+                {errors?.billingOptionalLine?.message}
               </StyledWarning>
 
               <StyledInput
                 placeholder="Street and number*"
-                defaultValue={BillingStreetAndNumber}
-                {...register('BillingStreetAndNumber')}
+                defaultValue={billingStreetAndNumber}
+                {...register('billingStreetAndNumber')}
               />
               <StyledWarning>
-                {errors?.BillingStreetAndNumber?.message}
+                {errors?.billingStreetAndNumber?.message}
               </StyledWarning>
 
               <StyledInput
                 placeholder="ZIP*"
-                defaultValue={BillingZip}
-                {...register('BillingZip')}
+                defaultValue={billingZip}
+                {...register('billingZip')}
               />
-              <StyledWarning>{errors?.BillingZip?.message}</StyledWarning>
+              <StyledWarning>{errors?.billingZip?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="City*"
-                defaultValue={BillingCity}
-                {...register('BillingCity')}
+                defaultValue={billingCity}
+                {...register('billingCity')}
               />
-              <StyledWarning>{errors?.BillingCity?.message}</StyledWarning>
+              <StyledWarning>{errors?.billingCity?.message}</StyledWarning>
 
               <StyledInput
                 placeholder="Country*"
-                defaultValue={BillingCountry}
-                {...register('BillingCountry')}
+                defaultValue={billingCountry}
+                {...register('billingCountry')}
               />
-              <StyledWarning>{errors?.BillingCountry?.message}</StyledWarning>
+              <StyledWarning>{errors?.billingCountry?.message}</StyledWarning>
             </div>
 
             <CheckboxWrapper>
               <Checkbox
                 type="checkbox"
                 disabled={showShippingAddress}
-                defaultChecked={LocalPickup}
-                {...register('LocalPickup')}
+                defaultChecked={localPickup}
+                {...register('localPickup')}
               />
 
               {showShippingAddress ? (
@@ -148,7 +148,7 @@ export default function AddressForm() {
 
             {!showCheckbox && (
               <CheckboxWrapper>
-                <Checkbox type="checkbox" {...register('DifferentShipping')} />
+                <Checkbox type="checkbox" {...register('differentShipping')} />
                 <span>Use a different shipping address</span>
               </CheckboxWrapper>
             )}
