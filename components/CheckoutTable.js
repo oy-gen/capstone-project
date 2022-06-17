@@ -117,13 +117,13 @@ const StyledTable = styled.table`
     padding: 0.4rem;
     color: (--text-maincolor);
     text-align: ${props => props.align};
-    border-bottom: 1px solid var(--text-lightcolor);
+    border-bottom: 1px solid lightgrey;
   }
 
   td {
     padding: 0.4rem;
     line-height: 1.2rem;
-    border-bottom: 1px solid var(--text-lightcolor);
+    border-bottom: 1px solid lightgrey;
   }
 
   td:empty {

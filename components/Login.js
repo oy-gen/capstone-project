@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import useHydration from '../hooks/useHydration';
 import styled from 'styled-components';
 import NavWrapper from './NavWrapper';
-import { LoginButton } from './Buttons';
+import { BigButton } from './Buttons';
 
 import Toast from './Toast';
 
@@ -20,13 +20,14 @@ export default function Login() {
   const onSubmit = () => {
     const user = getValues('user');
     const password = getValues('password');
-    if (user === 'Tom' && password === '1234') {
-      router.push('/shopping');
-    }
-    if (user === 'Eva' && password === '1234') {
-      router.push('/sellerspage');
-    } else {
-      setOpen(true);
+    const buyer = user === 'Tom' && password === '1234';
+    const seller = user === 'Eva' && password === '1234';
+    {
+      buyer
+        ? router.push('/shopping')
+        : seller
+        ? router.push('/sellerspage')
+        : setOpen(true);
       setTimeout(() => {
         setOpen(false);
       }, 2500);
@@ -55,7 +56,7 @@ export default function Login() {
 
             {open && <Toast message="wrong user name or password" />}
             <NavWrapper>
-              <LoginButton type="submit">Enter</LoginButton>
+              <BigButton className="log-in" type="submit">Enter</BigButton>
             </NavWrapper>
           </form>
         </LoginBackground>

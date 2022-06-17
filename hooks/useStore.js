@@ -267,7 +267,7 @@ const useStore = create(
             },
           });
           const json = await response.json();
-          // console.log(json);
+          //console.log(json);
           set(state => {
             return {
               user: {

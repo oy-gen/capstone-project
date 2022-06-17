@@ -57,7 +57,9 @@ const StyledQuantityButton = styled.button`
   color: var(--text-lightcolor);
   border-style: none;
   padding: 0 1rem;
-  cursor: pointer;
+  :active {
+    background-color: lightgrey;
+  }
 `;
 
 const StyledQuantityCounter = styled.span`

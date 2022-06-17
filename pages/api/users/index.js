@@ -8,24 +8,25 @@ export default async function handler(request, response) {
     case 'PATCH':
       try {
         const { _id, ...rest } = request.body;
-        await User.findByIdAndUpdate(
-          _id,
-          rest
-        ); /* create a new model in the database */
-        const user = await User.findById(_id).exec();
-        console.log('Hier', user);
-        response.status(201).json({ success: true, data: user });
+        let user = await User.findByIdAndUpdate(_id, rest);
+        if (user) {
+          user = await User.findById(_id).exec();
+          response.status(201).json({ success: true, data: user });
+         // console.log('Hier', user);
+        } else {
+          response.status(404).json({ success: false });
+        }
       } catch (error) {
-        console.error(error);
+       // console.error(error);
         response.status(400).json({ success: false });
       }
       break;
     case 'GET':
       try {
-        const users = await User.find(
+        const user = await User.find(
           {}
         ); /* find all the data in our database */
-        response.status(200).json({ success: true, data: users });
+        response.status(200).json({ success: true, data: user });
       } catch (error) {
         response.status(400).json({ success: false });
       }

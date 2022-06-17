@@ -1,12 +1,13 @@
-import Header from '../components/Header';
+import SellersHeader from '../components/SellersHeader';
 import React from 'react';
 import useHydration from '../hooks/useHydration';
 import SellersProductCard from '../components/SellersProductCard';
-import { StyledHeadline } from '../components/FormStyledComponents';
+
 import useStore from '../hooks/useStore';
-import NavWrapper from '../components/NavWrapper';
+import SellersNav from '../components/SellersNav';
 import { BigButton, SmallButton } from '../components/Buttons';
 import Icon from '../public/logout.svg';
+import styled from 'styled-components';
 
 export default function Home() {
   const products = useStore(state => state.products);
@@ -16,17 +17,11 @@ export default function Home() {
     <>
       {hydrated && (
         <>
-          <Header />
-          <StyledHeadline>Wholesale prices</StyledHeadline>
+          <SellersHeader />
           {products.map(product => (
             <SellersProductCard key={product.id} product={product} />
           ))}
-          <NavWrapper>
-            <SmallButton>
-              <Icon />
-            </SmallButton>
-            <BigButton>save and PROCEED</BigButton>
-          </NavWrapper>
+          <SellersNav />
         </>
       )}
     </>

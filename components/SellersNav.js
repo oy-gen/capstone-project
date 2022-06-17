@@ -13,15 +13,13 @@ export default function SellersNav(type) {
       {hydrated && (
         <NavWrapper>
           <Link passHref href="/">
-            <SmallButton>
+            <SmallButton className="back-office">
               <Icon />
             </SmallButton>
           </Link>
-
-          <BigButton type="submit">save and PROCEED</BigButton>
+          <BigButton type="submit">PROCEED</BigButton>
         </NavWrapper>
       )}
-      ,
     </>
   );
 }

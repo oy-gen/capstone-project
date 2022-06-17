@@ -77,7 +77,7 @@ const StyledCard = styled.div`
   border-top: 1px solid lightgray;
   gap: 1rem;
   background-color: var(--background-color);
-  padding: 1rem 1rem 1rem 0;
+  padding: 0.6rem 0.6rem 0.6rem 0;
   align-items: center;
   @media (max-width: 600px) {
     gap: 0rem;
