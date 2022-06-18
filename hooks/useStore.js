@@ -140,16 +140,16 @@ const useStore = create(
 
         cart: [],
         prices: [
-          { id: '633710796576', WSprice: 13 },
+          { id: '633710796576', WSprice: 13.1 },
           { id: '633710796637', WSprice: 14.6 },
-          { id: '4170000002000', WSprice: 17 },
-          { id: '633710796569', WSprice: 17 },
-          { id: '633710796606', WSprice: 17 },
-          { id: '4170000036258', WSprice: 71 },
-          { id: '633710796613', WSprice: 17 },
-          { id: '633710796552', WSprice: 14 },
-          { id: '633710796521', WSprice: 17 },
-          { id: '633710796507', WSprice: 15 },
+          { id: '4170000002000', WSprice: 17.34 },
+          { id: '633710796569', WSprice: 15.4 },
+          { id: '633710796606', WSprice: 13.6 },
+          { id: '4170000036258', WSprice: 14.45 },
+          { id: '633710796613', WSprice: 15.4 },
+          { id: '633710796552', WSprice: 14.3 },
+          { id: '633710796521', WSprice: 17.9 },
+          { id: '633710796507', WSprice: 15.12 },
         ],
 
         seller: {
@@ -184,18 +184,16 @@ const useStore = create(
           shippingCountry: '',
         },
 
-        setWSprice: data => {
+        setWSprice: (id, price) => {
           set(state => {
-            const priceExists = state.prices.some(
-              product => product.id === data.id
-            );
+            const priceExists = state.prices.some(product => product.id === id);
             if (priceExists) {
               return {
                 prices: state.prices.map(product =>
-                  product.id === data.id
+                  product.id === id
                     ? {
                         ...product,
-                        WSprice: data.WSprice,
+                        WSprice: price,
                       }
                     : product
                 ),
@@ -204,8 +202,8 @@ const useStore = create(
               return {
                 prices: [
                   {
-                    id: data.id,
-                    WSprice: data.WSprice,
+                    id: id,
+                    WSprice: price,
                   },
                   ...state.prices,
                 ],
@@ -213,6 +211,7 @@ const useStore = create(
             }
           });
         },
+
         setQuantity: (productId, quantity) => {
           set(state => {
             const productExists = state.cart.some(

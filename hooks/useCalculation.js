@@ -24,6 +24,14 @@ export function useFullInfo(id) {
   };
 }
 
+export function GetCleanNumber(input) {
+ 
+    const commaToDot = input.includes(',') ? input.replace(',', '.') : input;
+    const inputToTwoDezimals = parseFloat(commaToDot).toFixed(2);
+    const stringToNumber = parseFloat(inputToTwoDezimals);
+    return stringToNumber
+}
+
 export function GetTotals() {
   const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);

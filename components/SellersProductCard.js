@@ -9,7 +9,9 @@ import * as yup from 'yup';
 import Toast from './Toast';
 import { useState } from 'react';
 import Icon from '../public/save-icon.svg';
-import { SmallSquareButton } from '../components/Buttons';
+import { SmallSquareButton } from './Buttons';
+import { StyledInputBackOffice } from './FormStyledComponents';
+import { GetCleanNumber } from '../hooks/useCalculation';
 
 export default function ProductCard({ product }) {
   const [open, setOpen] = useState(false);
@@ -17,19 +19,16 @@ export default function ProductCard({ product }) {
   const { id, name, RRPprice, image } = product;
   const fullInfo = useFullInfo(product.id);
   const setWSprice = useStore(state => state.setWSprice);
+
   const schema = yup
     .object({
-      WSprice: yup
-        .string('numbers only')
-        .typeError('numbers & dots only')
-        .required('required field'),
+      WSprice: yup.string().required('required field'),
     })
     .required();
 
   const {
     register,
     getValues,
-    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -38,13 +37,10 @@ export default function ProductCard({ product }) {
 
   const onSubmit = data => {
     const input = getValues('WSprice');
-    const inputToDot = input.replace(',', '.');
-    const inputToNumber = parseFloat(inputToDot).toFixed(2);
-
-    setValue('WSprice', inputToNumber);
-    setWSprice(inputToNumber);
-    console.log(inputToNumber);
-    const dataModified = { id, ...data };
+    const cleanNumber = GetCleanNumber(input);
+    console.log('Input', input);
+    console.log('Final Value', cleanNumber);
+    setWSprice(id, cleanNumber);
   };
 
   function checkErrors() {
@@ -77,15 +73,15 @@ export default function ProductCard({ product }) {
               </InfoWrapper>
               <GridColumnWrapper>
                 <h5 className="back-office">ID: {id}</h5>
-                <p className="back-office">WS price:</p>
+                <p className="back-office">WS price</p>
                 <InputWrapper>
-                  <StyledInput
+                  <StyledInputBackOffice
                     key={id}
                     defaultValue={fullInfo.WSprice.toLocaleString('de-DE', {
                       style: 'currency',
                       currency: 'EUR',
                     })}
-                    placeholder="new price:"
+                    placeholder="new price"
                     {...register('WSprice')}
                   />
                   <WarningWrapper>
@@ -97,7 +93,6 @@ export default function ProductCard({ product }) {
                     className="save-button"
                     onClick={() => {
                       checkErrors();
-                      //console.log(prices);
                     }}
                     type="submit"
                   >
@@ -117,40 +112,18 @@ const StyledRow = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 0.7fr 1.1fr 1fr;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
   padding: 0.6rem 0.6rem 0.6rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   align-items: center;
   gap: 0.6rem;
 `;
 
-const StyledInput = styled.input`
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-  height: 40px;
-  width: 90px;
-  border-style: none;
-  background-color: rgb(0, 0, 0, 0.8);
-  border: 2px solid var(--accent-color);
-  margin: 5px 0;
-  padding: 5px 0;
-  color: var(--background-color);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: rgba(255, 255, 255, 0.3);
-    font-weight: 200;
-  }
-
-  &:focus {
-    border-style: none;
-    outline: none;
-    outline: 4px solid var(--accent-color);
-  }
+const WarningWrapper = styled.div`
+  position: absolute;
+  right: 190px;
+  gap: 0.6rem;
+  z-index: 10;
 `;
 
 const StyledImage = styled.img`
@@ -168,16 +141,8 @@ const GridColumnWrapper = styled.div`
 
 const InputWrapper = styled.div`
   position: relative;
-
   display: flex;
   align-items: center;
   gap: 0.6rem;
   grid-column: 3/4;
-`;
-
-const WarningWrapper = styled.div`
-  position: absolute;
-  right: 190px;
-  gap: 0.6rem;
-  z-index: 10;
 `;

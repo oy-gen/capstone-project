@@ -1,11 +1,11 @@
-import SellersHeader from '../components/SellersHeader';
+import SellersHeader from '../../components/SellersHeader';
 import React from 'react';
-import useHydration from '../hooks/useHydration';
-import SellersProductCard from '../components/SellersProductCard';
+import useHydration from '../../hooks/useHydration';
+import SellersProductCard from '../../components/SellersProductCard';
 
-import useStore from '../hooks/useStore';
-import SellersNav from '../components/SellersNav';
-import { BigButton, SmallButton } from '../components/Buttons';
+import useStore from '../../hooks/useStore';
+import SellersNav from '../../components/SellersNav';
+import { BigButton, SmallButton } from '../../components/Buttons';
 import Icon from '../public/logout.svg';
 import styled from 'styled-components';
 

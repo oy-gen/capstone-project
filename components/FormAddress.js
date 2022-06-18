@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Checkbox } from '@mui/material';
 import NavWrapper from './NavWrapper';
 import IconLeft from '../public/icon-left.svg';
-import { BigButton, SmallButton } from './Buttons';
+import { BigButton, SmallButton, ContentWrapper } from './Buttons';
 import { GetTotals } from '../hooks/useCalculation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormValidation from './FormValidation';
@@ -167,7 +167,7 @@ export default function AddressForm() {
             </Link>
 
             <BigButton type="submit">
-              <ButtonContentWrapper>
+              <ContentWrapper>
                 PROCEED TO Checkout
                 <h5>
                   SUBTOTAL:{' '}
@@ -176,7 +176,7 @@ export default function AddressForm() {
                     currency: 'EUR',
                   })}
                 </h5>
-              </ButtonContentWrapper>
+              </ContentWrapper>
             </BigButton>
           </NavWrapper>
         </form>
@@ -198,9 +198,4 @@ const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
   align-self: flex-start;
-`;
-
-const ButtonContentWrapper = styled.div`
-  text-align: left;
-  justify-self: flex-start;
 `;

@@ -26,7 +26,7 @@ export default function Login() {
       buyer
         ? router.push('/shopping')
         : seller
-        ? router.push('/sellerspage')
+        ? router.push('/backoffice/prices')
         : setOpen(true);
       setTimeout(() => {
         setOpen(false);
@@ -56,7 +56,9 @@ export default function Login() {
 
             {open && <Toast message="wrong user name or password" />}
             <NavWrapper>
-              <BigButton className="log-in" type="submit">Enter</BigButton>
+              <BigButton className="log-in" type="submit">
+                Enter
+              </BigButton>
             </NavWrapper>
           </form>
         </LoginBackground>

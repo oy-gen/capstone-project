@@ -11,7 +11,12 @@ export const SmallButton = styled.button`
     background-color: #555555;
   }
   &.back-office {
-    background-color: rgb(0, 0, 0, 0.7);
+    background-color: rgb(0, 0, 0, 0.9);
+    border-right: 1px solid var(--text-middlecolor);
+    :active {
+      background-color: var(--text-maincolor);
+      color: white;
+    }
   }
 `;
 
@@ -31,7 +36,16 @@ export const BigButton = styled.button`
   &.log-in {
     grid-column: 1/4;
     justify-content: center;
+    :active {
+      background-color: var(--text-maincolor);
+      color: white;
+    }
   }
+`;
+export const ContentWrapper = styled.div`
+  text-align: left;
+  align-self: center;
+  justify-self: left;
 `;
 
 export const SmallSquareButton = styled.button`
@@ -47,11 +61,11 @@ export const SmallSquareButton = styled.button`
     background-color: lightgrey;
   }
   &.save-button {
-    background-color: rgba(0, 0, 0, 0.8);
-    border: 2px solid var(--accent-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--accent-color);
     :active {
       outline: 2px solid var(--accent-color);
-      background-color: black;
+      background-color: white;
     }
   }
 `;

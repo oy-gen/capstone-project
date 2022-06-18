@@ -31,6 +31,35 @@ export const StyledInput = styled.input`
   }
 `;
 
+export const StyledInputBackOffice = styled.input`
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  height: 40px;
+  width: 90px;
+  border-style: none;
+  background-color: var(--background-color);
+  border: 1px solid var(--accent-color);
+  margin: 5px 0;
+  padding: 5px 0;
+  color: var(--accent-color);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.2);
+    font-weight: 200;
+  }
+
+  &:focus {
+    border-style: none;
+    outline: none;
+    outline: 2px solid var(--accent-color);
+  }
+`;
+
 export const StyledWarning = styled.p`
   position: absolute;
   color: var(--signal-color);
