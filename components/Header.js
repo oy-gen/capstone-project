@@ -4,12 +4,12 @@ import useHydration from '../hooks/useHydration';
 
 export default function Header() {
   const hydrated = useHydration();
-  const StoreLogo = useStore(state => state.seller.StoreLogo);
+  const logoImage = useStore(state => state.seller.logoImage);
   return (
     <>
       {hydrated && (
         <StyledHeader>
-          <StyledLogo src={StoreLogo} />
+          <StyledLogo src={logoImage} />
         </StyledHeader>
       )}
     </>

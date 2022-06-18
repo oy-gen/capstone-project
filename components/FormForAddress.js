@@ -11,7 +11,7 @@ import IconLeft from '../public/icon-left.svg';
 import { BigButton, SmallButton, ContentWrapper } from './Buttons';
 import { GetTotals } from '../hooks/useCalculation';
 import { yupResolver } from '@hookform/resolvers/yup';
-import FormValidation from './FormValidation';
+import { SchemaAddress } from './FormValidation';
 import ShippingAddress from './FormShippingAddress';
 import {
   StyledWarning,
@@ -24,7 +24,7 @@ export default function AddressForm() {
   const hydrated = useHydration();
   const router = useRouter();
   const setUserData = useStore(state => state.setUserData);
-  const schema = FormValidation;
+  const schema = SchemaAddress;
   const user = useStore(state => state.user);
 
   const {

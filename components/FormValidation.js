@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const schema = yup
+export const SchemaAddress = yup
   .object({
     differentShipping: yup.boolean(),
     billingFirstName: yup
@@ -97,4 +97,30 @@ const schema = yup
   })
   .required();
 
-export default schema;
+export const SchemaConditions = yup
+  .object({
+    domesticShipping: yup
+      .string()
+      .required('required')
+      .max(20, '${max} characters max'),
+    internationalShipping: yup.string().max(30, '${max} characters max'),
+    productsPerParcel: yup
+      .number()
+      .typeError('numbers only')
+      .positive()
+      .required('required'),
+    minItems: yup
+      .number()
+      .positive()
+      .typeError('numbers only')
+      .max(100, 'this number seems too big'),
+    maxItems: yup
+      .number()
+      .positive()
+      .typeError('numbers only')
+      .max(100, 'this number seems too big'),
+    VAT: yup.number().typeError('numbers only').max(30, 'too long to be true'),
+    logoImage: yup.string(),
+    backgroundImage: yup.string(),
+  })
+  .required();

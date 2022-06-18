@@ -153,12 +153,15 @@ const useStore = create(
         ],
 
         seller: {
-          ProductsInParcel: 20,
-          ParcelPrice: 9.9,
-          Taxes: 19,
-          StoreLogo:
+          productsPerParcel: 20,
+          domesticShipping: 9.9,
+          internationalShipping: 9.9,
+          minItems: 1,
+          maxItems: 21,
+          VAT: 19,
+          logoImage:
             'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
-          BackgroundImage:
+          backgroundImage:
             'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-geometrische-Designkerze-Raute-Set_6f7ddb1c-1083-48f5-8a4f-8185bd4f156c.jpg?v=1613518298',
         },
 
@@ -255,6 +258,17 @@ const useStore = create(
             };
           });
         },
+        setSellerData: data => {
+          set(state => {
+            return {
+              seller: {
+                ...state.seller,
+                ...data,
+              },
+            };
+          });
+        },
+
         setUserData: async data => {
           // console.log('setuserdata', user);
           const user = get().user;

@@ -10,7 +10,7 @@ import Toast from './Toast';
 import { useState } from 'react';
 import Icon from '../public/save-icon.svg';
 import { SmallSquareButton } from './Buttons';
-import { StyledInputBackOffice } from './FormStyledComponents';
+import { StyledInput } from './FormStyledComponents';
 import { GetCleanNumber } from '../hooks/useCalculation';
 
 export default function ProductCard({ product }) {
@@ -75,7 +75,8 @@ export default function ProductCard({ product }) {
                 <h5 className="back-office">ID: {id}</h5>
                 <p className="back-office">WS price</p>
                 <InputWrapper>
-                  <StyledInputBackOffice
+                  <StyledInput
+                    className="back-office--short"
                     key={id}
                     defaultValue={fullInfo.WSprice.toLocaleString('de-DE', {
                       style: 'currency',
@@ -122,8 +123,7 @@ const StyledRow = styled.div`
 const WarningWrapper = styled.div`
   position: absolute;
   right: 190px;
-  gap: 0.6rem;
-  z-index: 10;
+
 `;
 
 const StyledImage = styled.img`
@@ -143,6 +143,6 @@ const InputWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.4rem;
   grid-column: 3/4;
 `;

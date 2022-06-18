@@ -25,11 +25,10 @@ export function useFullInfo(id) {
 }
 
 export function GetCleanNumber(input) {
- 
-    const commaToDot = input.includes(',') ? input.replace(',', '.') : input;
-    const inputToTwoDezimals = parseFloat(commaToDot).toFixed(2);
-    const stringToNumber = parseFloat(inputToTwoDezimals);
-    return stringToNumber
+  const commaToDot = input.includes(',') ? input.replace(',', '.') : input;
+  const inputToTwoDezimals = parseFloat(commaToDot).toFixed(2);
+  const stringToNumber = parseFloat(inputToTwoDezimals);
+  return stringToNumber;
 }
 
 export function GetTotals() {
@@ -55,14 +54,14 @@ export function GetTotals() {
     totalProducts = totalProducts + product.quantity;
   });
 
-  const totalParcels = Math.ceil(totalProducts / seller.ProductsInParcel);
+  const totalParcels = Math.ceil(totalProducts / seller.productsPerParcel);
 
   const totalShipping = !user.localPickup
-    ? totalParcels * seller.ParcelPrice
+    ? totalParcels * seller.domesticShipping
     : 0;
 
   const subTotalPriceInclShipping = subTotalPrice + totalShipping;
-  const totalTaxes = subTotalPriceInclShipping * (seller.Taxes / 100);
+  const totalTaxes = subTotalPriceInclShipping * (seller.VAT / 100);
   const totalPrice = subTotalPriceInclShipping + totalTaxes;
 
   return {

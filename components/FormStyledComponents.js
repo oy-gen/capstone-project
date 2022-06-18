@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledHeadline = styled.h2`
   text-align: center;
-  margin: 30px auto 30px;
+  margin: 25px auto 25px;
 `;
 
 export const StyledInput = styled.input`
@@ -29,34 +29,55 @@ export const StyledInput = styled.input`
     outline: none;
     border-bottom: 2px solid var(--accent-color);
   }
-`;
-
-export const StyledInputBackOffice = styled.input`
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-  height: 40px;
-  width: 90px;
-  border-style: none;
-  background-color: var(--background-color);
-  border: 1px solid var(--accent-color);
-  margin: 5px 0;
-  padding: 5px 0;
-  color: var(--accent-color);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, 0.2);
-    font-weight: 200;
-  }
-
-  &:focus {
+  /*------------------------- back-office-style-------------------------*/
+  &.back-office {
+    height: 40px;
     border-style: none;
-    outline: none;
-    outline: 2px solid var(--accent-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--accent-color);
+    margin: 5px 0;
+    padding: 5px 16px;
+    color: var(--accent-color);
+
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: rgba(0, 0, 0, 0.2);
+      font-weight: 200;
+    }
+
+    &:focus {
+      border-style: none;
+      outline: none;
+      outline: 2px solid var(--accent-color);
+    }
+  }
+  /*------------------------- back-office-short style----------------------*/
+  &.back-office--short {
+    font-weight: 600;
+    text-align: center;
+    height: 40px;
+    width: 90px;
+    border-style: none;
+    background-color: var(--background-color);
+    border: 1px solid var(--accent-color);
+    margin: 5px 0;
+    padding: 5px 0;
+    color: var(--accent-color);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: rgba(0, 0, 0, 0.2);
+      font-weight: 200;
+    }
+
+    &:focus {
+      border-style: none;
+      outline: none;
+      outline: 2px solid var(--accent-color);
+    }
   }
 `;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import useHydration from '../../hooks/useHydration';
-import SellersProductCard from '../../components/SellersProductCard';
+import SellersProductCard from '../../components/PricesProductCard';
 import useStore from '../../hooks/useStore';
 import Link from 'next/link';
 import NavWrapper from '../../components/NavWrapper';
@@ -25,7 +25,7 @@ export default function Home() {
             <SettingsIcon />
             <ContentWrapper>
               <h2 className="back-office">B2B BACK-OFFICE</h2>
-              <h5>WHOLESALE PRICE ADJUSTMENT</h5>
+              <h5>WHOLESALE PRICES</h5>
             </ContentWrapper>
           </StyledHeader>
           {products.map(product => (
@@ -37,12 +37,14 @@ export default function Home() {
                 <LogoutIcon />
               </SmallButton>
             </Link>
-            <BigButton type="submit">
-              <ContentWrapper>
-                PROCEED TO
-                <h5>Shipping Conditions</h5>
-              </ContentWrapper>
-            </BigButton>
+            <Link passHref href="/backoffice/conditions">
+              <BigButton>
+                <ContentWrapper>
+                  PROCEED TO
+                  <h5>Order Conditions</h5>
+                </ContentWrapper>
+              </BigButton>
+            </Link>
           </NavWrapper>
         </>
       )}
