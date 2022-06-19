@@ -5,6 +5,7 @@ import useHydration from '../hooks/useHydration';
 import styled from 'styled-components';
 import NavWrapper from './NavWrapper';
 import { BigButton } from './Buttons';
+import { StyledInput, StyledHeadline } from './FormStyledComponents';
 
 import Toast from './Toast';
 
@@ -15,7 +16,7 @@ export default function Login() {
 
   const { register, handleSubmit, getValues } = useForm();
 
-  // START ---------------------  This is a temporary login solution //
+  // temporary login solution start ------------------------------------ //
 
   const onSubmit = () => {
     const user = getValues('user');
@@ -33,27 +34,26 @@ export default function Login() {
       }, 2500);
     }
   };
-
-  // END ---------------------  This is a temporary login solution //
+  // ------------------------------------  temporary login solution end//
 
   return (
     <>
       {hydrated && (
         <LoginBackground>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <StyledHeadlineLogin>Login</StyledHeadlineLogin>
-            <StyledInputLogin
+            <StyledHeadline className="log-in">Login</StyledHeadline>
+            <StyledInput
+              className="log-in"
               type="text"
               placeholder="user name*"
               {...register('user')}
             />
-
-            <StyledInputLogin
+            <StyledInput
+              className="log-in"
               type="password"
               placeholder="password*"
               {...register('password')}
             />
-
             {open && <Toast message="wrong user name or password" />}
             <NavWrapper>
               <BigButton className="log-in" type="submit">
@@ -76,33 +76,4 @@ const LoginBackground = styled.div`
   background-position: 50% 55%;
   background-size: 230%;
   padding: 0 1rem 2rem;
-`;
-
-const StyledHeadlineLogin = styled.h2`
-  text-align: center;
-  margin: 2rem auto 2rem;
-  color: white;
-`;
-
-const StyledInputLogin = styled.input`
-  width: 100%;
-  font-size: 1rem;
-  line-height: 2rem;
-  border-style: none;
-  background-color: rgb(255, 255, 255, 0.4);
-  border-bottom: 1px solid lightgrey;
-  padding: 10px 120px 10px 10px;
-  margin-bottom: 1rem;
-  color: white;
-
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: rgb(255, 255, 255, 0.6);
-  }
-
-  &:focus {
-    border-style: none;
-    outline: none;
-    border-bottom: 2px solid white;
-  }
 `;

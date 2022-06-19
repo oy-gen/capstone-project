@@ -3,7 +3,6 @@ import User from '../../../models/User';
 
 export default async function handler(request, response) {
   await dbConnect();
-  console.log('requestbody', request.body);
   switch (request.method) {
     case 'PATCH':
       try {
@@ -12,12 +11,10 @@ export default async function handler(request, response) {
         if (user) {
           user = await User.findById(_id).exec();
           response.status(201).json({ success: true, data: user });
-         // console.log('Hier', user);
         } else {
           response.status(404).json({ success: false });
         }
       } catch (error) {
-       // console.error(error);
         response.status(400).json({ success: false });
       }
       break;

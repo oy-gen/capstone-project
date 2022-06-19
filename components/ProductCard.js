@@ -60,7 +60,7 @@ export default function ProductCard({ product }) {
           {showDetails && (
             <ExtraInfoWrapper>
               <p>
-                <strong>BARCODE: </strong> {id}
+                <strong>BARCODE:</strong> {id}
               </p>
               <p>{description}</p>
             </ExtraInfoWrapper>

@@ -38,12 +38,10 @@ export default function ProductCard({ product }) {
   const onSubmit = data => {
     const input = getValues('WSprice');
     const cleanNumber = GetCleanNumber(input);
-    console.log('Input', input);
-    console.log('Final Value', cleanNumber);
     setWSprice(id, cleanNumber);
   };
 
-  function checkErrors() {
+  function triggerToast() {
     if (errors) {
       setOpen(true);
       setTimeout(() => {
@@ -93,7 +91,7 @@ export default function ProductCard({ product }) {
                   <SmallSquareButton
                     className="save-button"
                     onClick={() => {
-                      checkErrors();
+                      triggerToast();
                     }}
                     type="submit"
                   >
@@ -123,7 +121,6 @@ const StyledRow = styled.div`
 const WarningWrapper = styled.div`
   position: absolute;
   right: 190px;
-
 `;
 
 const StyledImage = styled.img`

@@ -24,7 +24,7 @@ export default function Home() {
           <StyledHeader className="back-office">
             <SettingsIcon />
             <ContentWrapper>
-              <h2 className="back-office">B2B BACK-OFFICE</h2>
+              <h2 className="back-office">B2B Settings</h2>
               <h5>WHOLESALE PRICES</h5>
             </ContentWrapper>
           </StyledHeader>

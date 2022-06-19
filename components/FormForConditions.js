@@ -1,5 +1,3 @@
-import React from 'react';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import useStore from '../hooks/useStore';
 import useHydration from '../hooks/useHydration';
@@ -12,23 +10,20 @@ import { BigButton, SmallButton, ContentWrapper } from './Buttons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SchemaConditions } from './FormValidation';
 import { GetCleanNumber } from '../hooks/useCalculation';
-import { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Box, LinearProgress } from '@mui/material';
 import Modal from './Modal';
-
-import {
-  StyledWarning,
-  StyledInput,
-  StyledHeadline,
-} from './FormStyledComponents';
+import { StyledInput, StyledHeadline } from './FormStyledComponents';
 
 export default function FormForConditions() {
-  const [open, setOpen] = useState(false);
   const hydrated = useHydration();
-  const router = useRouter();
-  const schema = SchemaConditions;
+  const [open, setOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const timer = useRef();
   const seller = useStore(state => state.seller);
   const setSellerData = useStore(state => state.setSellerData);
+  const schema = SchemaConditions;
   const {
     productsPerParcel,
     domesticShipping,
@@ -37,12 +32,8 @@ export default function FormForConditions() {
     maxItems,
     VAT,
   } = seller;
-
-  const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const timer = React.useRef();
-
-  React.useEffect(() => {
+  // ------------------------------------------------------- modal logic //
+  useEffect(() => {
     return () => {
       clearTimeout(timer.current);
     };
@@ -66,13 +57,12 @@ export default function FormForConditions() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
+  // ------------------------------------------------------- form logic //
   const onSubmit = data => {
     const domesticShipping = getValues('domesticShipping');
     const cleanDomShipping = GetCleanNumber(domesticShipping);
     const intShipping = getValues('internationalShipping');
     const cleanIntShipping = GetCleanNumber(intShipping);
-    const VAT = getValues('internationalShipping');
     const newData = {
       ...data,
       domesticShipping: cleanDomShipping,
@@ -98,7 +88,7 @@ export default function FormForConditions() {
           <FormWrapper>
             <section>
               <StyledHeadline>Shipping conditions</StyledHeadline>
-              <label // ---------------------------------------------------------------------
+              <label // --------------------------------------------------------------------- new label
                 htmlFor="domesticShipping"
                 className="back-office"
               >
@@ -118,7 +108,7 @@ export default function FormForConditions() {
                   <Toast message={errors?.domesticShipping?.message} />
                 )}
               </WarningWrapper>
-              <label // ---------------------------------------------------------------------
+              <label // --------------------------------------------------------------------- new label
                 htmlFor="internationalShipping"
                 className="back-office"
               >
@@ -138,11 +128,11 @@ export default function FormForConditions() {
                   <Toast message={errors?.internationalShipping?.message} />
                 )}
               </WarningWrapper>
-              <label // ---------------------------------------------------------------------
+              <label // --------------------------------------------------------------------- new label
                 htmlFor="productsPerParcel"
                 className="back-office"
               >
-                Products per parcel
+                Maximum products per parcel
               </label>
               <StyledInput
                 className="back-office"
@@ -159,7 +149,7 @@ export default function FormForConditions() {
             <hr />
             <section>
               <StyledHeadline>Order conditions</StyledHeadline>
-              <label // ---------------------------------------------------------------------
+              <label // --------------------------------------------------------------------- new label
                 htmlFor="VAT"
                 className="back-office"
               >
@@ -174,7 +164,7 @@ export default function FormForConditions() {
               <WarningWrapper>
                 {errors.VAT && open && <Toast message={errors?.VAT?.message} />}
               </WarningWrapper>
-              <label // ---------------------------------------------------------------------
+              <label // --------------------------------------------------------------------- new label
                 htmlFor="minItems"
                 className="back-office"
               >
@@ -191,7 +181,7 @@ export default function FormForConditions() {
                   <Toast message={errors?.minItems?.message} />
                 )}
               </WarningWrapper>
-              <label // ---------------------------------------------------------------------
+              <label // --------------------------------------------------------------------- new label
                 htmlFor="minItems"
                 className="back-office"
               >
@@ -210,7 +200,7 @@ export default function FormForConditions() {
               </WarningWrapper>
             </section>
           </FormWrapper>
-          <NavWrapper // ---------------------------------------------------------------------
+          <NavWrapper // --------------------------------------------------------------------- new label
           >
             {loading && (
               <Box
@@ -255,9 +245,6 @@ const FormWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   position: relative;
   padding: 1rem 1rem 2rem;
-  /* display;
-  flex-direction: column; */
-  z-index: 0;
 
   hr {
     border-width: 0;

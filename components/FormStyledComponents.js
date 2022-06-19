@@ -2,37 +2,38 @@ import styled from 'styled-components';
 
 export const StyledHeadline = styled.h2`
   text-align: center;
-  margin: 25px auto 25px;
+  margin: 25px auto;
+  &.log-in {
+    margin: 35px auto;
+    color: white;
+  }
 `;
 
 export const StyledInput = styled.input`
-  width: 90vw;
+  width: 100%;
   font-size: 1rem;
   line-height: 1.6rem;
   border-style: none;
   background-color: transparent;
   border-bottom: 1px solid lightgrey;
-  padding: 5px 120px 0 0;
+  padding: 5px 0;
   margin-bottom: 1rem;
   color: var(--text-darkcolor);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-
   ::placeholder,
   ::-webkit-input-placeholder {
     color: var(--text-lightcolor);
   }
-
   &:focus {
     border-style: none;
     outline: none;
     border-bottom: 2px solid var(--accent-color);
   }
-  /*------------------------- back-office-style-------------------------*/
+  //---------------------------------------------------   className back-office
   &.back-office {
     height: 40px;
-    border-style: none;
     background-color: var(--background-color);
     border: 1px solid var(--accent-color);
     margin: 5px 0;
@@ -46,26 +47,20 @@ export const StyledInput = styled.input`
     }
 
     &:focus {
-      border-style: none;
-      outline: none;
       outline: 2px solid var(--accent-color);
     }
   }
-  /*------------------------- back-office-short style----------------------*/
+  //---------------------------------------------------   className back-office--short
   &.back-office--short {
     font-weight: 600;
     text-align: center;
     height: 40px;
     width: 90px;
-    border-style: none;
     background-color: var(--background-color);
     border: 1px solid var(--accent-color);
     margin: 5px 0;
     padding: 5px 0;
     color: var(--accent-color);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 
     ::placeholder,
     ::-webkit-input-placeholder {
@@ -74,9 +69,23 @@ export const StyledInput = styled.input`
     }
 
     &:focus {
-      border-style: none;
-      outline: none;
       outline: 2px solid var(--accent-color);
+    }
+  }
+  //---------------------------------------------------   className log-in
+  &.log-in {
+    background-color: rgb(255, 255, 255, 0.4);
+    padding: 10px;
+    margin-bottom: 1rem;
+    color: white;
+
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: rgb(255, 255, 255, 0.6);
+    }
+
+    &:focus {
+      border-bottom: 2px solid white;
     }
   }
 `;

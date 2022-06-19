@@ -42,6 +42,7 @@ export const BigButton = styled.button`
     }
   }
 `;
+
 export const ContentWrapper = styled.div`
   text-align: left;
   align-self: center;

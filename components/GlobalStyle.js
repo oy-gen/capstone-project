@@ -125,9 +125,6 @@ label {
   padding-bottom: 0.6rem;
   color: var(--text-lightcolor);
   font-weight: 400;
-  @media (max-width: 600px) {
-    font-size: 0.9rem;
-  }
   &.back-office {
     color: var(--text-maincolor);
     padding-bottom: 0rem;
