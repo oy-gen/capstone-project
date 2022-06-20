@@ -81,7 +81,7 @@ const StyledCard = styled.div`
   border-top: 1px solid lightgray;
   gap: 1rem;
   background-color: transparent;
-  padding: 10px 0 ;
+  padding: 10px 0;
   align-items: center;
   overflow: hidden;
 
