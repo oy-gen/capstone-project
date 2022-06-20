@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       {hydrated && (
-        <>
+        <section>
           <StyledHeader className="back-office">
             <SettingsIcon />
             <ContentWrapper>
@@ -20,7 +20,7 @@ export default function Home() {
             </ContentWrapper>
           </StyledHeader>
           <FormForConditions />
-        </>
+        </section>
       )}
     </>
   );

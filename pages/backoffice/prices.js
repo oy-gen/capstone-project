@@ -18,7 +18,7 @@ export default function Home() {
   const hydrated = useHydration();
 
   return (
-    <>
+    <section>
       {hydrated && (
         <>
           <StyledHeader className="back-office">
@@ -48,6 +48,6 @@ export default function Home() {
           </NavWrapper>
         </>
       )}
-    </>
+    </section>
   );
 }

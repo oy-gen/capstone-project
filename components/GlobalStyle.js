@@ -25,11 +25,11 @@ const GlobalStyle = createGlobalStyle`
   /* ------------------------------------------------------------- Variables - Effects */
 
   --box-shadow: 0px 0px 2rem 1rem rgba(0, 0, 0, 0.3);
-  --black-translucent:rgba(0, 0, 0, 0.9);
-  --gray-translucent: rgba(0, 0, 0, 0.2)
-  --white-translucent:rgba(255, 255, 255, 1);
-  --white-translucent-05:rgba(255, 255, 255, 0.5);
-  --background-blur: blur(12px);
+  --black-translucent: rgb(0, 0, 0, 0.85);
+  --gray-translucent: rgb(0, 0, 0, 0.2);
+  --white-translucent: rgb(255, 255, 255, 0.6);
+  --white-translucent-09: rgb(255, 255, 255, 0.9);
+  --background-blur: blur(7px);
   
   
 }
@@ -39,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;  
+    position: relative;
     
   }
 
@@ -47,9 +48,12 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--background-color);
     font-size: 1rem;
     max-width: 800px;
-    margin: var(--nav-height-mobile) auto;
   }
    
+  section {
+  margin: var(--nav-height-mobile) auto;
+  }
+
   button {
     text-align: left;
     display:flex;
@@ -82,7 +86,8 @@ const GlobalStyle = createGlobalStyle`
   h2 {
   color: var(--text-maincolor);
   line-height: 1.2rem;
-  padding-bottom: 0.2rem;
+  padding-bottom: 6px;
+  padding-right: 10px;
   font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;

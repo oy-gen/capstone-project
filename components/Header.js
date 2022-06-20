@@ -20,7 +20,6 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--white-translucent);
   box-shadow: var(--box-shadow);
   position: fixed;
   top: 0;
@@ -28,6 +27,9 @@ export const StyledHeader = styled.header`
   width: 100vw;
   height: var(--nav-height);
   z-index: 2;
+  background-color: var(
+    --white-translucent-09
+  ); // for browsers other than chrome
   @supports (backdrop-filter: var(--background-blur)) {
     background-color: var(--white-translucent);
     backdrop-filter: var(--background-blur);

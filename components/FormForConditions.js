@@ -86,7 +86,7 @@ export default function FormForConditions() {
       {hydrated && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormWrapper>
-            <section>
+            <StyledContainer>
               <StyledHeadline>Shipping conditions</StyledHeadline>
               <label // --------------------------------------------------------------------- new label
                 htmlFor="domesticShipping"
@@ -145,9 +145,9 @@ export default function FormForConditions() {
                   <Toast message={errors?.productsPerParcel?.message} />
                 )}
               </WarningWrapper>
-            </section>
+            </StyledContainer>
             <hr />
-            <section>
+            <StyledContainer>
               <StyledHeadline>Order conditions</StyledHeadline>
               <label // --------------------------------------------------------------------- new label
                 htmlFor="VAT"
@@ -198,7 +198,7 @@ export default function FormForConditions() {
                   <Toast message={errors?.maxItems?.message} />
                 )}
               </WarningWrapper>
-            </section>
+            </StyledContainer>
           </FormWrapper>
           <NavWrapper // --------------------------------------------------------------------- new label
           >
@@ -244,17 +244,17 @@ export default function FormForConditions() {
 const FormWrapper = styled.div`
   background-color: var(--background-darkcolor);
   position: relative;
-  padding: 1rem 1rem 2rem;
+  padding: 0 1rem;
 
   hr {
     border-width: 0;
     border-style: none;
     outline: 0.5px solid var(--gray-translucent);
   }
+`;
 
-  section {
-    padding-bottom: 2rem;
-  }
+const StyledContainer = styled.div`
+  padding: 1rem 0 3rem;
 `;
 
 const WarningWrapper = styled.div`

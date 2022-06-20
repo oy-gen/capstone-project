@@ -17,7 +17,7 @@ const Nav = styled.nav`
   right: 0px;
   width: 100vw;
   height: var(--nav-height);
-  background-color: var(--white-translucent);
+  background-color: var( --white-translucent-09);   // for browsers other than chrome
   @supports (backdrop-filter: var(--background-blur)) {
     background-color: var(--white-translucent);
     backdrop-filter: var(--background-blur);
@@ -31,9 +31,9 @@ const NavElementWrapper = styled.div`
   display: grid;
   align-items: stretch;
 
-  grid-template-columns: 1.2fr 2fr;
+  grid-template-columns:  1.3fr 2fr;
   width: 800px;
   @media (max-width: 600px) {
-    grid-template-columns: 1.2fr 2fr;
+    grid-template-columns:  1.3fr 2fr;
   }
 `;

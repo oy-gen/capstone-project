@@ -35,7 +35,6 @@ export default function Nav() {
           </Link>
         </NavWrapper>
       )}
-      ,
     </>
   );
 }

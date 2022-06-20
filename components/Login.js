@@ -66,13 +66,16 @@ export default function Login() {
   );
 }
 
-const LoginBackground = styled.div`
+const LoginBackground = styled.body`
+  margin: 0;
+  position: absolute;
   background-image: url('https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-Candles-Coin-of-Wisdom.jpg?v=1613518249');
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
   overflow: hidden;
-  height: calc(100vh - (2 * var(--nav-height-mobile)));
-  background-position: 50% 55%;
+  height: 100vh;
+  width: 100vw;
+  background-position: 50% 60%;
   background-size: 230%;
-  padding: 0 1rem 2rem;
+  padding: var(--nav-height-mobile) 1rem 2rem;
 `;
