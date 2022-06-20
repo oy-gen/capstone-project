@@ -23,6 +23,7 @@ export const SmallButton = styled.button`
 export const BigButton = styled.button`
   grid-column: 2/4;
   background-color: var(--black-translucent);
+
   color: white;
   padding: 0 16px;
   &:disabled {
