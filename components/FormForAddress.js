@@ -169,7 +169,7 @@ export default function AddressForm() {
             <BigButton type="submit">
               <ContentWrapper>
                 PROCEED TO Checkout
-                <h5>
+                <h5 className='h5--light'>
                   SUBTOTAL:{' '}
                   {subTotalPrice.toLocaleString('de-DE', {
                     style: 'currency',

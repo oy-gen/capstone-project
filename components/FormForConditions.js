@@ -226,7 +226,7 @@ export default function FormForConditions() {
             >
               <ContentWrapper>
                 Save settings
-                <h5>log out</h5>
+                <h5 className="h5--light">log out</h5>
               </ContentWrapper>
             </BigButton>
             <Modal onClose={() => setShowModal(false)} show={showModal}>
@@ -242,14 +242,14 @@ export default function FormForConditions() {
 }
 
 const FormWrapper = styled.div`
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--background-darkcolor);
   position: relative;
   padding: 1rem 1rem 2rem;
 
   hr {
     border-width: 0;
     border-style: none;
-    outline: 0.5px solid rgba(0, 0, 0, 0.2);
+    outline: 0.5px solid var(--gray-translucent);
   }
 
   section {

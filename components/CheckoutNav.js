@@ -55,7 +55,7 @@ export default function CheckoutNav() {
         <BigButton disabled={loading} onClick={handleButtonClick}>
           <ContentWrapper>
             submit order
-            <h5>
+            <h5 className="h5--light">
               Total price:{' '}
               {totalPrice.toLocaleString('de-DE', {
                 style: 'currency',

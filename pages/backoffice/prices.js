@@ -25,7 +25,7 @@ export default function Home() {
             <SettingsIcon />
             <ContentWrapper>
               <h2 className="back-office">B2B Settings</h2>
-              <h5>WHOLESALE PRICES</h5>
+              <h5 className='h5--light'>WHOLESALE PRICES</h5>
             </ContentWrapper>
           </StyledHeader>
           {products.map(product => (
@@ -41,7 +41,7 @@ export default function Home() {
               <BigButton>
                 <ContentWrapper>
                   PROCEED TO
-                  <h5>Order Conditions</h5>
+                  <h5 className='h5--light'>Order Conditions</h5>
                 </ContentWrapper>
               </BigButton>
             </Link>

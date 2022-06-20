@@ -5,6 +5,8 @@ import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
 import { useFullInfo } from '../hooks/useCalculation';
 import useHydration from '../hooks/useHydration';
+import useStore from '../hooks/useStore';
+import QuantityIndicator from './QuantityIndicator';
 
 export default function ProductCard({ product }) {
   const hydrated = useHydration();
@@ -56,6 +58,7 @@ export default function ProductCard({ product }) {
                 </ButtonWrapper>
               </FlexWrapper>
             </TitleWrapper>
+            <QuantityIndicator quantity={quantity} />
           </StyledCard>
           {showDetails && (
             <ExtraInfoWrapper>
@@ -73,12 +76,15 @@ export default function ProductCard({ product }) {
 
 const StyledCard = styled.div`
   display: grid;
+  position: relative;
   grid-template-columns: 1.3fr 2fr;
   border-top: 1px solid lightgray;
   gap: 1rem;
-  background-color: var(--background-color);
+  background-color: transparent;
   padding: 0.6rem 0.6rem 0.6rem 0;
   align-items: center;
+  overflow: hidden;
+
   @media (max-width: 600px) {
     gap: 0rem;
   }

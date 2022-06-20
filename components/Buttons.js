@@ -11,7 +11,7 @@ export const SmallButton = styled.button`
     background-color: #555555;
   }
   &.back-office {
-    background-color: rgb(0, 0, 0, 0.9);
+    background-color: var(--black-translucent);
     border-right: 1px solid var(--text-middlecolor);
     :active {
       background-color: var(--text-maincolor);
@@ -22,7 +22,7 @@ export const SmallButton = styled.button`
 
 export const BigButton = styled.button`
   grid-column: 2/4;
-  background-color: rgb(0, 0, 0, 0.9);
+  background-color: var(--black-translucent);
   color: white;
   padding: 0 16px;
   &:disabled {
@@ -31,14 +31,12 @@ export const BigButton = styled.button`
   }
   :active {
     background-color: var(--text-maincolor);
-    color: white;
   }
   &.log-in {
     grid-column: 1/4;
     justify-content: center;
     :active {
       background-color: var(--text-maincolor);
-      color: white;
     }
   }
 `;
@@ -53,7 +51,7 @@ export const SmallSquareButton = styled.button`
   background-color: transparent;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--text-lightcolor);
+  border: 1px solid var(--text-middlecolor);
   height: 40px;
   width: 40px;
   color: var(--text-lightcolor);

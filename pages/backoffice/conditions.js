@@ -16,7 +16,7 @@ export default function Home() {
             <SettingsIcon />
             <ContentWrapper>
               <h2 className="back-office">B2B BACK-OFFICE</h2>
-              <h5>Order Conditions</h5>
+              <h5 className="h5--light">Order Conditions</h5>
             </ContentWrapper>
           </StyledHeader>
           <FormForConditions />

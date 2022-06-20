@@ -13,7 +13,6 @@ export default function Login() {
   const hydrated = useHydration();
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
   const { register, handleSubmit, getValues } = useForm();
 
   // temporary login solution start ------------------------------------ //

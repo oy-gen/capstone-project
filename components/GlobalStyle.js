@@ -6,18 +6,34 @@ const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,400&display=swap');
   
   html {
+
+/* ------------------------------------------------------------- Variables - Colors */
+
   --background-color: #EFEFEF;
+  --background-darkcolor: #BDBDBD;
   --text-maincolor: #1C1B1B;
-  --text-middlecolor:#4f4f4f;
-  --text-lightcolor: #7E7E7E;
+  --text-middlecolor:#616161;
+  --text-lightcolor: #757575;
   --signal-color: #F94C43;
-  --accent-color: #506bcc;
-  --backoffice-maincolor:80, 107, 204;
+  --accent-color: #00796b;
+
+  /* ------------------------------------------------------------- Variables - Sizes */
 
   --nav-height: 75px;
   --nav-height-mobile:65px;
-  }
+
+  /* ------------------------------------------------------------- Variables - Effects */
+
+  --box-shadow: 0px 0px 2rem 1rem rgba(0, 0, 0, 0.3);
+  --black-translucent:rgba(0, 0, 0, 0.9);
+  --gray-translucent: rgba(0, 0, 0, 0.2)
+  --white-translucent:rgba(255, 255, 255, 1);
+  --white-translucent-05:rgba(255, 255, 255, 0.5);
+  --background-blur: blur(12px);
   
+  
+}
+
  * {    
     margin: 0;
     padding: 0;
@@ -87,34 +103,31 @@ const GlobalStyle = createGlobalStyle`
 
   h4 {
   text-transform: uppercase;
-  color: var(--text-lightcolor);
+  color: var(--text-middlecolor);
   font-size: 1rem;
   font-weight: 600;
   &.back-office {
-    color: var(--text-middlecolor);
     margin-top:5px;
   }
   }
 
   h5 {
-  color: var(--text-lightcolor);
+  color: var(--text-middlecolor);
   text-transform: uppercase;
   font-size: 0.9rem;
   font-weight: 400;
-  &.back-office {
-    color: var(--text-middlecolor);
+  &.h5--light{
+    color: var(--text-lightcolor);
   }
   }
 
   p {
   padding-bottom: 0.6rem;
-  color: var(--text-lightcolor);
+  color: var(--text-middlecolor);
   font-weight: 400;
-  @media (max-width: 600px) {
-    font-size: 0.9rem;
-  }
+  font-size: 0.9rem;
+
   &.back-office {
-    color: var(--text-middlecolor);
     padding-bottom: 0rem;
     text-transform: uppercase;
     font-size: 0.8rem;
@@ -123,7 +136,7 @@ const GlobalStyle = createGlobalStyle`
 
 label {
   padding-bottom: 0.6rem;
-  color: var(--text-lightcolor);
+  color: var(--text-middlecolor);
   font-weight: 400;
   &.back-office {
     color: var(--text-maincolor);

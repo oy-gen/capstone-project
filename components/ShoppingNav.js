@@ -23,7 +23,7 @@ export default function Nav() {
             <BigButton disabled={subTotalPrice === 0}>
               <Wrapper>
                 PROCEED TO SHIPPING
-                <h5>
+                <h5 className="h5--light">
                   SUBTOTAL:{' '}
                   {subTotalPrice.toLocaleString('de-DE', {
                     style: 'currency',

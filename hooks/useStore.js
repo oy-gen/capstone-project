@@ -89,7 +89,7 @@ const useStore = create(
             name: 'Sun Candle',
             id: '4170000002000',
             image:
-              'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-Sun-Candle.png?v=1652898466',
+              'https://cdn.shopify.com/s/files/1/0002/7502/1865/products/Burning-Buddha-Sun-Candle_clean_1200x1200.png',
             description: `Die Sonnenkerze spielt mit der Transluzenz des Kerzenwachses. Durch die raffinierte Formgebung leuchtet sie wie eine Sonne und kreiert eine außergewöhnliche Atmosphäre im Raum. Das flackernde Licht fesselt Deinen Blick und lässt ihn nicht mehr los.Auch in der Sonnenkerze wartet die Münze der Weisheit auf Dich. Erst nach dem Abbrennen kommt die versteckte Botschaft zum Vorschein. Welche Weisheit Deine Kerze für Dich bereit hält, entscheidet der Zufall - falls es ihn gibt.
         Material: Raps-Komposition mit Paraffinanteil, Baumwolldocht, Metallmünze
         Farbe: ungefärbt
@@ -157,7 +157,7 @@ const useStore = create(
           domesticShipping: 9.9,
           internationalShipping: 9.9,
           minItems: 1,
-          maxItems: 21,
+          maxItems: 12,
           VAT: 19,
           logoImage:
             'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',

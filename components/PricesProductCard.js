@@ -59,6 +59,9 @@ export default function ProductCard({ product }) {
               <StyledImage src={image} alt={name} />
               <InfoWrapper>
                 <h3>{name}</h3>
+                <h5 className="back-office">ID: {id}</h5>
+              </InfoWrapper>
+              <GridColumnWrapper>
                 <h4 className="back-office">
                   <strong>
                     RRP:{' '}
@@ -68,10 +71,7 @@ export default function ProductCard({ product }) {
                     })}
                   </strong>
                 </h4>
-              </InfoWrapper>
-              <GridColumnWrapper>
-                <h5 className="back-office">ID: {id}</h5>
-                <p className="back-office">WS price</p>
+                <p className="back-office">WS price:</p>
                 <InputWrapper>
                   <StyledInput
                     className="back-office--short"
@@ -111,9 +111,9 @@ const StyledRow = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 0.7fr 1.1fr 1fr;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--background-darkcolor);
   padding: 0.6rem 0.6rem 0.6rem 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--gray-translucent);
   align-items: center;
   gap: 0.6rem;
 `;
