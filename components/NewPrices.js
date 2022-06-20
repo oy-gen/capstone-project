@@ -1,70 +1,67 @@
 import styled from 'styled-components';
 import useHydration from '../hooks/useHydration';
-import { useFullInfo } from '../hooks/useCalculation';
 import useStore from '../hooks/useStore';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import Toast from './Toast';
-import { useState } from 'react';
 import { StyledInput } from './FormStyledComponents';
-import { GetCleanNumber } from '../hooks/useCalculation';
-import { useFormContext } from 'react-hook-form';
+import NavWrapper from './NavWrapper';
+import { BigButton, SmallButton } from './Buttons';
+import { useEffect } from 'react';
 
-export default function ProductCard({ product }) {
-  const [open, setOpen] = useState(false);
+export default function NewPrices() {
+  const products = useStore(state => state.products);
   const hydrated = useHydration();
-  const { id, name, RRPprice, image } = product;
-  const fullInfo = useFullInfo(product.id);
-  const setWSprice = useStore(state => state.setWSprice);
   const {
     register,
+    handleSubmit,
+    defaultValues,
+    setValue,
     formState: { errors },
-  } = useFormContext();
+  } = useForm();
+
+  const onSubmit = data => {
+    console.log('log data', data);
+    //const updateId= setValue(...data
+    // const input = getValues('WSprice');
+    // const cleanNumber = GetCleanNumber(input);
+    // setWSprice(id, cleanNumber);
+  };
 
   return (
     <>
       {hydrated && (
         <>
-          <StyledRow>
-            <StyledImage src={image} alt={name} />
-            <InfoWrapper>
-              <h3>{name}</h3>
-              <h5 className="back-office">ID: {id}</h5>
-            </InfoWrapper>
-            <GridColumnWrapper>
-              <h4 className="back-office">
-                <strong>
-                  RRP:{' '}
-                  {RRPprice.toLocaleString('de-DE', {
-                    style: 'currency',
-                    currency: 'EUR',
-                  })}
-                </strong>
-              </h4>
-              <p className="back-office">WS price:</p>
-              <InputWrapper>
-                <StyledInput
-                  className="back-office--short"
-                  key={id}
-                  defaultValue={fullInfo.WSprice.toLocaleString('de-DE', {
-                    style: 'currency',
-                    currency: 'EUR',
-                  })}
-                  placeholder="new price"
-                  {...register('WSprice')}
-                  {...register(`${id}`)}
-                  
-                />
-                <WarningWrapper>
-                  {errors && open && (
-                    <Toast message={errors?.WSprice?.message} />
-                  )}
-                </WarningWrapper>
-              </InputWrapper>
-            </GridColumnWrapper>
-          </StyledRow>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {products.map((product, index) => (
+              <StyledRow key={product.id}>
+                <StyledImage src={product.image} alt={product.name} />
+                <InfoWrapper>
+                  <h4>{product.name}</h4>
+                  <h4>RRP: {product.RRPprice}</h4>
+                </InfoWrapper>
+                <p className="back-office">WS price:</p>
+                <InputWrapper>
+                  <StyledInput
+                    {...register(`${index}.WSprice`, {
+                      required: 'error message',
+                    })}
+                    className="back-office"
+                    key={product.id}
+                    placeholder="new price"
+                    onChange={() => setValue(`${index}.id`, `${product.id}`)}
+                  />
+                  <WarningWrapper>
+                    <p>{errors?.WSprice?.message}</p>
+                  </WarningWrapper>
+                </InputWrapper>
+              </StyledRow>
+            ))}
+            <NavWrapper // ---------------------------------------------- NAV
+            >
+              <SmallButton className="back-office">logout</SmallButton>
+              <BigButton type="submit">PROCEED TO</BigButton>
+            </NavWrapper>
+          </form>
         </>
       )}
     </>
@@ -95,9 +92,6 @@ const StyledImage = styled.img`
 
 const InfoWrapper = styled.div`
   grid-column: 2/3;
-`;
-const GridColumnWrapper = styled.div`
-  grid-column: 3/4;
 `;
 
 const InputWrapper = styled.div`

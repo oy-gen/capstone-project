@@ -7,6 +7,7 @@ import NavWrapper from '../../components/NavWrapper';
 import LogoutIcon from '../../public/logout-white.svg';
 import SettingsIcon from '../../public/settings2-icon.svg';
 import { StyledHeader } from '../../components/Header';
+import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import {
   BigButton,
   SmallButton,
@@ -14,39 +15,37 @@ import {
 } from '../../components/Buttons';
 
 export default function Home() {
+  const onSubmit = data => console.log(data);
   const products = useStore(state => state.products);
   const hydrated = useHydration();
+  const methods = useForm();
+  const _onSubmit = data => {
+    const input = getValues('WSprice');
+    const cleanNumber = GetCleanNumber(input);
+    setWSprice(id, cleanNumber);
+  };
+
+  // function triggerToast() {
+  //   if (errors) {
+  //     setOpen(true);
+  //     setTimeout(() => {
+  //       setOpen(false);
+  //     }, 2500);
+  //   }
+  // }
 
   return (
     <section>
       {hydrated && (
-        <>
-          <StyledHeader className="back-office">
-            <SettingsIcon />
-            <ContentWrapper>
-              <h2 className="back-office">B2B Settings</h2>
-              <h5 className='h5--light'>WHOLESALE PRICES</h5>
-            </ContentWrapper>
-          </StyledHeader>
-          {products.map(product => (
-            <SellersProductCard key={product.id} product={product} />
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          {products.map((product, index) => (
+            <SellersProductCard
+              key={product.id}
+              product={product}
+              //{...methods.register(`${product.id}`)}
+            />
           ))}
-          <NavWrapper>
-            <Link passHref href="/">
-              <SmallButton className="back-office">
-                <LogoutIcon />
-              </SmallButton>
-            </Link>
-            <Link passHref href="/backoffice/conditions">
-              <BigButton>
-                <ContentWrapper>
-                  PROCEED TO
-                  <h5 className='h5--light'>Order Conditions</h5>
-                </ContentWrapper>
-              </BigButton>
-            </Link>
-          </NavWrapper>
-        </>
+        </form>
       )}
     </section>
   );
