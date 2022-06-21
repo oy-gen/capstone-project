@@ -1,5 +1,4 @@
 import GlobalStyle from '../components/GlobalStyle';
-import { SessionProvider } from 'next-auth/react';
 import useHydration from '../hooks/useHydration';
 import { useEffect } from 'react';
 import useStore from '../hooks/useStore';
@@ -41,12 +40,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <>
       {hydrated && (
-        <SessionProvider session={session}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle></GlobalStyle>
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </SessionProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle></GlobalStyle>
+          <Component {...pageProps} />
+        </ThemeProvider>
       )}
     </>
   );

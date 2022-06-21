@@ -1,13 +1,14 @@
 import React from 'react';
 import useHydration from '../../hooks/useHydration';
-import SellersProductCard from '../../components/PricesProductCard';
+import NewPricesCard from '../../components/NewPricesCard';
 import useStore from '../../hooks/useStore';
-import Link from 'next/link';
 import NavWrapper from '../../components/NavWrapper';
-import LogoutIcon from '../../public/logout-white.svg';
-import SettingsIcon from '../../public/settings2-icon.svg';
-import { StyledHeader } from '../../components/Header';
-import { useForm, FormProvider, useFormContext } from 'react-hook-form';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import Icon from '../../public/logout-white.svg';
+import HeaderBackOffice from '../../components/HeaderBackOffice';
 import {
   BigButton,
   SmallButton,
@@ -15,37 +16,63 @@ import {
 } from '../../components/Buttons';
 
 export default function Home() {
-  const onSubmit = data => console.log(data);
-  const products = useStore(state => state.products);
   const hydrated = useHydration();
-  const methods = useForm();
-  const _onSubmit = data => {
-    const input = getValues('WSprice');
-    const cleanNumber = GetCleanNumber(input);
-    setWSprice(id, cleanNumber);
-  };
+  const router = useRouter();
+  const products = useStore(state => state.products);
+  const [open, setOpen] = useState(false);
 
-  // function triggerToast() {
-  //   if (errors) {
-  //     setOpen(true);
-  //     setTimeout(() => {
-  //       setOpen(false);
-  //     }, 2500);
-  //   }
-  // }
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = data => {
+    console.log('log data', data);
+    router.push('/backoffice/conditions');
+    //const updateId= setValue(...data
+    // const input = getValues('WSprice');
+    // const cleanNumber = GetCleanNumber(input);
+    // setWSprice(id, cleanNumber);
+  };
 
   return (
     <section>
       {hydrated && (
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          {products.map((product, index) => (
-            <SellersProductCard
-              key={product.id}
-              product={product}
-              //{...methods.register(`${product.id}`)}
-            />
-          ))}
-        </form>
+        <>
+          <HeaderBackOffice>
+            <h5 className="h5--light">Wholesale Prices</h5>
+          </HeaderBackOffice>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {products.map((p, index) => (
+              <NewPricesCard
+                key={p.id}
+                product={p}
+                index={index}
+                register={register}
+                errors={errors}
+                setValue={setValue}
+                getValues={getValues}
+              />
+            ))}
+            <NavWrapper>
+              <Link passHref href="/">
+                <SmallButton className="back-office">
+                  <Icon />
+                </SmallButton>
+              </Link>
+
+              <BigButton type="submit" disabled={errors.WSprice}>
+                <ContentWrapper>
+                  SAVE and PROCEED
+                  <h5>to orderc onditions</h5>
+                </ContentWrapper>
+              </BigButton>
+            </NavWrapper>
+          </form>
+        </>
       )}
     </section>
   );

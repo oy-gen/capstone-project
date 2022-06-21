@@ -4,6 +4,7 @@ import SettingsIcon from '../../public/settings2-icon.svg';
 import { StyledHeader } from '../../components/Header';
 import FormForConditions from '../../components/FormForConditions';
 import { ContentWrapper } from '../../components/Buttons';
+import HeaderBackOffice from '../../components/HeaderBackOffice';
 
 export default function Home() {
   const hydrated = useHydration();
@@ -12,13 +13,9 @@ export default function Home() {
     <>
       {hydrated && (
         <section>
-          <StyledHeader className="back-office">
-            <SettingsIcon />
-            <ContentWrapper>
-              <h2 className="back-office">B2B BACK-OFFICE</h2>
-              <h5 className="h5--light">Order Conditions</h5>
-            </ContentWrapper>
-          </StyledHeader>
+          <HeaderBackOffice>
+            <h5 className="h5--light">Order Conditions</h5>
+          </HeaderBackOffice>
           <FormForConditions />
         </section>
       )}

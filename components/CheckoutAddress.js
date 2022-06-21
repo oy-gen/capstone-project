@@ -65,7 +65,7 @@ export default function CheckoutAddressSection() {
   );
 }
 
-const AddressSection = styled.section`
+const AddressSection = styled.div`
   display: flex;
   gap: 1rem;
   padding: 0 1rem;
