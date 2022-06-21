@@ -9,17 +9,17 @@ import {
 
 const ShippingAddress = ({ register, errors }) => {
   const hydrated = useHydration();
-  const buyer = useStore(state => state.buyer);
+  const user = useStore(state => state.user);
   const {
-    ShippingFirstName,
-    ShippingLastName,
-    ShippingCompany,
-    ShippingOptionalLine,
-    ShippingStreetAndNumber,
-    ShippingZip,
-    ShippingCity,
-    ShippingCountry,
-  } = buyer;
+    shippingFirstName,
+    shippingLastName,
+    shippingCompany,
+    shippingOptionalLine,
+    shippingStreetAndNumber,
+    shippingZip,
+    shippingCity,
+    shippingCountry,
+  } = user;
 
   return (
     <>
@@ -28,61 +28,61 @@ const ShippingAddress = ({ register, errors }) => {
           <StyledHeadline>Shipping Address</StyledHeadline>
           <StyledInput
             placeholder="First Name*"
-            defaultValue={ShippingFirstName}
-            {...register('ShippingFirstName')}
+            defaultValue={shippingFirstName}
+            {...register('shippingFirstName')}
           />
-          <StyledWarning>{errors?.ShippingFirstName?.message}</StyledWarning>
+          <StyledWarning>{errors?.shippingFirstName?.message}</StyledWarning>
 
           <StyledInput
             placeholder="Last Name*"
-            defaultValue={ShippingLastName}
-            {...register('ShippingLastName')}
+            defaultValue={shippingLastName}
+            {...register('shippingLastName')}
           />
-          <StyledWarning>{errors?.ShippingLastName?.message}</StyledWarning>
+          <StyledWarning>{errors?.shippingLastName?.message}</StyledWarning>
           <StyledInput
             placeholder="Company"
-            defaultValue={ShippingCompany}
-            {...register('ShippingCompany')}
+            defaultValue={shippingCompany}
+            {...register('shippingCompany')}
           />
-          <StyledWarning>{errors?.ShippingCompany?.message}</StyledWarning>
+          <StyledWarning>{errors?.shippingCompany?.message}</StyledWarning>
 
           <StyledInput
             placeholder="Optional line"
-            defaultValue={ShippingOptionalLine}
-            {...register('ShippingOptionalLine')}
+            defaultValue={shippingOptionalLine}
+            {...register('shippingOptionalLine')}
           />
-          <StyledWarning>{errors?.ShippingOptionalLine?.message}</StyledWarning>
+          <StyledWarning>{errors?.shippingOptionalLine?.message}</StyledWarning>
 
           <StyledInput
             placeholder="Street and number*"
-            defaultValue={ShippingStreetAndNumber}
-            {...register('ShippingStreetAndNumber')}
+            defaultValue={shippingStreetAndNumber}
+            {...register('shippingStreetAndNumber')}
           />
           <StyledWarning>
-            {errors?.ShippingStreetAndNumber?.message}
+            {errors?.shippingStreetAndNumber?.message}
           </StyledWarning>
 
           <StyledInput
             placeholder="ZIP*"
-            defaultValue={ShippingZip}
-            {...register('ShippingZip')}
+            defaultValue={shippingZip}
+            {...register('shippingZip')}
           />
-          <StyledWarning>{errors?.ShippingZip?.message}</StyledWarning>
+          <StyledWarning>{errors?.shippingZip?.message}</StyledWarning>
 
           <StyledInput
             placeholder="City*"
-            defaultValue={ShippingCity}
-            {...register('ShippingCity')}
+            defaultValue={shippingCity}
+            {...register('shippingCity')}
           />
 
-          <StyledWarning>{errors?.ShippingCity?.message}</StyledWarning>
+          <StyledWarning>{errors?.shippingCity?.message}</StyledWarning>
 
           <StyledInput
             placeholder="Country*"
-            defaultValue={ShippingCountry}
-            {...register('ShippingCountry')}
+            defaultValue={shippingCountry}
+            {...register('shippingCountry')}
           />
-          <StyledWarning>{errors?.ShippingCountry?.message}</StyledWarning>
+          <StyledWarning>{errors?.shippingCountry?.message}</StyledWarning>
         </>
       )}
     </>

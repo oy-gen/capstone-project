@@ -2,72 +2,70 @@ import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 
 export default function CheckoutAddressSection() {
-  const buyer = useStore(state => state.buyer);
+  const user = useStore(state => state.user);
   const {
-    BuyerEmail,
-    DifferentShipping,
-    BillingFirstName,
-    BillingLastName,
-    BillingCompany,
-    BillingStreetAndNumber,
-    BillingOptionalLine,
-    BillingZip,
-    BillingCity,
-    BillingCountry,
-    ShippingFirstName,
-    ShippingLastName,
-    ShippingCompany,
-    ShippingOptionalLine,
-    ShippingStreetAndNumber,
-    ShippingZip,
-    ShippingCity,
-    ShippingCountry,
-  } = buyer;
+    differentShipping,
+    billingFirstName,
+    billingLastName,
+    billingCompany,
+    billingStreetAndNumber,
+    billingOptionalLine,
+    billingZip,
+    billingCity,
+    billingCountry,
+    shippingFirstName,
+    shippingLastName,
+    shippingCompany,
+    shippingOptionalLine,
+    shippingStreetAndNumber,
+    shippingZip,
+    shippingCity,
+    shippingCountry,
+  } = user;
 
   return (
     <AddressSection>
       <div>
         <StyledHeadline align="left">
-          {DifferentShipping ? 'Billing Address' : 'Billing / Shipping Address'}
+          {differentShipping ? 'Billing Address' : 'Billing / Shipping Address'}
         </StyledHeadline>
-        {BillingCompany.length > 0 && <StyledLine>{BillingCompany}</StyledLine>}
+        {billingCompany.length > 0 && <StyledLine>{billingCompany}</StyledLine>}
         <StyledLine>
-          {BillingFirstName} {BillingLastName}
+          {billingFirstName} {billingLastName}
         </StyledLine>
-        <StyledLine>{BillingStreetAndNumber}</StyledLine>
-        {BillingOptionalLine.length > 0 && (
-          <StyledLine>{BillingOptionalLine}</StyledLine>
+        <StyledLine>{billingStreetAndNumber}</StyledLine>
+        {billingOptionalLine.length > 0 && (
+          <StyledLine>{billingOptionalLine}</StyledLine>
         )}
         <StyledLine>
-          {BillingZip} {BillingCity}
+          {billingZip} {billingCity}
         </StyledLine>
-        <StyledLine>{BillingCountry}</StyledLine>
-        <StyledLine>{BuyerEmail}</StyledLine>
+        <StyledLine>{billingCountry}</StyledLine>
       </div>
-      {DifferentShipping && (
+      {differentShipping && (
         <div>
           <StyledHeadline>shipping address</StyledHeadline>
-          {ShippingCompany.length > 0 && (
-            <StyledLine>{ShippingCompany}</StyledLine>
+          {shippingCompany.length > 0 && (
+            <StyledLine>{shippingCompany}</StyledLine>
           )}
           <StyledLine>
-            {ShippingFirstName} {ShippingLastName}
+            {shippingFirstName} {shippingLastName}
           </StyledLine>
-          <StyledLine>{ShippingStreetAndNumber}</StyledLine>
-          {ShippingOptionalLine.length > 0 && (
-            <StyledLine>{ShippingOptionalLine}</StyledLine>
+          <StyledLine>{shippingStreetAndNumber}</StyledLine>
+          {shippingOptionalLine.length > 0 && (
+            <StyledLine>{shippingOptionalLine}</StyledLine>
           )}
           <StyledLine>
-            {ShippingZip} {ShippingCity}
+            {shippingZip} {shippingCity}
           </StyledLine>
-          <StyledLine>{ShippingCountry}</StyledLine>
+          <StyledLine>{shippingCountry}</StyledLine>
         </div>
       )}
     </AddressSection>
   );
 }
 
-const AddressSection = styled.section`
+const AddressSection = styled.div`
   display: flex;
   gap: 1rem;
   padding: 0 1rem;

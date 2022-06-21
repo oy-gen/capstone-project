@@ -5,6 +5,8 @@ import TrashIcon from '../public/trash-icon.svg';
 
 export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
+  const seller = useStore(state => state.seller);
+  const { minItems, maxItems } = seller;
 
   return (
     <QuantityWrapper>
@@ -26,7 +28,7 @@ export default function QuantitySelector({ id, quantity }) {
         <StyledQuantityCounter>{quantity}</StyledQuantityCounter>
         <StyledQuantityButton
           onClick={() => {
-            setQuantity(id, Math.min(quantity + 1, 20));
+            setQuantity(id, Math.min(quantity + 1, maxItems));
           }}
         >
           {'+'}
@@ -45,19 +47,19 @@ const QuantityWrapper = styled.div`
 const StyledSelector = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid var(--text-lightcolor);
+  border: 1px solid var(--text-middlecolor);
   height: 40px;
 `;
 
 const StyledQuantityButton = styled.button`
+  background-color: transparent;
   font-family: 'Poppins', sans-serif;
   font-size: 24px;
   font-weight: 200;
   text-transform: uppercase;
-  color: var(--text-lightcolor);
+  color: var(--text-middlecolor);
   border-style: none;
   padding: 0 1rem;
-  cursor: pointer;
 `;
 
 const StyledQuantityCounter = styled.span`
@@ -67,5 +69,5 @@ const StyledQuantityCounter = styled.span`
   font-size: 16px;
   font-weight: 400;
   text-transform: uppercase;
-  color: var(--text-lightcolor);
+  color: var(--text-middlecolor);
 `;

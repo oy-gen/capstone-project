@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 const useStore = create(
   persist(
-    set => {
+    (set, get) => {
       return {
         products: [
           {
@@ -18,7 +18,6 @@ const useStore = create(
             Größe:19cm
             Geruch: neutral`,
             RRPprice: 29.9,
-            WSprice: 17.4,
           },
           {
             name: 'Meister Candle Mint',
@@ -32,7 +31,6 @@ const useStore = create(
           Größe:19cm
           Geruch: neutral`,
             RRPprice: 29.9,
-            WSprice: 17.4,
           },
           {
             name: 'Meister Candle Black',
@@ -46,7 +44,6 @@ const useStore = create(
               Größe:19cm
               Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.4,
           },
           {
             name: 'Meister Candle Purpur',
@@ -60,7 +57,6 @@ const useStore = create(
                 Größe:19cm
                 Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.4,
           },
 
           {
@@ -75,7 +71,6 @@ const useStore = create(
             Größe:19cm
             Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.6,
           },
           {
             name: 'Meister Candle Jade',
@@ -89,13 +84,12 @@ const useStore = create(
         Größe:19cm
         Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.6,
           },
           {
             name: 'Sun Candle',
             id: '4170000002000',
             image:
-              'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-Sun-Candle.png?v=1652898466',
+              'https://cdn.shopify.com/s/files/1/0002/7502/1865/products/Burning-Buddha-Sun-Candle_clean_1200x1200.png',
             description: `Die Sonnenkerze spielt mit der Transluzenz des Kerzenwachses. Durch die raffinierte Formgebung leuchtet sie wie eine Sonne und kreiert eine außergewöhnliche Atmosphäre im Raum. Das flackernde Licht fesselt Deinen Blick und lässt ihn nicht mehr los.Auch in der Sonnenkerze wartet die Münze der Weisheit auf Dich. Erst nach dem Abbrennen kommt die versteckte Botschaft zum Vorschein. Welche Weisheit Deine Kerze für Dich bereit hält, entscheidet der Zufall - falls es ihn gibt.
         Material: Raps-Komposition mit Paraffinanteil, Baumwolldocht, Metallmünze
         Farbe: ungefärbt
@@ -103,7 +97,6 @@ const useStore = create(
         Brenndauer: 50h+
         Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 17.4,
           },
           {
             name: 'Prisma Candle Lavendel',
@@ -117,7 +110,6 @@ const useStore = create(
         Brenndauer: 40h
         Geruchsneutral`,
             RRPprice: 34.9,
-            WSprice: 17.4,
           },
           {
             name: 'Meister Candle Black Gold',
@@ -131,7 +123,6 @@ const useStore = create(
         Größe:19cm
         Geruch: neutral`,
             RRPprice: 34.9,
-            WSprice: 19.6,
           },
           {
             name: 'Meister Stein Sculpture',
@@ -144,45 +135,84 @@ const useStore = create(
         Farbe: Schneeweiß
         Größe: 18cm`,
             RRPprice: 34.9,
-            WSprice: 17.4,
           },
         ],
 
         cart: [],
-        discounts: [],
+        prices: [
+          { id: '633710796576', WSprice: 13.1 },
+          { id: '633710796637', WSprice: 14.6 },
+          { id: '4170000002000', WSprice: 17.34 },
+          { id: '633710796569', WSprice: 15.4 },
+          { id: '633710796606', WSprice: 13.6 },
+          { id: '4170000036258', WSprice: 14.45 },
+          { id: '633710796613', WSprice: 15.4 },
+          { id: '633710796552', WSprice: 14.3 },
+          { id: '633710796521', WSprice: 17.9 },
+          { id: '633710796507', WSprice: 15.12 },
+        ],
 
         seller: {
-          ProductsInParcel: 20,
-          ParcelPrice: 9.9,
-          Taxes: 19,
-          StoreLogo:
+          productsPerParcel: 20,
+          domesticShipping: 9.9,
+          internationalShipping: 9.9,
+          minItems: 1,
+          maxItems: 12,
+          VAT: 19,
+          logoImage:
             'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Candles-of-Wisdom_logo_v1_rgb_shopify_logosmaller_black.png?v=1624907146',
-          BackgroundImage:
+          backgroundImage:
             'https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-geometrische-Designkerze-Raute-Set_6f7ddb1c-1083-48f5-8a4f-8185bd4f156c.jpg?v=1613518298',
         },
 
-        buyer: {
-          BuyerId: 1001,
-          BuyerPassword: '',
-          BuyerEmail: '',
-          LocalPickup: false,
-          DifferentShipping: false,
-          BillingFirstName: '',
-          BillingLastName: '',
-          BillingCompany: '',
-          BillingOptionalLine: '',
-          BillingStreetAndNumber: '',
-          BillingZip: '',
-          BillingCity: '',
-          BillingCountry: '',
-          ShippingFirstName: '',
-          ShippingLastName: '',
-          ShippingCompany: '',
-          ShippingOptionalLine: '',
-          ShippingStreetAndNumber: '',
-          ShippingZip: '',
-          ShippingCity: '',
-          ShippingCountry: '',
+        user: {
+          isSeller: false,
+          localPickup: false,
+          differentShipping: false,
+          billingFirstName: '',
+          billingLastName: '',
+          billingCompany: '',
+          billingOptionalLine: '',
+          billingStreetAndNumber: '',
+          billingZip: '',
+          billingCity: '',
+          billingCountry: '',
+          shippingFirstName: '',
+          shippingLastName: '',
+          shippingCompany: '',
+          shippingOptionalLine: '',
+          shippingStreetAndNumber: '',
+          shippingZip: '',
+          shippingCity: '',
+          shippingCountry: '',
+        },
+
+        setWSprice: (id, price) => {
+          set(state => {
+            const priceExists = state.prices.some(product => product.id === id);
+            if (priceExists) {
+              return {
+                prices: state.prices.map(product =>
+                  product.id === id
+                    ? {
+                        ...product,
+                        WSprice: price,
+                      }
+                    : product
+                ),
+              };
+            } else {
+              return {
+                prices: [
+                  {
+                    id: id,
+                    WSprice: price,
+                  },
+                  ...state.prices,
+                ],
+              };
+            }
+          });
         },
 
         setQuantity: (productId, quantity) => {
@@ -214,13 +244,45 @@ const useStore = create(
             }
           });
         },
-
-        setBuyerData: data => {
+        loadUser: async () => {
+          const response = await fetch('/api/users');
+          const json = await response.json();
+          const partialUser = json.data[0];
           set(state => {
             return {
-              buyer: {
-                ...state.buyer,
+              user: {
+                ...state.user,
+                ...partialUser,
+              },
+            };
+          });
+        },
+        setSellerData: data => {
+          set(state => {
+            return {
+              seller: {
+                ...state.seller,
                 ...data,
+              },
+            };
+          });
+        },
+
+        setUserData: async data => {
+          const user = get().user;
+          const response = await fetch('/api/users', {
+            method: 'PATCH',
+            body: JSON.stringify({ ...data, _id: user._id }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const json = await response.json();
+          set(state => {
+            return {
+              user: {
+                ...state.user,
+                ...json.data,
               },
             };
           });

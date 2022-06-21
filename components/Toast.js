@@ -10,6 +10,8 @@ export default function Toast({ message }) {
 }
 
 const StyledToastContainer = styled.div`
+  place-self: center;
+  white-space: nowrap;
   opacity: 0;
   font-weight: 600;
   display: flex;
@@ -17,7 +19,7 @@ const StyledToastContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 16px;
-  box-shadow: 0px 0px 2rem 1rem rgba(0, 0, 0, 0.25);
+  box-shadow: var(--box-shadow);
   background-color: var(--signal-color);
   color: white;
 

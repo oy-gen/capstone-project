@@ -15,8 +15,8 @@ export default function CheckoutTable() {
 
   const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
-  const parcelPrice = useStore(state => state.seller.ParcelPrice);
-  const taxes = useStore(state => state.seller.Taxes);
+  const parcelPrice = useStore(state => state.seller.domesticShipping);
+  const taxes = useStore(state => state.seller.VAT);
   const fullInfo = useFullInfo;
   return (
     <>
@@ -117,13 +117,13 @@ const StyledTable = styled.table`
     padding: 0.4rem;
     color: (--text-maincolor);
     text-align: ${props => props.align};
-    border-bottom: 1px solid var(--text-lightcolor);
+    border-bottom: 1px solid lightgrey;
   }
 
   td {
     padding: 0.4rem;
     line-height: 1.2rem;
-    border-bottom: 1px solid var(--text-lightcolor);
+    border-bottom: 1px solid lightgrey;
   }
 
   td:empty {

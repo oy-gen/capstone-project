@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form';
 import useHydration from '../hooks/useHydration';
 import styled from 'styled-components';
 import NavWrapper from './NavWrapper';
-import { LoginButton } from './Buttons';
+import { BigButton } from './Buttons';
+import { StyledInput, StyledHeadline } from './FormStyledComponents';
 
 import Toast from './Toast';
 
@@ -12,50 +13,51 @@ export default function Login() {
   const hydrated = useHydration();
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
   const { register, handleSubmit, getValues } = useForm();
 
-  // START ---------------------  This is a temporary login solution //
+  // temporary login solution start ------------------------------------ //
 
   const onSubmit = () => {
     const user = getValues('user');
     const password = getValues('password');
-    if (user === 'Tom' && password === '1234') {
-      router.push('/shopping');
-    }
-    if (user === 'Eva' && password === '1234') {
-      router.push('/sellerspage');
-    } else {
-      setOpen(true);
+    const buyer = user === 'Tom' && password === '1234';
+    const seller = user === 'Eva' && password === '1234';
+    {
+      buyer
+        ? router.push('/shopping')
+        : seller
+        ? router.push('/backoffice/prices')
+        : setOpen(true);
       setTimeout(() => {
         setOpen(false);
       }, 2500);
     }
   };
-
-  // END ---------------------  This is a temporary login solution //
+  // ------------------------------------  temporary login solution end//
 
   return (
     <>
       {hydrated && (
         <LoginBackground>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <StyledHeadlineLogin>Login</StyledHeadlineLogin>
-            <StyledInputLogin
+            <StyledHeadline className="log-in">Login</StyledHeadline>
+            <StyledInput
+              className="log-in"
               type="text"
               placeholder="user name*"
               {...register('user')}
             />
-
-            <StyledInputLogin
+            <StyledInput
+              className="log-in"
               type="password"
               placeholder="password*"
               {...register('password')}
             />
-
             {open && <Toast message="wrong user name or password" />}
             <NavWrapper>
-              <LoginButton type="submit">Enter</LoginButton>
+              <BigButton className="log-in" type="submit">
+                Enter
+              </BigButton>
             </NavWrapper>
           </form>
         </LoginBackground>
@@ -64,42 +66,16 @@ export default function Login() {
   );
 }
 
-const LoginBackground = styled.div`
+const LoginBackground = styled.body`
+  margin: 0;
+  position: absolute;
   background-image: url('https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-Candles-Coin-of-Wisdom.jpg?v=1613518249');
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
   overflow: hidden;
-  height: calc(100vh - (2 * var(--nav-height-mobile)));
-  background-position: 50% 55%;
+  height: 100vh;
+  width: 100vw;
+  background-position: 50% 60%;
   background-size: 230%;
-  padding: 0 1rem 2rem;
-`;
-
-const StyledHeadlineLogin = styled.h2`
-  text-align: center;
-  margin: 2rem auto 2rem;
-  color: white;
-`;
-
-const StyledInputLogin = styled.input`
-  width: 100%;
-  font-size: 1rem;
-  line-height: 2rem;
-  border-style: none;
-  background-color: rgb(255, 255, 255, 0.4);
-  border-bottom: 1px solid lightgrey;
-  padding: 10px 120px 10px 10px;
-  margin-bottom: 1rem;
-  color: white;
-
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: rgb(255, 255, 255, 0.6);
-  }
-
-  &:focus {
-    border-style: none;
-    outline: none;
-    border-bottom: 2px solid white;
-  }
+  padding: var(--nav-height-mobile) 1rem 2rem;
 `;

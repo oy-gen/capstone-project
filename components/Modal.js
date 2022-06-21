@@ -46,6 +46,6 @@ const StyledModalOverlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--black-translucent);
   z-index: 100;
 `;

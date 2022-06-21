@@ -6,7 +6,7 @@ import { useState } from 'react';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import IconLeft from '../public/icon-left.svg';
-import { BigButton, SmallButton } from './Buttons';
+import { BigButton, SmallButton, ContentWrapper } from './Buttons';
 import { GetTotals } from '../hooks/useCalculation';
 import { LinearProgress } from '@mui/material';
 
@@ -53,16 +53,16 @@ export default function CheckoutNav() {
           </SmallButton>
         </Link>
         <BigButton disabled={loading} onClick={handleButtonClick}>
-          <Wrapper>
+          <ContentWrapper>
             submit order
-            <h5>
+            <h5 className="h5--light">
               Total price:{' '}
               {totalPrice.toLocaleString('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
               })}
             </h5>
-          </Wrapper>
+          </ContentWrapper>
         </BigButton>
         <Modal onClose={() => setShowModal(false)} show={showModal}>
           <h2>Thank you!</h2>
@@ -82,10 +82,4 @@ const Message = styled.p`
   font-weight: 400;
   padding: 1rem 1rem;
   text-align: center;
-`;
-
-const Wrapper = styled.div`
-  text-align: left;
-  align-self: center;
-  justify-self: left;
 `;

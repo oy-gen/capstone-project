@@ -5,11 +5,11 @@ import CheckoutAddress from '../components/CheckoutAddress';
 
 export default function Checkout() {
   return (
-    <>
+    <section>
       <Header />
       <CheckoutAddress />
       <CheckoutTable />
       <CheckoutNav />
-    </>
+    </section>
   );
 }
