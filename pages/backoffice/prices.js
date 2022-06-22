@@ -30,7 +30,6 @@ export default function Home() {
   } = useForm();
 
   const onSubmit = data => {
-    console.log('log data', data);
     router.push('/backoffice/conditions');
     //const updateId= setValue(...data
     // const input = getValues('WSprice');

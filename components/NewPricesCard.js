@@ -30,7 +30,6 @@ export default function NewPricesCard({
   const number = getValues(`WSprice`);
   const [open, setOpen] = useState(false);
   // const cleanNumber = GetCleanNumber(number);
-  console.log(errors);
 
   useEffect(() => {
     setValue(`${index}.id`, `${id}`);
