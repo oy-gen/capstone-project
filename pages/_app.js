@@ -34,7 +34,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   });
   useEffect(() => {
     loadUser();
-    // useStore.getState().loadUser()   --> could also be written like this
   }, [loadUser]);
 
   return (

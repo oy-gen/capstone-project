@@ -4,14 +4,13 @@ export function useFullInfo(id) {
   const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
   const products = useStore(state => state.products);
-  const productPrices = useStore(state => state.prices);
 
-  const discountedProduct = productPrices.find(product => product.id === id);
   const currentProduct = products.find(product => product.id === id);
   const currentProductInCart = productsInCart.find(
     productInCart => productInCart.id === id
   );
-  const WSprice = discountedProduct?.WSprice ?? currentProduct.RRPprice;
+
+  const WSprice = currentProduct.WSprice;
   const quantity = currentProductInCart?.quantity ?? 0;
   const name = currentProduct.name;
   const sum = quantity * WSprice;

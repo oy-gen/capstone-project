@@ -2,9 +2,6 @@ import styled from 'styled-components';
 import useHydration from '../hooks/useHydration';
 import useStore from '../hooks/useStore';
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import NavWrapper from './NavWrapper';
-import { BigButton, SmallButton } from './Buttons';
 import { useEffect, useState } from 'react';
 import { useFullInfo } from '../hooks/useCalculation';
 import Toast from './Toast';
@@ -25,16 +22,18 @@ export default function NewPricesCard({
   index,
 }) {
   const hydrated = useHydration();
-  const { id, name, RRPprice, image } = product;
-  const WSprice = useFullInfo(id).WSprice;
+  const setWSprice = useStore(state => state.setWSprice);
+  const { id, name, RRPprice, image, WSprice } = product;
   const number = getValues(`WSprice`);
   const [open, setOpen] = useState(false);
   // const cleanNumber = GetCleanNumber(number);
 
   useEffect(() => {
     setValue(`${index}.id`, `${id}`);
-  }, [id, index, register, setValue]);
+    setWSprice(id, number);
+  }, [id, index, register, setValue, number, setWSprice]);
 
+  console.log('check product', product);
   // function triggerToast() {
   //   if (errors) {
   //     setOpen(true);
@@ -52,7 +51,6 @@ export default function NewPricesCard({
             <StyledImage src={image} alt={name} />
             <InfoWrapper>
               <h3>{name}</h3>
-              <h5 className="back-office">ID: {id}</h5>
             </InfoWrapper>
             <GridColumnWrapper>
               <h4 className="back-office">
@@ -72,10 +70,8 @@ export default function NewPricesCard({
                     required: 'required input',
                   })}
                   placeholder="new price"
-                  defaultValue={WSprice.toLocaleString('de-DE', {
-                    style: 'currency',
-                    currency: 'EUR',
-                  })}
+                  defaultValue={WSprice}
+                  onChange={() => setWSprice(id, number)}
                 />
                 <WarningWrapper>
                   <ErrorMessage
