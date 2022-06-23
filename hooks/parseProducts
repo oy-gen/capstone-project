@@ -1,5 +1,3 @@
-import { Calculate } from '@mui/icons-material';
-
 export default function parseProducts(data) {
   return Object.values(data).map(product => ({
     id: product.id,
@@ -7,6 +5,5 @@ export default function parseProducts(data) {
     description: product.description,
     image: product.images[0].src,
     RRPprice: product.variants[0].price,
-    WSprice: product.variants[0].price / 2,
   }));
 }

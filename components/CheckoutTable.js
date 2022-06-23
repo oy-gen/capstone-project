@@ -13,11 +13,10 @@ export default function CheckoutTable() {
     totalParcels,
   } = GetTotals();
 
-  const cart = useStore(state => state.cart);
-  const productsInCart = cart.filter(product => product.quantity > 0);
+  const productsInCart = useStore(state => state.cart);
   const parcelPrice = useStore(state => state.seller.domesticShipping);
   const taxes = useStore(state => state.seller.VAT);
-  const fullInfo = useFullInfo;
+
   return (
     <>
       <StyledTable>

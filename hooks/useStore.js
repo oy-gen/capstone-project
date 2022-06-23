@@ -10,23 +10,23 @@ const useStore = create(
         cart: [],
 
         prices: [
-          { id: 'gid://shopify/Product/550127108137', WSprice: 13.1 },
-          { id: 'gid://shopify/Product/563837960233', WSprice: 14.6 },
-          { id: 'gid://shopify/Product/747547820128', WSprice: 17.34 },
-          { id: 'gid://shopify/Product/1329300734048', WSprice: 15.4 },
-          { id: 'gid://shopify/Product/1329956159584', WSprice: 13.6 },
-          { id: 'gid://shopify/Product/1396584185952', WSprice: 14.45 },
-          { id: 'gid://shopify/Product/1851114946656', WSprice: 15.4 },
-          { id: 'gid://shopify/Product/1927457767520', WSprice: 14.3 },
-          { id: 'gid://shopify/Product/1929023455328', WSprice: 17.9 },
-          { id: 'gid://shopify/Product/1929042919520', WSprice: 15.12 },
-          { id: 'gid://shopify/Product/1938219696224', WSprice: 15.4 },
-          { id: 'gid://shopify/Product/2285011632224', WSprice: 13.6 },
-          { id: 'gid://shopify/Product/2285038731360', WSprice: 14.45 },
-          { id: 'gid://shopify/Product/2288399941728', WSprice: 15.4 },
-          { id: 'gid://shopify/Product/4569885409376', WSprice: 14.3 },
-          { id: 'gid://shopify/Product/1929023455328', WSprice: 17.9 },
-          { id: 'gid://shopify/Product/6070864052411', WSprice: 15.12 },
+          { id: 'gid://shopify/Product/550127108137', WSprice: '13.1' },
+          { id: 'gid://shopify/Product/563837960233', WSprice: '14.6' },
+          { id: 'gid://shopify/Product/747547820128', WSprice: '17.34' },
+          { id: 'gid://shopify/Product/1329300734048', WSprice: '15.4' },
+          { id: 'gid://shopify/Product/1329956159584', WSprice: '13.6' },
+          { id: 'gid://shopify/Product/1396584185952', WSprice: '14.45' },
+          { id: 'gid://shopify/Product/1851114946656', WSprice: '15.4' },
+          { id: 'gid://shopify/Product/1927457767520', WSprice: '14.3' },
+          { id: 'gid://shopify/Product/1929023455328', WSprice: '17.9' },
+          { id: 'gid://shopify/Product/1929042919520', WSprice: '15.12' },
+          { id: 'gid://shopify/Product/1938219696224', WSprice: '15.4' },
+          { id: 'gid://shopify/Product/2285011632224', WSprice: '13.6' },
+          { id: 'gid://shopify/Product/2285038731360', WSprice: '14.45' },
+          { id: 'gid://shopify/Product/2288399941728', WSprice: '15.4' },
+          { id: 'gid://shopify/Product/4569885409376', WSprice: '14.3' },
+          { id: 'gid://shopify/Product/1929023455328', WSprice: '17.9' },
+          { id: 'gid://shopify/Product/6070864052411', WSprice: '15.12' },
         ],
 
         seller: {
@@ -66,6 +66,7 @@ const useStore = create(
 
         setWSprice: (id, price) => {
           set(state => {
+            const productExists = state.cart.some(product => product.id === id);
             return {
               prices: state.prices.map(product =>
                 product.id === id
@@ -106,6 +107,13 @@ const useStore = create(
                 ],
               };
             }
+          });
+        },
+        setPrices: data => {
+          set(state => {
+            return {
+              prices: data,
+            };
           });
         },
 

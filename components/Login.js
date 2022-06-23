@@ -6,8 +6,6 @@ import styled from 'styled-components';
 import NavWrapper from './NavWrapper';
 import { BigButton } from './Buttons';
 import { StyledInput, StyledHeadline } from './FormStyledComponents';
-
-
 import Toast from './Toast';
 
 export default function Login() {
@@ -15,10 +13,6 @@ export default function Login() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { register, handleSubmit, getValues } = useForm();
- 
-
-
-
 
   // temporary login solution start ------------------------------------ //
 
@@ -30,8 +24,6 @@ export default function Login() {
     {
       if (buyer) {
         router.push('/shopping');
-        fetch;
-        console.log(fetch);
       }
       if (seller) {
         router.push('/backoffice/prices');

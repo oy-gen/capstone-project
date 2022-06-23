@@ -3,7 +3,7 @@ import QuantitySelector from './QuantitySelector';
 import { useState } from 'react';
 import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
-import { useFullInfo } from '../hooks/useCalculation';
+import { GetSum, GetQuantity, GetWSprice } from '../hooks/useCalculation';
 import useHydration from '../hooks/useHydration';
 import useStore from '../hooks/useStore';
 import QuantityIndicator from './QuantityIndicator';
@@ -12,7 +12,9 @@ export default function ProductCard({ product }) {
   const hydrated = useHydration();
   const [showDetails, setShowDetails] = useState();
   const { id, image, name, description, RRPprice } = product;
-  const { sum, quantity, WSprice } = useFullInfo(product.id);
+  const sum = GetSum(id);
+  const quantity = GetQuantity(id);
+  const WSprice = GetWSprice(id);
 
   return (
     <>

@@ -59,16 +59,8 @@ export default function FormForConditions() {
   });
   // ------------------------------------------------------- form logic //
   const onSubmit = data => {
-    const domesticShipping = getValues('domesticShipping');
-    const cleanDomShipping = GetCleanNumber(domesticShipping);
-    const intShipping = getValues('internationalShipping');
-    const cleanIntShipping = GetCleanNumber(intShipping);
-    const newData = {
-      ...data,
-      domesticShipping: cleanDomShipping,
-      internationalShipping: cleanIntShipping,
-    };
-    setSellerData(newData);
+    console.log('raw data', data);
+    setSellerData(data);
     handleButtonClick();
   };
 
@@ -97,10 +89,7 @@ export default function FormForConditions() {
               <StyledInput
                 className="back-office"
                 placeholder="€*"
-                defaultValue={domesticShipping.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
+                defaultValue={domesticShipping}
                 {...register('domesticShipping')}
               />
               <WarningWrapper>
@@ -117,10 +106,7 @@ export default function FormForConditions() {
               <StyledInput
                 className="back-office"
                 placeholder="€"
-                defaultValue={internationalShipping.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
+                defaultValue={internationalShipping}
                 {...register('internationalShipping')}
               />
               <WarningWrapper>

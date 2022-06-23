@@ -19,22 +19,20 @@ export default function Home() {
   const hydrated = useHydration();
   const router = useRouter();
   const products = useStore(state => state.products);
+  const setPrices = useStore(state => state.setPrices);
   const [open, setOpen] = useState(false);
 
   const {
     register,
     handleSubmit,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm();
 
   const onSubmit = data => {
+    const newData = Object.values(data);
+    setPrices(newData);
     router.push('/backoffice/conditions');
-    //const updateId= setValue(...data
-    // const input = getValues('WSprice');
-    // const cleanNumber = GetCleanNumber(input);
-    // setWSprice(id, cleanNumber);
   };
 
   return (
@@ -47,13 +45,12 @@ export default function Home() {
           <form onSubmit={handleSubmit(onSubmit)}>
             {products.map((p, index) => (
               <NewPricesCard
-                key={p.id}
+                key={index}
                 product={p}
                 index={index}
                 register={register}
                 errors={errors}
                 setValue={setValue}
-                getValues={getValues}
               />
             ))}
             <NavWrapper>
@@ -62,11 +59,10 @@ export default function Home() {
                   <Icon />
                 </SmallButton>
               </Link>
-
               <BigButton type="submit" disabled={errors.WSprice}>
                 <ContentWrapper>
                   SAVE and PROCEED
-                  <h5>to orderc onditions</h5>
+                  <h5>to order conditions</h5>
                 </ContentWrapper>
               </BigButton>
             </NavWrapper>

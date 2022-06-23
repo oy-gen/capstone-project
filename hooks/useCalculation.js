@@ -1,32 +1,39 @@
 import useStore from './useStore';
 
-export function useFullInfo(id) {
+export function GetQuantity(id) {
   const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
-  const products = useStore(state => state.products);
-  const prices = useStore(state => state.prices);
-
-  const currentProduct = products.find(product => product.id === id);
-  const currrentReducedProduct = prices.find(product => product.id === id);
   const currentProductInCart = productsInCart.find(
     productInCart => productInCart.id === id
   );
-
-  const WSprice = currrentReducedProduct.WSprice;
   const quantity = currentProductInCart?.quantity ?? 0;
-  const name = currentProduct.name;
-  const sum = quantity * WSprice;
-  return {
-    id,
-    quantity,
-    name,
-    WSprice,
-    sum,
-  };
+  return quantity;
 }
 
-export function GetCleanNumber(input) {
-  const commaToDot = input.includes(',') ? input.replace(',', '.') : input;
+export function GetName(id) {
+  const products = useStore(state => state.products);
+  const currentProduct = products.find(product => product.id === id);
+  const name = currentProduct.name;
+  return name;
+}
+
+export function GetWSprice(id) {
+  const prices = useStore(state => state.prices);
+  const products = useStore(state => state.products);
+  const currrentReducedProduct = prices.find(product => product.id == id);
+  const productWithNoWSprice = products.find(product => product.id == id);
+  const WSprice =
+    currrentReducedProduct?.WSprice ?? productWithNoWSprice.RRPprice;
+  return WSprice;
+}
+
+export function GetSum(id) {
+  const sum = GetQuantity(id) * GetWSprice(id);
+  return sum;
+}
+
+export function GetCleanNumber(number) {
+  const commaToDot = number.includes(',') ? number.replace(',', '.') : number;
   const inputToTwoDezimals = parseFloat(commaToDot).toFixed(2);
   const stringToNumber = parseFloat(inputToTwoDezimals);
   return stringToNumber;

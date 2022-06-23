@@ -1,51 +1,26 @@
 import styled from 'styled-components';
 import useHydration from '../hooks/useHydration';
-import useStore from '../hooks/useStore';
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { useFullInfo } from '../hooks/useCalculation';
+import { useEffect } from 'react';
 import Toast from './Toast';
-import { GetCleanNumber } from '../hooks/useCalculation';
+import { GetWSprice } from '../hooks/useCalculation';
 import { ErrorMessage } from '@hookform/error-message';
-import {
-  StyledWarning,
-  StyledInput,
-  StyledHeadline,
-} from './FormStyledComponents';
+import { StyledInput } from './FormStyledComponents';
 
 export default function NewPricesCard({
   register,
-  getValues,
   setValue,
   errors,
   product,
   index,
 }) {
   const hydrated = useHydration();
-
-  const setWSprice = useStore(state => state.setWSprice);
   const { id, name, RRPprice, image } = product;
-  const number = getValues(`${index}.WSprice`);
-  const WSprice = useFullInfo(product.id).WSprice;
-  // const cleanNumber = GetCleanNumber(number);
-  // const [open, setOpen] = useState(false);
-
-  console.log('hi', WSprice);
-  console.log('ho', number);
+  const WSprice = GetWSprice(id);
 
   useEffect(() => {
-    setValue(`${index}.id`, `${id}`);
-    setWSprice(id, number);
-  }, [id, index, register, setValue, number, setWSprice]);
-
-  // function triggerToast() {
-  //   if (errors) {
-  //     setOpen(true);
-  //     setTimeout(() => {
-  //       setOpen(false);
-  //     }, 2500);
-  //   }
-  // }
+    setValue(`${index}.id`, id);
+  });
 
   return (
     <>
@@ -70,14 +45,12 @@ export default function NewPricesCard({
               <InputWrapper>
                 <StyledInput
                   className="back-office"
+                  pattern="^\d*(\.\d{0,2})?$"
                   {...register(`${index}.WSprice`, {
                     required: 'required input',
                   })}
                   placeholder="new price"
-                  defaultValue={WSprice.toLocaleString('de-DE', {
-                    style: 'currency',
-                    currency: 'EUR',
-                  })}
+                  defaultValue={WSprice}
                 />
                 <WarningWrapper>
                   <ErrorMessage
