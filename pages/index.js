@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import parseProducts from '../hooks/parseProducts';
 
 export default function Home(props) {
-  console.log(props)
+  console.log(props);
   const hydrated = useHydration();
   const setProducts = useStore(state => state.setProducts);
   const newProducts = parseProducts(props.products);
@@ -17,7 +17,7 @@ export default function Home(props) {
   useEffect(() => {
     setProducts(newProducts);
   });
-console.log(newProducts)
+  console.log(newProducts);
 
   return (
     <>

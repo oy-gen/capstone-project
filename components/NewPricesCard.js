@@ -22,18 +22,22 @@ export default function NewPricesCard({
   index,
 }) {
   const hydrated = useHydration();
+
   const setWSprice = useStore(state => state.setWSprice);
-  const { id, name, RRPprice, image, WSprice } = product;
-  const number = getValues(`WSprice`);
-  const [open, setOpen] = useState(false);
+  const { id, name, RRPprice, image } = product;
+  const number = getValues(`${index}.WSprice`);
+  const WSprice = useFullInfo(product.id).WSprice;
   // const cleanNumber = GetCleanNumber(number);
+  // const [open, setOpen] = useState(false);
+
+  console.log('hi', WSprice);
+  console.log('ho', number);
 
   useEffect(() => {
     setValue(`${index}.id`, `${id}`);
     setWSprice(id, number);
   }, [id, index, register, setValue, number, setWSprice]);
 
-  console.log('check product', product);
   // function triggerToast() {
   //   if (errors) {
   //     setOpen(true);
@@ -70,8 +74,10 @@ export default function NewPricesCard({
                     required: 'required input',
                   })}
                   placeholder="new price"
-                  defaultValue={WSprice}
-                  onChange={() => setWSprice(id, number)}
+                  defaultValue={WSprice.toLocaleString('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  })}
                 />
                 <WarningWrapper>
                   <ErrorMessage

@@ -7,6 +7,6 @@ export default function parseProducts(data) {
     description: product.description,
     image: product.images[0].src,
     RRPprice: product.variants[0].price,
-    WSprice: product.variants[0].price,
+    WSprice: product.variants[0].price / 2,
   }));
 }

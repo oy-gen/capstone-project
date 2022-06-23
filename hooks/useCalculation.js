@@ -4,13 +4,15 @@ export function useFullInfo(id) {
   const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
   const products = useStore(state => state.products);
+  const prices = useStore(state => state.prices);
 
   const currentProduct = products.find(product => product.id === id);
+  const currrentReducedProduct = prices.find(product => product.id === id);
   const currentProductInCart = productsInCart.find(
     productInCart => productInCart.id === id
   );
 
-  const WSprice = currentProduct.WSprice;
+  const WSprice = currrentReducedProduct.WSprice;
   const quantity = currentProductInCart?.quantity ?? 0;
   const name = currentProduct.name;
   const sum = quantity * WSprice;
@@ -41,10 +43,10 @@ export function GetTotals() {
   let subTotalPrice = 0;
   let productSum = 0;
   productsInCart.forEach(productInCart => {
-    const currentWSprice = prices.find(
+    const currrentReducedProduct = prices.find(
       product => product.id === productInCart.id
     );
-    productSum = currentWSprice.WSprice * productInCart.quantity;
+    productSum = currrentReducedProduct.WSprice * productInCart.quantity;
     subTotalPrice = subTotalPrice + productSum;
   });
 

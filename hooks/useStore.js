@@ -67,7 +67,7 @@ const useStore = create(
         setWSprice: (id, price) => {
           set(state => {
             return {
-              products: state.products.map(product =>
+              prices: state.prices.map(product =>
                 product.id === id
                   ? {
                       ...product,
