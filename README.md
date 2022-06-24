@@ -1,9 +1,9 @@
 # B2B Shopify App for Small Businesses
 
 This is a capstone project done during my web development bootcamp @ [neuefische](neuefische). The app is optimized for mobile.
-You can fetch your shopify data and adjust your wholesale prices and conditions in the settings area. your settigns are saved in a database. The shopping area is build for fast, high quantity purchases.
+You can fetch your shopify products and assign new wholesale prices and order conditions. Your settigns are saved in a database. The shopping experience is designed for fast, high quantity purchases, showing your assigned prices and conditions to your clients.
 
-Tech Stack: 
+Tech stack: 
 - react 
 - next.js
 - nongoDB
