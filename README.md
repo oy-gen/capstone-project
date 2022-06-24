@@ -6,7 +6,7 @@ You can fetch your shopify products and assign new wholesale prices and order co
 Tech stack: 
 - react 
 - next.js
-- nongoDB
+- mongoDB
 - styled components
 - MUI
 - zustand
