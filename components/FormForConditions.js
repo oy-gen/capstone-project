@@ -9,7 +9,6 @@ import BackIcon from '../public/icon-left.svg';
 import { BigButton, SmallButton, ContentWrapper } from './Buttons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SchemaConditions } from './FormValidation';
-import { GetCleanNumber } from '../hooks/useCalculation';
 import React, { useState, useRef, useEffect } from 'react';
 import { Box, LinearProgress } from '@mui/material';
 import Modal from './Modal';
@@ -52,23 +51,14 @@ export default function FormForConditions() {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
   // ------------------------------------------------------- form logic //
   const onSubmit = data => {
-    const domesticShipping = getValues('domesticShipping');
-    const cleanDomShipping = GetCleanNumber(domesticShipping);
-    const intShipping = getValues('internationalShipping');
-    const cleanIntShipping = GetCleanNumber(intShipping);
-    const newData = {
-      ...data,
-      domesticShipping: cleanDomShipping,
-      internationalShipping: cleanIntShipping,
-    };
-    setSellerData(newData);
+    console.log('raw data', data);
+    setSellerData(data);
     handleButtonClick();
   };
 
@@ -97,10 +87,7 @@ export default function FormForConditions() {
               <StyledInput
                 className="back-office"
                 placeholder="€*"
-                defaultValue={domesticShipping.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
+                defaultValue={domesticShipping}
                 {...register('domesticShipping')}
               />
               <WarningWrapper>
@@ -117,10 +104,7 @@ export default function FormForConditions() {
               <StyledInput
                 className="back-office"
                 placeholder="€"
-                defaultValue={internationalShipping.toLocaleString('de-DE', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
+                defaultValue={internationalShipping}
                 {...register('internationalShipping')}
               />
               <WarningWrapper>

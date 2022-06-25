@@ -1,24 +1,14 @@
 import styled from 'styled-components';
 import useHydration from '../hooks/useHydration';
-import useStore from '../hooks/useStore';
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import NavWrapper from './NavWrapper';
-import { BigButton, SmallButton } from './Buttons';
-import { useEffect, useState } from 'react';
-import { useFullInfo } from '../hooks/useCalculation';
+import { useEffect } from 'react';
 import Toast from './Toast';
-import { GetCleanNumber } from '../hooks/useCalculation';
+import { GetWSprice } from '../hooks/useCalculation';
 import { ErrorMessage } from '@hookform/error-message';
-import {
-  StyledWarning,
-  StyledInput,
-  StyledHeadline,
-} from './FormStyledComponents';
+import { StyledInput } from './FormStyledComponents';
 
 export default function NewPricesCard({
   register,
-  getValues,
   setValue,
   errors,
   product,
@@ -26,24 +16,11 @@ export default function NewPricesCard({
 }) {
   const hydrated = useHydration();
   const { id, name, RRPprice, image } = product;
-  const WSprice = useFullInfo(id).WSprice;
-  const number = getValues(`WSprice`);
-  const [open, setOpen] = useState(false);
-  // const cleanNumber = GetCleanNumber(number);
-  console.log(errors);
+  const WSprice = GetWSprice(id);
 
   useEffect(() => {
-    setValue(`${index}.id`, `${id}`);
-  }, [id, index, register, setValue]);
-
-  // function triggerToast() {
-  //   if (errors) {
-  //     setOpen(true);
-  //     setTimeout(() => {
-  //       setOpen(false);
-  //     }, 2500);
-  //   }
-  // }
+    setValue(`${index}.id`, id);
+  });
 
   return (
     <>
@@ -53,7 +30,6 @@ export default function NewPricesCard({
             <StyledImage src={image} alt={name} />
             <InfoWrapper>
               <h3>{name}</h3>
-              <h5 className="back-office">ID: {id}</h5>
             </InfoWrapper>
             <GridColumnWrapper>
               <h4 className="back-office">
@@ -69,14 +45,12 @@ export default function NewPricesCard({
               <InputWrapper>
                 <StyledInput
                   className="back-office"
+                  pattern="^\d*(\.\d{0,2})?$"
                   {...register(`${index}.WSprice`, {
                     required: 'required input',
                   })}
                   placeholder="new price"
-                  defaultValue={WSprice.toLocaleString('de-DE', {
-                    style: 'currency',
-                    currency: 'EUR',
-                  })}
+                  defaultValue={WSprice}
                 />
                 <WarningWrapper>
                   <ErrorMessage

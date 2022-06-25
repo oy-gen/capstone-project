@@ -6,7 +6,7 @@ import TrashIcon from '../public/trash-icon.svg';
 export default function QuantitySelector({ id, quantity }) {
   const setQuantity = useStore(state => state.setQuantity);
   const seller = useStore(state => state.seller);
-  const { minItems, maxItems } = seller;
+  const { maxItems } = seller;
 
   return (
     <QuantityWrapper>

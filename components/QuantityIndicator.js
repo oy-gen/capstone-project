@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useFullInfo } from '../hooks/useCalculation';
 import useStore from '../hooks/useStore';
 
 export default function QuantityIndicator({ quantity }) {

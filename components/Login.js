@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import NavWrapper from './NavWrapper';
 import { BigButton } from './Buttons';
 import { StyledInput, StyledHeadline } from './FormStyledComponents';
-
 import Toast from './Toast';
 
 export default function Login() {
@@ -23,14 +22,17 @@ export default function Login() {
     const buyer = user === 'Tom' && password === '1234';
     const seller = user === 'Eva' && password === '1234';
     {
-      buyer
-        ? router.push('/shopping')
-        : seller
-        ? router.push('/backoffice/prices')
-        : setOpen(true);
-      setTimeout(() => {
-        setOpen(false);
-      }, 2500);
+      if (buyer) {
+        router.push('/shopping');
+      }
+      if (seller) {
+        router.push('/backoffice/prices');
+      } else {
+        setOpen(true);
+        setTimeout(() => {
+          setOpen(false);
+        }, 2500);
+      }
     }
   };
   // ------------------------------------  temporary login solution end//
@@ -66,7 +68,7 @@ export default function Login() {
   );
 }
 
-const LoginBackground = styled.body`
+const LoginBackground = styled.div`
   margin: 0;
   position: absolute;
   background-image: url('https://cdn.shopify.com/s/files/1/0002/7502/1865/files/Burning-Buddha-Candles-Coin-of-Wisdom.jpg?v=1613518249');
