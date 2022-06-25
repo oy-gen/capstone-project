@@ -3,6 +3,15 @@
 This is my capstone project created during my web development bootcamp at [neuefische](neuefische).
 You can fetch your shopify products and assign new wholesale prices and order conditions. Your settigns are saved in a database. The store front shopping experience is designed for fast, high quantity purchases, showing your assigned prices and conditions to your clients.
 
+Seller-Login: user: Eva | pw: 1234
+Buyer-Login: user: Tom | pw: 1234
+
+
+The app is optimized for iPhone SE - guideline specified by [neuefische](neuefische).
+
+See the latest version [here](https://iframe-mobile.vercel.app/).
+
+
 Tech stack:
 
 - react
@@ -16,9 +25,6 @@ Tech stack:
 - shopify buy SDK
 - node.js
 
-The app is optimized for iPhone SE - guideline specified by [neuefische](neuefische).
-
-See the latest version [here]((https://capstone-project-78it4ns3z-oy-gen.vercel.app/)).
 
 ---
 
