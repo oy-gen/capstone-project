@@ -1,13 +1,11 @@
 import {
   GetWSprice,
-  GetQuantity,
   GetSum,
   GetName,
 } from '../hooks/useCalculation';
 
 export default function TableRow({ productInCart }) {
   const sum = GetSum(productInCart.id);
-  const quantity = GetQuantity(productInCart.id);
   const WSprice = GetWSprice(productInCart.id);
   const name = GetName(productInCart.id);
 

@@ -6,7 +6,6 @@ import NavWrapper from '../../components/NavWrapper';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import Icon from '../../public/logout-white.svg';
 import HeaderBackOffice from '../../components/HeaderBackOffice';
 import {
@@ -20,7 +19,6 @@ export default function Home() {
   const router = useRouter();
   const products = useStore(state => state.products);
   const setPrices = useStore(state => state.setPrices);
-  const [open, setOpen] = useState(false);
 
   const {
     register,

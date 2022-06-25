@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { FadeInOut } from './GlobalStyle';
 
 export default function Toast({ message }) {

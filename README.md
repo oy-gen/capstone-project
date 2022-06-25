@@ -1,34 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# B2B Shopify App for Small Businesses
 
-## Getting Started
+This is my capstone project created during my web development bootcamp at [neuefische](neuefische).
+You can fetch your shopify products and assign new wholesale prices and order conditions. Your settigns are saved in a database. The store front shopping experience is designed for fast, high quantity purchases, showing your assigned prices and conditions to your clients.
 
-First, run the development server:
+Tech stack:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- react
+- next.js
+- mongoDB
+- styled components
+- MUI
+- zustand
+- react hook form
+- YUP resolver
+- shopify buy SDK
+- node.js
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app is optimized for iPhone SE - guideline specified by [neuefische](neuefische).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+See the latest version [here](https://capstone-project-bay.vercel.app/).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Screen Shot 2022-06-20 at 11 54 41](https://user-images.githubusercontent.com/102030428/175499381-491e73df-b270-4532-8f0e-4c925de53b99.png)
+![Screen Shot 2022-06-20 at 11 56 10](https://user-images.githubusercontent.com/102030428/175499661-9087069a-55b4-47fb-b309-be3f939f5564.png)

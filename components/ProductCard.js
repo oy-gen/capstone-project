@@ -5,7 +5,6 @@ import { SmallSquareButton } from './Buttons';
 import InfoIcon from '../public/info-icon.svg';
 import { GetSum, GetQuantity, GetWSprice } from '../hooks/useCalculation';
 import useHydration from '../hooks/useHydration';
-import useStore from '../hooks/useStore';
 import QuantityIndicator from './QuantityIndicator';
 
 export default function ProductCard({ product }) {
