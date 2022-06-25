@@ -10,6 +10,7 @@ export default function Home() {
     <>
       {hydrated && (
         <section>
+          
           <HeaderBackOffice>
             <h5 className="h5--light">Order Conditions</h5>
           </HeaderBackOffice>

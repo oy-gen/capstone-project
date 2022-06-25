@@ -47,10 +47,12 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--background-color);
     font-size: 1rem;
     max-width: 800px;
+    margin: auto;
   }
    
   section {
   margin: var(--nav-height-mobile) auto;
+  
   }
 
   button {

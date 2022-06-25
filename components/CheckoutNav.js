@@ -35,16 +35,9 @@ export default function CheckoutNav() {
   return (
     <>
       {loading && (
-        <Box
-          sx={{
-            width: '100%',
-            position: 'fixed',
-            bottom: 'var(--nav-height-mobile)',
-            zIndex: '200',
-          }}
-        >
+        <ProgressWrapper>
           <LinearProgress />
-        </Box>
+        </ProgressWrapper>
       )}
       <NavWrapper>
         <Link passHref href="/address">
@@ -82,4 +75,11 @@ const Message = styled.p`
   font-weight: 400;
   padding: 1rem 1rem;
   text-align: center;
+`;
+const ProgressWrapper = styled.div`
+  width: 100vw;
+  position: fixed;
+  bottom: var(--nav-height-mobile);
+  left:0;
+  z-index: 200;
 `;

@@ -77,6 +77,7 @@ const LoginBackground = styled.div`
   overflow: hidden;
   height: 100vh;
   width: 100vw;
+  max-width: 800px;
   background-position: 50% 60%;
   background-size: 230%;
   padding: var(--nav-height-mobile) 1rem 2rem;

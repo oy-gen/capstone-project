@@ -2,7 +2,7 @@ import React from 'react';
 import useHydration from '../../hooks/useHydration';
 import NewPricesCard from '../../components/NewPricesCard';
 import useStore from '../../hooks/useStore';
-import NavWrapper from '../../components/NavWrapper';
+import NavWrapper from '../../components/NavWrapperDark';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -51,6 +51,7 @@ export default function Home() {
                 setValue={setValue}
               />
             ))}
+            
             <NavWrapper>
               <Link passHref href="/">
                 <SmallButton className="back-office">

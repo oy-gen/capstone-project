@@ -17,13 +17,7 @@ const Nav = styled.nav`
   right: 0px;
   width: 100vw;
   height: var(--nav-height-mobile);
-  background-color: var(
-    --white-translucent-09
-  ); // for browsers other than chrome
-  @supports (backdrop-filter: var(--background-blur)) {
-    background-color: var(--white-translucent);
-    backdrop-filter: var(--background-blur);
-  }
+  background-color: black; // for browsers other than chrome
 `;
 
 const NavElementWrapper = styled.div`
