@@ -9,7 +9,7 @@ Buyer-Login: user: Tom | pw: 1234
 
 The app is optimized for iPhone SE - guideline specified by [neuefische](neuefische).
 
-See the latest version [here](https://iframe-mobile.vercel.app/).
+See the latest version [here](https://capstone-project-bay.vercel.app/).
 
 
 Tech stack:
