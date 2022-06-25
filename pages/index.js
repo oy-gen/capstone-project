@@ -3,7 +3,7 @@ import React from 'react';
 import useHydration from '../hooks/useHydration';
 import Login from '../components/Login';
 import parseProducts from '../hooks/parseProducts';
-import client from '../lib/Shopify-client';
+import client from '../lib/shopify-client';
 import useStore from '../hooks/useStore';
 import { useEffect } from 'react';
 
