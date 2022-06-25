@@ -9,7 +9,6 @@ import BackIcon from '../public/icon-left.svg';
 import { BigButton, SmallButton, ContentWrapper } from './Buttons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SchemaConditions } from './FormValidation';
-import { GetCleanNumber } from '../hooks/useCalculation';
 import React, { useState, useRef, useEffect } from 'react';
 import { Box, LinearProgress } from '@mui/material';
 import Modal from './Modal';
@@ -52,7 +51,6 @@ export default function FormForConditions() {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),

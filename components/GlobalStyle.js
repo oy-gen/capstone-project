@@ -25,12 +25,11 @@ const GlobalStyle = createGlobalStyle`
   /* ------------------------------------------------------------- Variables - Effects */
 
   --box-shadow: 0px 0px 2rem 1rem rgba(0, 0, 0, 0.3);
-  --black-translucent: rgb(0, 0, 0, 0.85);
+  --black-translucent: rgb(0, 0, 0, 0.9);
   --gray-translucent: rgb(0, 0, 0, 0.2);
   --white-translucent: rgb(255, 255, 255, 0.6);
   --white-translucent-09: rgb(255, 255, 255, 0.9);
   --background-blur: blur(7px);
-  
   
 }
 

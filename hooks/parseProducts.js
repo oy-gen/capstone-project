@@ -1,4 +1,5 @@
 export default function parseProducts(data) {
+  
   return Object.values(data).map(product => ({
     id: product.id,
     name: product.title,
