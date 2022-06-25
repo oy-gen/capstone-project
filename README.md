@@ -18,7 +18,7 @@ Tech stack:
 
 The app is optimized for iPhone SE - guideline specified by [neuefische](neuefische).
 
-See the latest version [here](https://capstone-project-bay.vercel.app/).
+See the latest version [here]((https://capstone-project-78it4ns3z-oy-gen.vercel.app/)).
 
 ---
 
