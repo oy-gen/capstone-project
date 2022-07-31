@@ -4,7 +4,7 @@ import useHydration from '../hooks/useHydration';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Toast from './Toast';
-import NavWrapper from './NavWrapper';
+import NavWrapper from './NavWrapperDark';
 import BackIcon from '../public/icon-left.svg';
 import { BigButton, SmallButton, ContentWrapper } from './Buttons';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -184,19 +184,11 @@ export default function FormForConditions() {
               </WarningWrapper>
             </StyledContainer>
           </FormWrapper>
-          <NavWrapper // --------------------------------------------------------------------- new label
-          >
+          <NavWrapper className="black">
             {loading && (
-              <Box
-                sx={{
-                  width: '100%',
-                  position: 'fixed',
-                  bottom: 'var(--nav-height-mobile)',
-                  zIndex: '200',
-                }}
-              >
+              <ProgressWrapper>
                 <LinearProgress />
-              </Box>
+              </ProgressWrapper>
             )}
             <Link passHref href="/backoffice/prices">
               <SmallButton className="back-office">
@@ -229,6 +221,7 @@ const FormWrapper = styled.div`
   background-color: var(--background-darkcolor);
   position: relative;
   padding: 0 1rem;
+  height: 100vh;
 
   hr {
     border-width: 0;
@@ -252,4 +245,12 @@ const Message = styled.p`
   font-weight: 400;
   padding: 1rem 1rem;
   text-align: center;
+`;
+
+const ProgressWrapper = styled.div`
+  width: 100vw;
+  position: fixed;
+  bottom: var(--nav-height-mobile);
+  left: 0;
+  z-index: 200;
 `;
