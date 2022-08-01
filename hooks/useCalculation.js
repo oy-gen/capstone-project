@@ -32,13 +32,6 @@ export function GetSum(id) {
   return sum;
 }
 
-export function GetCleanNumber(number) {
-  const commaToDot = number.includes(',') ? number.replace(',', '.') : number;
-  const inputToTwoDezimals = parseFloat(commaToDot).toFixed(2);
-  const stringToNumber = parseFloat(inputToTwoDezimals);
-  return stringToNumber;
-}
-
 export function GetTotals() {
   const cart = useStore(state => state.cart);
   const productsInCart = cart.filter(product => product.quantity > 0);
@@ -82,3 +75,10 @@ export function GetTotals() {
     totalParcels,
   };
 }
+
+// export function GetCleanNumber(number) {
+//   const commaToDot = number.includes(',') ? number.replace(',', '.') : number;
+//   const inputToTwoDezimals = parseFloat(commaToDot).toFixed(2);
+//   const stringToNumber = parseFloat(inputToTwoDezimals);
+//   return stringToNumber;
+// }
